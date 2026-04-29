@@ -1,0 +1,68 @@
+.hdr {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  background: rgba(255,255,255,.95);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  transition: box-shadow .3s;
+}
+.hdr.scrolled { box-shadow: 0 2px 24px rgba(13,30,74,.08); }
+
+.hdr-inner {
+  max-width: 1320px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 48px; height: 68px;
+}
+
+/* LOGO */
+.hdr-logo { display: flex; align-items: center; }
+.hdr-logo-img {
+  height: 42px; width: auto; object-fit: contain;
+  transition: opacity .2s;
+}
+.hdr-logo-img:hover { opacity: .82; }
+
+/* NAV */
+.hdr-nav { display: flex; align-items: center; gap: 2px; }
+.hdr-nav a {
+  font-family: var(--font-display);
+  font-size: .82rem; font-weight: 400;
+  color: var(--muted); padding: 8px 12px;
+  text-transform: uppercase; letter-spacing: 1px;
+  border-radius: 4px; transition: color .2s, background .2s;
+}
+.hdr-nav a:hover { color: var(--navy); background: var(--panel); }
+.nav-cta {
+  background: var(--navy) !important;
+  color: #fff !important;
+  padding: 9px 22px !important;
+  border-radius: 0 !important;
+  clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 0 100%);
+}
+.nav-cta:hover { background: var(--cyan) !important; }
+
+/* HAMBURGER */
+.menu-btn {
+  display: none; background: none; border: none;
+  padding: 6px; flex-direction: column; gap: 5px;
+}
+.menu-btn span {
+  display: block; width: 22px; height: 1.5px;
+  background: var(--navy); transition: all .3s;
+}
+.menu-btn.active span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.menu-btn.active span:nth-child(2) { opacity: 0; }
+.menu-btn.active span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+@media (max-width: 1100px) { .hdr-inner { padding: 0 24px; } }
+
+@media (max-width: 900px) {
+  .menu-btn { display: flex; }
+  .hdr-nav {
+    display: none; flex-direction: column; align-items: stretch;
+    position: absolute; top: 68px; left: 0; right: 0;
+    background: #fff; border-bottom: 1px solid var(--border); padding: 8px;
+    gap: 2px;
+  }
+  .hdr-nav.open { display: flex; }
+  .hdr-nav a { text-align: center; }
+}

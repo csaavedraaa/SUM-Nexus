@@ -1,0 +1,6 @@
+@media (max-width: 1100px) {
+  .sspa-layout { grid-template-columns: 1fr !important; }
+}
+@media (max-width: 600px) {
+  .sspa-ics { grid-template-columns: 1fr 1fr !important; }
+}

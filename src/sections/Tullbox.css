@@ -1,0 +1,11 @@
+.tb-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  border: 1px solid var(--border);
+  margin-top: 52px;
+  overflow: hidden;
+}
+@media (max-width: 1100px) {
+  .tb-wrap { grid-template-columns: 1fr; }
+}

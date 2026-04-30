@@ -59,4 +59,4 @@ export default function Tullbox() {
       </div>
     </section>
   )
-}
+}// CSS is inline — add Tullbox.css for responsive

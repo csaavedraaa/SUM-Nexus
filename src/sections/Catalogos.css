@@ -1,0 +1,70 @@
+.cat-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 1px; background: var(--border);
+  margin-top: 52px;
+}
+.cat-main-card {
+  grid-column: 1 / -1;
+  background: var(--navy);
+  padding: 32px 40px;
+  display: flex; align-items: center;
+}
+.cat-main-title {
+  font-family: var(--font-display); font-size: 1.5rem; font-weight: 700;
+  text-transform: uppercase; color: #fff; margin-bottom: 6px;
+}
+.cat-main-sub { color: rgba(255,255,255,.5); font-size: .83rem; }
+
+.cat-card {
+  background: #fff; display: flex; flex-direction: column;
+  overflow: hidden; transition: all .3s; cursor: pointer;
+  border: none; text-decoration: none; color: inherit;
+  position: relative;
+}
+.cat-card::after {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+  height: 2px; background: var(--cyan);
+  transform: scaleX(0); transform-origin: left; transition: transform .4s;
+}
+.cat-card:hover::after { transform: scaleX(1); }
+.cat-card:hover { box-shadow: 0 6px 20px rgba(13,30,74,.08); }
+.cat-img-wrap {
+  position: relative; height: 130px; overflow: hidden; flex-shrink: 0;
+}
+.cat-img {
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform .5s; filter: brightness(.85);
+}
+.cat-card:hover .cat-img { transform: scale(1.05); }
+.cat-img-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to bottom, transparent 40%, rgba(13,30,74,.4) 100%);
+}
+.cat-body { padding: 18px; flex: 1; display: flex; flex-direction: column; gap: 8px; }
+.cat-title {
+  font-family: var(--font-display); font-size: .95rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .5px; color: var(--navy);
+}
+.cat-desc { font-size: .77rem; color: var(--muted); line-height: 1.6; flex: 1; }
+.cat-link {
+  font-family: var(--font-mono); font-size: .6rem;
+  color: var(--cyan); letter-spacing: 2px; text-transform: uppercase;
+}
+
+.cat-rec {
+  background: var(--off); border: 1px solid var(--border);
+  border-left: 3px solid var(--amber);
+  padding: 18px 22px; margin-top: 18px;
+  display: flex; gap: 12px; align-items: flex-start;
+}
+.cat-rec-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 2px; }
+.cat-rec h5 {
+  font-family: var(--font-display); font-size: .83rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 1px; color: var(--amber); margin-bottom: 3px;
+}
+.cat-rec p { font-size: .77rem; color: var(--muted); line-height: 1.7; margin: 0; }
+.cat-rec strong { color: var(--navy); }
+
+@media (max-width: 1100px) { .cat-layout { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 600px)  { .cat-layout { grid-template-columns: 1fr; } }

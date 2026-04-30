@@ -1,11 +1,14 @@
+/* ═══════════════════════════════════════════
+   HEADER
+═══════════════════════════════════════════ */
 .hdr {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
-  background: rgba(255,255,255,.95);
-  backdrop-filter: blur(20px);
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: 200;
+  background: #ffffff;
   border-bottom: 1px solid var(--border);
   transition: box-shadow .3s;
 }
-.hdr.scrolled { box-shadow: 0 2px 24px rgba(13,30,74,.08); }
+.hdr.scrolled { box-shadow: 0 2px 24px rgba(13,30,74,.1); }
 
 .hdr-inner {
   max-width: 1320px; margin: 0 auto;
@@ -13,31 +16,57 @@
   padding: 0 48px; height: 68px;
 }
 
-.hdr-logo { display: flex; align-items: center; }
-.hdr-logo-img { height: 42px; width: auto; object-fit: contain; transition: opacity .2s; }
-.hdr-logo-img:hover { opacity: .82; }
+/* ── LOGO ────────────────────────────────── */
+.hdr-logo {
+  display: flex; align-items: center;
+  text-decoration: none;
+  /* Fondo blanco explícito detrás del logo */
+  background: #ffffff;
+  padding: 4px 0;
+  border-radius: 2px;
+}
+.hdr-logo-img {
+  height: 40px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+  /* Sin filtros — el PNG ya tiene colores correctos sobre blanco */
+  filter: none;
+  transition: opacity .2s;
+}
+.hdr-logo:hover .hdr-logo-img { opacity: .8; }
 
-/* NAV — desktop */
+/* ── NAV ─────────────────────────────────── */
 .hdr-nav { display: flex; align-items: center; gap: 0; }
 .hdr-nav a {
   font-family: var(--font-display);
   font-size: .78rem; font-weight: 400;
-  color: var(--muted); padding: 6px 10px;
+  color: var(--muted);
+  padding: 6px 10px;
   text-transform: uppercase; letter-spacing: 1px;
-  border-radius: 4px; transition: color .2s, background .2s; white-space: nowrap;
+  border-radius: 4px;
+  transition: color .2s, background .2s;
+  white-space: nowrap;
+  text-decoration: none;
 }
 .hdr-nav a:hover { color: var(--navy); background: var(--panel); }
+
 .nav-cta {
-  background: var(--navy) !important; color: #fff !important;
-  padding: 9px 20px !important; border-radius: 0 !important; margin-left: 8px;
+  background: var(--navy) !important;
+  color: #fff !important;
+  padding: 9px 20px !important;
+  border-radius: 0 !important;
+  margin-left: 8px;
   clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 0 100%);
 }
 .nav-cta:hover { background: var(--cyan) !important; }
 
-/* HAMBURGER */
+/* ── HAMBURGER ───────────────────────────── */
 .menu-btn {
-  display: none; background: none; border: none;
-  padding: 6px; flex-direction: column; gap: 5px;
+  display: none;
+  background: none; border: none;
+  padding: 6px;
+  flex-direction: column; gap: 5px;
   cursor: pointer;
 }
 .menu-btn span {
@@ -48,27 +77,29 @@
 .menu-btn.active span:nth-child(2) { opacity: 0; }
 .menu-btn.active span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
 
-/* ── RESPONSIVE ── */
+/* ── RESPONSIVE ──────────────────────────── */
 @media (max-width: 1100px) {
   .hdr-inner { padding: 0 24px; }
-  .hdr-nav a { font-size: .72rem; padding: 5px 8px; }
+  .hdr-nav a  { font-size: .72rem; padding: 5px 8px; }
 }
 
 @media (max-width: 900px) {
   .menu-btn { display: flex; }
   .hdr-nav {
-    display: none; flex-direction: column; align-items: stretch;
+    display: none;
+    flex-direction: column; align-items: stretch;
     position: absolute; top: 68px; left: 0; right: 0;
-    background: #fff; border-bottom: 1px solid var(--border);
+    background: #fff;
+    border-bottom: 1px solid var(--border);
     padding: 8px 16px; gap: 2px;
     box-shadow: 0 8px 24px rgba(13,30,74,.1);
   }
-  .hdr-nav.open { display: flex; }
-  .hdr-nav a { text-align: left; padding: 10px 12px; font-size: .85rem; }
-  .nav-cta { margin-left: 0; margin-top: 4px; text-align: center !important; }
+  .hdr-nav.open  { display: flex; }
+  .hdr-nav a     { text-align: left; padding: 10px 12px; font-size: .85rem; }
+  .nav-cta       { margin-left: 0; margin-top: 4px; text-align: center !important; }
 }
 
 @media (max-width: 480px) {
-  .hdr-inner { padding: 0 16px; }
+  .hdr-inner    { padding: 0 16px; }
   .hdr-logo-img { height: 34px; }
 }

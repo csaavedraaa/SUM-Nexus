@@ -1,4 +1,5 @@
 import './Blog.css'
+import DetailPage from '../components/DetailPage'
 
 const ARTICLES = [
   {
@@ -37,6 +38,7 @@ const ARTICLES = [
 ]
 
 export default function Blog() {
+  const [openBlog, setOpenBlog] = useState(false)
   return (
     <section id="blog" className="section section-alt">
       <div className="container">
@@ -80,6 +82,24 @@ export default function Blog() {
           ))}
         </div>
       </div>
+    
+      <div className="ver-mas-wrap reveal d2"><button className="btn-ver-mas" onClick={() => setOpenBlog(true)}>Ver todos los artículos</button></div>
+
+      <DetailPage isOpen={openBlog} onClose={() => setOpenBlog(false)}
+  eyebrow="Conocimiento Industrial" title="Blog &amp; <em>Contenido</em>"
+  lead="Insights sobre Supply Chain, S&OP, digitalización industrial y buenas prácticas en los sectores que atendemos.">
+  <img className="dp-img" src="https://images.unsplash.com/photo-1553413077-190dd305871c?w=1200&q=80&fit=crop" alt="Supply Chain" />
+  <h3>S&OP en la Industria Petrolera</h3>
+  <p>La planificación de ventas y operaciones en sectores críticos enfrenta retos únicos. En SUMIMSA hemos construido un modelo S&OP adaptado a la realidad del mercado mexicano que integra demanda del cliente, capacidad de entrega y stock de seguridad inteligente.</p>
+  <h3>Los 5 KPIs del Supply Chain Industrial</h3>
+  <p><strong>1. OTIF (On Time In Full):</strong> Mide si entregaste completo y a tiempo. SUMIMSA mantiene OTIF &gt; 97%.</p>
+  <p><strong>2. Fill Rate:</strong> Porcentaje de líneas de orden entregadas vs solicitadas. Meta: 98%+.</p>
+  <p><strong>3. DIO (Days Inventory Outstanding):</strong> Días de inventario antes de convertirse en venta. El equilibrio es clave.</p>
+  <p><strong>4. Perfect Order Rate:</strong> Órdenes entregadas sin error, a tiempo, completas y bien documentadas.</p>
+  <p><strong>5. Cash-to-Cash Cycle:</strong> Tiempo entre que pagas a tu proveedor y cobras a tu cliente. Reducirlo mejora el flujo de caja.</p>
+  <h3>Digitalización Industrial: El caso Tullbox</h3>
+  <p>La transición de un sistema de inventario en papel a un modelo digital con sensores y dashboard en tiempo real redujo el tiempo de solicitud de herramienta de 45 minutos a menos de 2 minutos, y eliminó el 100% del extravío de herramienta costosa en campo.</p>
+</DetailPage>
     </section>
   )
 }

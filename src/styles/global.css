@@ -215,3 +215,29 @@ button { cursor: pointer; font-family: inherit; }
   .cursor-dot, .cursor-ring { display: none !important; }
   body { cursor: auto; }
 }
+
+/* ── VER MÁS BUTTON ─────────────────────────── */
+.ver-mas-wrap { text-align: center; margin-top: 44px; }
+.btn-ver-mas {
+  font-family: var(--font-display);
+  font-size: .85rem; font-weight: 600;
+  letter-spacing: 2px; text-transform: uppercase;
+  background: transparent;
+  color: var(--navy);
+  border: 1px solid var(--navy);
+  padding: 12px 32px; cursor: pointer;
+  transition: all .3s;
+  display: inline-flex; align-items: center; gap: 10px;
+  clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 0 100%);
+}
+.btn-ver-mas::after { content: '→'; transition: transform .3s; }
+.btn-ver-mas:hover { background: var(--navy); color: #fff; }
+.btn-ver-mas:hover::after { transform: translateX(5px); }
+
+/* white variant (for dark section backgrounds) */
+.btn-ver-mas.white {
+  color: #fff; border-color: rgba(255,255,255,.35);
+}
+.btn-ver-mas.white:hover {
+  background: rgba(255,255,255,.12); border-color: rgba(255,255,255,.7);
+}

@@ -1,4 +1,5 @@
 import './Proyectos.css'
+import DetailPage from '../components/DetailPage'
 
 const PROJS = [
   {
@@ -30,6 +31,7 @@ const PROJS = [
 ]
 
 export default function Proyectos() {
+  const [openProy, setOpenProy] = useState(false)
   return (
     <section id="proyectos" className="section section-alt">
       <div className="container">
@@ -52,6 +54,24 @@ export default function Proyectos() {
           ))}
         </div>
       </div>
+    
+      <div className="ver-mas-wrap reveal d2"><button className="btn-ver-mas" onClick={() => setOpenProy(true)}>Ver todos los proyectos</button></div>
+
+      <DetailPage isOpen={openProy} onClose={() => setOpenProy(false)}
+  eyebrow="Proyectos" title="Ejecutados con <em>Precisión</em>"
+  lead="Soluciones industriales entregadas con excelencia operativa en los sectores más exigentes de México.">
+  <img className="dp-img" src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&q=80&fit=crop" alt="Proyectos" />
+  <h3>Suministro offshore — Golfo de México</h3>
+  <p>Suministro integral a plataformas petroleras offshore incluyendo herramienta de precisión, EPP certificado y consumibles industriales con entregas programadas desde nuestras plazas de Tampico, Ciudad del Carmen y Paraíso.</p>
+  <h3>Programa Tullbox — Planta industrial Tamaulipas</h3>
+  <p>Instalación y operación de contenedor Tullbox In Situ en planta de manufactura. Resultado: reducción del 85% en tiempo de búsqueda de herramienta y eliminación del 100% de extravíos de herramienta de alto valor.</p>
+  <div className="dp-grid">
+    <div className="dp-feature"><h4>Naval — Tampico/Veracruz</h4><p>Equipamiento de buques con herramienta de cubierta, seguridad marítima y mantenimiento a bordo.</p></div>
+    <div className="dp-feature"><h4>Energético — Norte MX</h4><p>Suministro de herramienta especializada para instalación de aerogeneradores en parque eólico.</p></div>
+    <div className="dp-feature"><h4>Metal-Mecánico — Automotriz</h4><p>Equipamiento integral de taller para planta de estampado y ensamble en el noreste del país.</p></div>
+    <div className="dp-feature"><h4>Inspección — Refinería</h4><p>Servicios de inspección especializada con equipos certificados para sector refinación PEMEX.</p></div>
+  </div>
+</DetailPage>
     </section>
   )
 }

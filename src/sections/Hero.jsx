@@ -44,69 +44,66 @@ function scrollToId(href) {
   if (el) window.scrollTo({ top: el.offsetTop - 68, behavior: 'smooth' })
 }
 
-/* ── Blob SVG ── */
-function HeroBlob({ accentColor }) {
+/* ─────────────────────────────────────────────────────────────
+   BLOB  — capa absoluta independiente, sobre la imagen,
+   bajo el texto. Sin textos ni puntos conectados.
+───────────────────────────────────────────────────────────── */
+function HeroBlob() {
   return (
-    <div className="hero-blob-wrap">
-      <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" className="hero-blob-svg">
-        <defs>
-          <filter id="glow">
-            <feGaussianBlur stdDeviation="6" result="blur"/>
-            <feComposite in="SourceGraphic" in2="blur" operator="over"/>
-          </filter>
-        </defs>
-
-        {/* Outer blob — amber */}
-        <path className="blob-outer" fill="rgba(244,121,32,0.12)" stroke="rgba(244,121,32,0.4)" strokeWidth="1.5">
-          <animate attributeName="d" dur="9s" repeatCount="indefinite"
+    <div className="hero-blob-layer" aria-hidden="true">
+      <svg
+        className="hero-blob-svg"
+        viewBox="0 0 520 420"
+        xmlns="http://www.w3.org/2000/svg"
+        preserveAspectRatio="xMidYMid slice"
+      >
+        {/* Blob 1 — naranja sólido-semiopaco, tamaño generoso */}
+        <path fill="rgba(244,121,32,0.55)">
+          <animate
+            attributeName="d"
+            dur="10s"
+            repeatCount="indefinite"
+            calcMode="spline"
+            keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1"
             values="
-              M200,60 C260,40 340,70 360,130 C380,190 340,260 270,280 C200,300 120,270 90,210 C55,145 70,90 130,65 C155,55 175,65 200,60Z;
-              M200,50 C270,30 355,75 365,145 C375,210 325,275 255,285 C180,298 105,260 80,195 C52,128 80,75 145,55 C165,48 180,57 200,50Z;
-              M200,65 C250,42 335,65 358,125 C382,188 348,265 278,282 C205,300 118,275 88,212 C55,148 68,88 125,66 C150,56 178,72 200,65Z;
-              M200,60 C260,40 340,70 360,130 C380,190 340,260 270,280 C200,300 120,270 90,210 C55,145 70,90 130,65 C155,55 175,65 200,60Z"
+              M260,60 C340,30 450,80 470,170 C492,265 430,360 330,390 C225,420 110,380 70,290 C28,196 60,100 150,65 C188,50 222,78 260,60Z;
+              M255,50 C345,22 460,85 475,180 C492,278 425,368 318,395 C208,422 98,378 62,282 C24,184 65,90 162,58 C198,46 218,72 255,50Z;
+              M265,68 C348,38 455,88 472,178 C490,270 428,362 322,390 C212,418 100,374 66,284 C30,192 68,98 160,64 C195,50 232,82 265,68Z;
+              M258,55 C342,26 458,82 473,175 C490,270 427,365 320,392 C210,420 100,377 64,285 C26,190 62,94 158,62 C194,48 226,76 258,55Z;
+              M260,60 C340,30 450,80 470,170 C492,265 430,360 330,390 C225,420 110,380 70,290 C28,196 60,100 150,65 C188,50 222,78 260,60Z"
           />
         </path>
 
-        {/* Inner blob — cyan */}
-        <path className="blob-inner" fill="rgba(0,155,219,0.08)" stroke="rgba(0,196,240,0.35)" strokeWidth="1">
-          <animate attributeName="d" dur="12s" repeatCount="indefinite"
+        {/* Blob 2 — cyan, ligeramente desplazado, más opaco */}
+        <path fill="rgba(0,155,219,0.45)">
+          <animate
+            attributeName="d"
+            dur="14s"
+            repeatCount="indefinite"
+            calcMode="spline"
+            keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1"
             values="
-              M200,90 C245,72 305,95 320,145 C335,195 305,250 255,262 C200,275 145,252 120,200 C95,148 115,100 160,88 C175,83 188,94 200,90Z;
-              M200,82 C250,68 312,98 325,152 C338,205 300,258 248,268 C193,280 138,255 115,202 C90,146 118,96 168,84 C182,79 190,86 200,82Z;
-              M200,92 C242,74 308,92 322,143 C338,197 308,252 258,264 C202,278 144,255 118,202 C90,148 112,98 158,87 C172,82 188,96 200,92Z;
-              M200,90 C245,72 305,95 320,145 C335,195 305,250 255,262 C200,275 145,252 120,200 C95,148 115,100 160,88 C175,83 188,94 200,90Z"
+              M240,90 C310,62 410,105 428,195 C446,285 390,368 298,388 C202,410 108,368 78,282 C46,192 85,112 172,86 C204,74 218,106 240,90Z;
+              M248,78 C322,52 418,100 434,192 C450,284 392,370 296,390 C196,412 100,372 72,284 C42,194 84,108 175,80 C208,68 226,94 248,78Z;
+              M236,96 C308,68 415,108 430,198 C446,290 388,372 294,392 C198,414 104,372 76,284 C46,196 88,114 174,88 C206,76 216,108 236,96Z;
+              M240,90 C310,62 410,105 428,195 C446,285 390,368 298,388 C202,410 108,368 78,282 C46,192 85,112 172,86 C204,74 218,106 240,90Z"
           />
         </path>
 
-        {/* Pulsing dots */}
-        <circle cx="155" cy="120" r="4" fill="rgba(244,121,32,0.8)" className="blob-dot">
-          <animate attributeName="r" values="3;6;3" dur="3s" repeatCount="indefinite"/>
-          <animate attributeName="opacity" values="0.8;0.3;0.8" dur="3s" repeatCount="indefinite"/>
-        </circle>
-        <circle cx="265" cy="105" r="3" fill="rgba(0,196,240,0.8)" className="blob-dot">
-          <animate attributeName="r" values="2;5;2" dur="4s" repeatCount="indefinite" begin="1s"/>
-          <animate attributeName="opacity" values="0.8;0.2;0.8" dur="4s" repeatCount="indefinite" begin="1s"/>
-        </circle>
-        <circle cx="290" cy="195" r="3.5" fill="rgba(244,121,32,0.6)" className="blob-dot">
-          <animate attributeName="r" values="2.5;5.5;2.5" dur="3.5s" repeatCount="indefinite" begin="0.5s"/>
-        </circle>
-        <circle cx="140" cy="210" r="3" fill="rgba(0,196,106,0.7)" className="blob-dot">
-          <animate attributeName="r" values="2;4.5;2" dur="5s" repeatCount="indefinite" begin="2s"/>
-        </circle>
-
-        {/* Connection lines */}
-        <line x1="155" y1="120" x2="265" y2="105" stroke="rgba(244,121,32,0.2)" strokeWidth="1" strokeDasharray="4 5">
-          <animate attributeName="stroke-dashoffset" values="0;-36" dur="3s" repeatCount="indefinite"/>
-        </line>
-        <line x1="265" y1="105" x2="290" y2="195" stroke="rgba(0,155,219,0.2)" strokeWidth="1" strokeDasharray="4 5">
-          <animate attributeName="stroke-dashoffset" values="0;-36" dur="4s" repeatCount="indefinite"/>
-        </line>
-
-        {/* Labels */}
-        <text x="148" y="112" fontFamily="Space Mono, monospace" fontSize="7" fill="rgba(244,121,32,0.7)" letterSpacing="1">MX</text>
-        <text x="258" y="98" fontFamily="Space Mono, monospace" fontSize="7" fill="rgba(0,196,240,0.7)" letterSpacing="1">580+</text>
-        <text x="282" y="215" fontFamily="Space Mono, monospace" fontSize="7" fill="rgba(244,121,32,0.6)" letterSpacing="1">6 PLAZAS</text>
-        <text x="128" y="228" fontFamily="Space Mono, monospace" fontSize="7" fill="rgba(0,196,106,0.6)" letterSpacing="1">ACTIVO</text>
+        {/* Blob 3 — naranja más oscuro, borde del compositing */}
+        <path fill="rgba(244,121,32,0.30)">
+          <animate
+            attributeName="d"
+            dur="18s"
+            repeatCount="indefinite"
+            calcMode="spline"
+            keySplines="0.4 0 0.6 1; 0.4 0 0.6 1"
+            values="
+              M270,100 C335,75 418,118 432,202 C446,288 392,358 305,375 C215,392 128,352 100,272 C70,190 108,118 192,96 C222,86 244,118 270,100Z;
+              M262,92 C330,66 420,112 436,198 C452,286 396,358 308,376 C218,394 128,356 100,272 C70,188 110,116 194,92 C225,80 240,112 262,92Z;
+              M270,100 C335,75 418,118 432,202 C446,288 392,358 305,375 C215,392 128,352 100,272 C70,190 108,118 192,96 C222,86 244,118 270,100Z"
+          />
+        </path>
       </svg>
     </div>
   )
@@ -136,49 +133,60 @@ export default function Hero() {
 
   return (
     <section id="hero" className="hero">
-      {/* Background slides */}
+
+      {/* CAPA 1 — Imagen de fondo */}
       {SLIDES.map((sl, i) => (
         <div key={i} className={`hero-slide${i === cur ? ' active' : ''}`}>
           <img className="hero-bg" src={sl.img} alt={sl.badge} />
         </div>
       ))}
 
-      {/* Dark overlay */}
+      {/* CAPA 2 — Overlay oscuro izquierda */}
       <div className="hero-overlay" />
 
-      {/* Left content + blob together */}
+      {/* CAPA 3 — Blob animado (sobre imagen, bajo texto) */}
+      <HeroBlob />
+
+      {/* CAPA 4 — Texto sobre el blob */}
       <div className="hero-content">
         <div className="hero-badge" style={{ color: s.accentColor }}>
           <span className="hero-badge-line" style={{ background: s.accentColor }} />
           {s.badge}
         </div>
+
         <h1 className="hero-h1">
           <span>{s.h1[0]}</span>
           <em style={{ WebkitTextStrokeColor: s.accentColor }}>{s.h1[1]}</em>
           <span>{s.h1[2]}</span>
         </h1>
-        <p className="hero-sub">{s.sub}</p>
-        <div className="hero-btns">
-          <button className="btn-main" onClick={() => scrollToId('#contacto')}>Solicitar cotización</button>
-          <button className="btn-sec white" onClick={() => scrollToId('#sectores')}>Explorar →</button>
-        </div>
 
-        {/* Blob sits below the text, still inside hero-content */}
-        <HeroBlob accentColor={s.accentColor} />
+        <p className="hero-sub">{s.sub}</p>
+
+        <div className="hero-btns">
+          <button className="btn-main" onClick={() => scrollToId('#contacto')}>
+            Solicitar cotización
+          </button>
+          <button className="btn-sec white" onClick={() => scrollToId('#sectores')}>
+            Explorar →
+          </button>
+        </div>
       </div>
 
-      {/* Carousel controls */}
+      {/* Controles del carrusel */}
       <button className="car-prev" onClick={() => go(cur - 1)} aria-label="Anterior">‹</button>
       <button className="car-next" onClick={() => go(cur + 1)} aria-label="Siguiente">›</button>
 
-      {/* Dots */}
       <div className="car-dots">
         {SLIDES.map((_, i) => (
-          <button key={i} className={`car-dot${i === cur ? ' active' : ''}`} onClick={() => go(i)} aria-label={`Slide ${i+1}`} />
+          <button
+            key={i}
+            className={`car-dot${i === cur ? ' active' : ''}`}
+            onClick={() => go(i)}
+            aria-label={`Slide ${i + 1}`}
+          />
         ))}
       </div>
 
-      {/* Progress bar */}
       <div key={cur} className="car-prog" />
 
       {/* Stats bar */}

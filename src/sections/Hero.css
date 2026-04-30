@@ -1,4 +1,13 @@
-/* ── HERO SHELL ────────────────────────────── */
+/* ═══════════════════════════════════════════════
+   HERO SECTION
+   Layer order (z-index):
+     1  — .hero-slide (imagen)
+     2  — .hero-overlay (gradiente oscuro)
+     3  — .hero-blob-layer (blob naranja/cyan)
+     4  — .hero-content (texto)
+     5  — controles (dots, flechas)
+     6  — .stats-bar
+═══════════════════════════════════════════════ */
 .hero {
   position: relative;
   width: 100%;
@@ -8,34 +17,67 @@
   margin-top: 68px;
 }
 
-/* ── SLIDES ────────────────────────────────── */
+/* ── CAPA 1: imagen ──────────────────────────── */
 .hero-slide {
   position: absolute; inset: 0;
-  opacity: 0; transition: opacity .9s ease;
+  opacity: 0;
+  transition: opacity .9s ease;
+  z-index: 1;
 }
-.hero-slide.active { opacity: 1; z-index: 1; }
+.hero-slide.active { opacity: 1; }
+
 .hero-bg {
-  width: 100%; height: 100%; object-fit: cover;
-  filter: brightness(.45) contrast(1.1);
+  width: 100%; height: 100%;
+  object-fit: cover;
+  filter: brightness(.55) contrast(1.05);
   transform: scale(1.06);
   transition: transform 8s ease;
 }
 .hero-slide.active .hero-bg { transform: scale(1); }
 
-/* ── OVERLAY ───────────────────────────────── */
+/* ── CAPA 2: overlay izquierdo ───────────────── */
 .hero-overlay {
   position: absolute; inset: 0; z-index: 2;
   background:
-    linear-gradient(to right, rgba(13,30,74,.85) 0%, rgba(13,30,74,.4) 50%, transparent 100%),
-    linear-gradient(to top, rgba(5,8,16,.6) 0%, transparent 50%);
+    linear-gradient(to right,
+      rgba(8,16,40,.70) 0%,
+      rgba(8,16,40,.40) 45%,
+      transparent 75%
+    ),
+    linear-gradient(to top,
+      rgba(5,8,16,.55) 0%,
+      transparent 40%
+    );
 }
 
-/* ── CONTENT ───────────────────────────────── */
+/* ── CAPA 3: blob ────────────────────────────── */
+.hero-blob-layer {
+  position: absolute;
+  /* Ocupa el cuadrante izquierdo donde está el texto */
+  top: 0; left: 0;
+  width: 65%;
+  height: calc(100% - 72px); /* deja hueco para stats */
+  z-index: 3;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  /* blend mode: mezcla bonita con imagen de fondo */
+  mix-blend-mode: screen;
+}
+.hero-blob-svg {
+  width: 100%;
+  height: 100%;
+  /* No overflow clip — los blobs pueden sangrar */
+  overflow: visible;
+}
+
+/* ── CAPA 4: texto ───────────────────────────── */
 .hero-content {
   position: absolute;
-  top: 0; left: 0; bottom: 80px;
-  width: min(700px, 55%);
-  z-index: 5;
+  top: 0; left: 0;
+  bottom: 72px; /* stats bar height */
+  width: min(680px, 58%);
+  z-index: 4;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -46,133 +88,153 @@
 .hero-badge {
   display: inline-flex; align-items: center; gap: 8px;
   font-family: var(--font-mono); font-size: .65rem;
-  letter-spacing: 3px; text-transform: uppercase; margin-bottom: 16px;
+  letter-spacing: 3px; text-transform: uppercase;
+  margin-bottom: 16px;
+  /* Sombra de texto para legibilidad sobre el blob */
+  text-shadow: 0 1px 6px rgba(0,0,0,.6);
 }
 .hero-badge-line { width: 22px; height: 1px; flex-shrink: 0; }
 
 .hero-h1 {
   font-family: var(--font-display);
   font-size: clamp(2.8rem, 6vw, 6rem);
-  font-weight: 700; text-transform: uppercase;
-  letter-spacing: -2px; line-height: .9;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: -2px;
+  line-height: .9;
   display: flex; flex-direction: column; gap: 4px;
   margin-bottom: 14px;
+  /* Sombra fuerte para que el texto "flote" sobre el blob */
+  text-shadow: 0 2px 16px rgba(0,0,0,.7), 0 0 40px rgba(0,0,0,.4);
 }
 .hero-h1 span { color: #fff; }
-.hero-h1 em { color: transparent; font-style: normal; -webkit-text-stroke: 1.5px; }
+.hero-h1 em {
+  color: transparent;
+  font-style: normal;
+  -webkit-text-stroke: 1.5px;
+  /* El outline blanco siempre visible */
+  filter: drop-shadow(0 2px 8px rgba(0,0,0,.8));
+}
 
 .hero-sub {
   font-family: var(--font-display);
   font-size: clamp(.9rem, 1.6vw, 1.2rem);
-  font-weight: 300; color: rgba(255,255,255,.65);
-  letter-spacing: .3px; margin-bottom: 28px;
-  max-width: 440px; line-height: 1.6;
+  font-weight: 300;
+  color: rgba(255,255,255,.92);
+  letter-spacing: .3px;
+  margin-bottom: 30px;
+  max-width: 440px;
+  line-height: 1.6;
+  text-shadow: 0 1px 8px rgba(0,0,0,.7);
 }
 
 .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
 
-/* ── BLOB ──────────────────────────────────── */
-.hero-blob-wrap {
-  margin-top: 32px;
-  width: 100%;
-  max-width: 420px;
-  pointer-events: none;
-  /* subtle entrance */
-  animation: blobFadeIn 1.2s ease forwards;
-  opacity: 0;
-}
-@keyframes blobFadeIn {
-  from { opacity: 0; transform: translateY(16px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-.hero-blob-svg {
-  width: 100%;
-  height: auto;
-  overflow: visible;
-}
-.blob-dot { pointer-events: none; }
-
-/* ── ARROWS ────────────────────────────────── */
+/* ── CONTROLES: z-index 5 ────────────────────── */
 .car-prev, .car-next {
-  position: absolute; top: 50%; transform: translateY(-50%); z-index: 10;
-  background: rgba(255,255,255,.1); backdrop-filter: blur(6px);
-  border: 1px solid rgba(255,255,255,.2); color: #fff;
-  width: 48px; height: 48px; font-size: 1.3rem;
+  position: absolute; top: 50%; transform: translateY(-50%);
+  z-index: 5;
+  background: rgba(255,255,255,.12);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255,255,255,.25);
+  color: #fff;
+  width: 48px; height: 48px;
+  font-size: 1.3rem;
   display: flex; align-items: center; justify-content: center;
   transition: all .2s; cursor: pointer;
 }
 .car-prev { left: 16px; }
 .car-next { right: 16px; }
-.car-prev:hover, .car-next:hover { background: var(--cyan); border-color: var(--cyan); }
+.car-prev:hover, .car-next:hover {
+  background: var(--cyan); border-color: var(--cyan);
+}
 
-/* ── DOTS ──────────────────────────────────── */
 .car-dots {
-  position: absolute; bottom: 90px; left: 64px;
-  display: flex; gap: 8px; z-index: 10;
+  position: absolute; bottom: 86px; left: 64px;
+  display: flex; gap: 8px; z-index: 5;
 }
 .car-dot {
-  width: 24px; height: 3px; background: rgba(255,255,255,.3);
-  border: none; padding: 0; cursor: pointer; transition: all .3s;
+  width: 24px; height: 3px;
+  background: rgba(255,255,255,.35);
+  border: none; padding: 0; cursor: pointer;
+  transition: all .3s;
 }
 .car-dot.active { background: var(--cyan); width: 40px; }
 
-/* ── PROGRESS ──────────────────────────────── */
 .car-prog {
-  position: absolute; bottom: 0; left: 0; z-index: 20;
+  position: absolute; bottom: 72px; left: 0; z-index: 5;
   height: 2px; background: var(--cyan);
   animation: cprog 5s linear forwards;
 }
 @keyframes cprog { from { width: 0; } to { width: 100%; } }
 
-/* ── STATS BAR ─────────────────────────────── */
+/* ── STATS BAR: z-index 6 ────────────────────── */
 .stats-bar {
   position: absolute; bottom: 0; left: 0; right: 0;
-  display: grid; grid-template-columns: repeat(4,1fr);
-  background: rgba(5,8,16,.8); backdrop-filter: blur(12px);
-  border-top: 1px solid rgba(255,255,255,.07); z-index: 6;
   height: 72px;
+  display: grid; grid-template-columns: repeat(4,1fr);
+  background: rgba(5,8,16,.82);
+  backdrop-filter: blur(14px);
+  border-top: 1px solid rgba(255,255,255,.07);
+  z-index: 6;
 }
 .st {
-  display: flex; flex-direction: column; align-items: center;
-  justify-content: center; padding: 10px 8px;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  padding: 8px;
   border-right: 1px solid rgba(255,255,255,.07);
 }
 .st:last-child { border: none; }
 .st-num {
-  font-family: var(--font-display); font-size: 1.6rem;
-  font-weight: 700; color: var(--cyan); line-height: 1;
+  font-family: var(--font-display);
+  font-size: 1.6rem; font-weight: 700;
+  color: var(--cyan); line-height: 1;
 }
 .st-num span { color: var(--amber); font-size: 1rem; }
 .st-lbl {
   font-family: var(--font-mono); font-size: .5rem;
-  color: rgba(255,255,255,.4); letter-spacing: 2px;
-  text-transform: uppercase; margin-top: 3px;
+  color: rgba(255,255,255,.4);
+  letter-spacing: 2px; text-transform: uppercase; margin-top: 3px;
 }
 
-/* ── RESPONSIVE ────────────────────────────── */
+/* ── RESPONSIVE ──────────────────────────────── */
 @media (max-width: 1100px) {
-  .hero-content { width: min(600px, 65%); padding: 0 40px; }
+  .hero-content    { width: min(600px, 70%); padding: 0 40px; }
+  .hero-blob-layer { width: 75%; }
 }
+
 @media (max-width: 768px) {
   .hero { height: 100svh; }
-  .hero-content {
-    width: 100%; padding: 0 24px;
-    bottom: 72px;
-    justify-content: flex-end;
-    padding-bottom: 28px;
+
+  /* El blob cubre toda la pantalla en móvil */
+  .hero-blob-layer {
+    width: 100%;
+    height: calc(100% - 72px);
+    mix-blend-mode: screen;
   }
-  .hero-h1 { font-size: clamp(2.2rem, 8vw, 3.5rem); }
-  .hero-sub { font-size: .9rem; max-width: 100%; }
-  .hero-blob-wrap { max-width: 280px; margin-top: 20px; }
-  .car-dots { left: 24px; bottom: 84px; }
+
+  /* Texto pegado al fondo en móvil */
+  .hero-content {
+    width: 100%;
+    padding: 0 22px;
+    top: auto;
+    bottom: 80px;
+    justify-content: flex-end;
+  }
+
+  .hero-h1 { font-size: clamp(2.2rem, 9vw, 3.4rem); letter-spacing: -1px; }
+  .hero-sub { font-size: .88rem; max-width: 100%; }
   .car-prev, .car-next { display: none; }
+  .car-dots { left: 22px; bottom: 84px; }
+
   .stats-bar { height: auto; }
+  .st { padding: 10px 4px; }
   .st-num { font-size: 1.2rem; }
-  .st-lbl { font-size: .45rem; }
+  .st-lbl { font-size: .42rem; letter-spacing: 1px; }
 }
+
 @media (max-width: 480px) {
-  .hero-h1 { letter-spacing: -1px; }
-  .hero-btns { flex-direction: column; gap: 10px; }
+  .hero-btns { flex-direction: column; }
   .hero-btns .btn-main,
-  .hero-btns .btn-sec { text-align: center; justify-content: center; }
+  .hero-btns .btn-sec { text-align: center; width: 100%; }
 }

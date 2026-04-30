@@ -1,4 +1,5 @@
 import './Noticias.css'
+import DetailPage from '../components/DetailPage'
 
 const NEWS = [
   {
@@ -28,6 +29,7 @@ const NEWS = [
 ]
 
 export default function Noticias() {
+  const [openNews, setOpenNews] = useState(false)
   return (
     <section id="noticias" className="section section-alt">
       <div className="container">
@@ -57,6 +59,23 @@ export default function Noticias() {
           </a>
         </div>
       </div>
+    
+      <div className="ver-mas-wrap reveal d2" style={{marginTop:28}}><button className="btn-ver-mas" onClick={() => setOpenNews(true)}>Ver todas las noticias</button></div>
+
+      <DetailPage isOpen={openNews} onClose={() => setOpenNews(false)}
+  eyebrow="Noticias" title="Últimas <em>Novedades</em>"
+  lead="Mantente informado sobre los últimos proyectos, expansiones y logros de SUMIMSA.">
+  <h3>SUMIMSA amplía servicios en plataformas offshore del Golfo</h3>
+  <p>ENE 2025 — Nuevas alianzas estratégicas con operadores del Golfo de México refuerzan nuestra presencia en el sector de exploración y producción de hidrocarburos, ampliando el catálogo de herramienta especializada disponible para plataformas.</p>
+  <h3>Entrada al sector de energías renovables</h3>
+  <p>OCT 2024 — SUMIMSA suma esfuerzos para apoyar proyectos eólicos y solares en el norte del país. Herramienta especializada para instalación y mantenimiento de aerogeneradores y paneles fotovoltaicos ya disponible en catálogo.</p>
+  <h3>Nueva sucursal en Ciudad del Carmen</h3>
+  <p>NOV 2024 — La apertura de nuestra séptima ubicación en Cd. del Carmen, Campeche consolida nuestra cobertura en el sur del Golfo de México, atendiendo la intensa actividad de plataformas offshore y buques de apoyo en la zona.</p>
+  <div className="dp-grid">
+    <div className="dp-feature"><h4>Canal YouTube</h4><p>Síguenos en YouTube para ver videos de nuestras operaciones, instalaciones Tullbox y eventos corporativos.</p></div>
+    <div className="dp-feature"><h4>LinkedIn</h4><p>Actualizaciones, empleos y noticias del sector industrial en nuestro perfil de LinkedIn.</p></div>
+  </div>
+</DetailPage>
     </section>
   )
 }

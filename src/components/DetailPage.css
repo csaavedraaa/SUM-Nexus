@@ -1,0 +1,159 @@
+/* ═══════════════════════════════════════════════
+   DETAIL PAGE OVERLAY
+   — empieza en top:68px para que el header quede visible
+   — el header SIEMPRE está encima (z-index 200)
+   — el overlay usa z-index 150
+═══════════════════════════════════════════════ */
+.dp-overlay {
+  position: fixed;
+  /* Empieza DEBAJO del header fijo (68px) */
+  top: 68px;
+  left: 0; right: 0; bottom: 0;
+  z-index: 150;
+  background: #fff;
+
+  /* Slide desde la derecha */
+  transform: translateX(100%);
+  transition: transform .45s cubic-bezier(.77,0,.175,1);
+  /* Sin overflow aquí — el scroll lo maneja dp-scroll-area */
+  overflow: hidden;
+}
+.dp-overlay.dp-open {
+  transform: translateX(0);
+}
+
+/* Área scrolleable */
+.dp-scroll-area {
+  width: 100%; height: 100%;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+/* ── HEADER DE DETALLE ─────────────────────── */
+.dp-header {
+  background: var(--navy);
+  padding: 48px;
+  position: relative; overflow: hidden;
+}
+.dp-header::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23009bdb' fill-opacity='0.04'%3E%3Cpath d='M20 20.5V18H0v5h5v5H0v5h20v-5h15v-5H20v-.5z'/%3E%3C/g%3E%3C/svg%3E");
+  pointer-events: none;
+}
+/* Cyan accent line top */
+.dp-header::after {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--cyan), var(--amber));
+}
+
+.dp-back {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--font-display); font-size: .78rem; font-weight: 500;
+  letter-spacing: 1.5px; text-transform: uppercase;
+  color: rgba(255,255,255,.45);
+  background: none; border: none; cursor: pointer;
+  margin-bottom: 28px;
+  transition: color .2s;
+  position: relative; z-index: 1;
+}
+.dp-back:hover { color: var(--cyan); }
+.dp-back-arrow { font-size: 1.1rem; transition: transform .2s; }
+.dp-back:hover .dp-back-arrow { transform: translateX(-4px); }
+
+.dp-eyebrow {
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 12px;
+  position: relative; z-index: 1;
+}
+.dp-eyebrow-line {
+  display: inline-block; width: 28px; height: 2px;
+  background: var(--cyan); flex-shrink: 0;
+}
+.dp-eyebrow span {
+  font-family: var(--font-mono); font-size: .62rem;
+  color: var(--cyan); letter-spacing: 3px; text-transform: uppercase;
+}
+
+.dp-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3.8rem);
+  font-weight: 700; text-transform: uppercase;
+  letter-spacing: -1px; line-height: .92;
+  color: #fff;
+  position: relative; z-index: 1;
+  margin-bottom: 12px;
+}
+.dp-title em { color: var(--cyan); font-style: normal; }
+
+.dp-lead {
+  font-size: 1rem; color: rgba(255,255,255,.55);
+  max-width: 600px; line-height: 1.8;
+  position: relative; z-index: 1;
+}
+
+/* ── BODY ──────────────────────────────────── */
+.dp-body {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 56px 48px 80px;
+}
+
+/* Typography dentro del cuerpo */
+.dp-body h3 {
+  font-family: var(--font-display); font-size: 1.5rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .5px; color: var(--navy);
+  margin: 36px 0 12px;
+  display: flex; align-items: center; gap: 12px;
+}
+.dp-body h3:first-child { margin-top: 0; }
+.dp-body h3::before {
+  content: '';
+  display: inline-block; width: 4px; height: 1.4em;
+  background: var(--cyan); flex-shrink: 0;
+}
+.dp-body p {
+  font-size: .93rem; color: var(--muted);
+  line-height: 1.85; margin-bottom: 14px;
+}
+.dp-body ul {
+  margin: 8px 0 16px 24px;
+}
+.dp-body li {
+  font-size: .93rem; color: var(--muted);
+  line-height: 1.7; margin-bottom: 7px;
+}
+.dp-body strong { color: var(--navy); }
+
+/* Feature grid */
+.dp-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 16px; margin: 24px 0;
+}
+.dp-feature {
+  border-left: 3px solid var(--cyan);
+  padding: 18px 20px;
+  background: var(--off);
+}
+.dp-feature h4 {
+  font-family: var(--font-display); font-size: 1rem; font-weight: 700;
+  text-transform: uppercase; color: var(--navy); margin-bottom: 7px;
+}
+.dp-feature p { font-size: .82rem; color: var(--muted); margin: 0; line-height: 1.7; }
+
+/* Hero image en detalle */
+.dp-img {
+  width: 100%; height: 320px;
+  object-fit: cover; margin-bottom: 36px;
+  display: block;
+  filter: brightness(.85);
+}
+
+/* ── RESPONSIVE ──────────────────────────── */
+@media (max-width: 768px) {
+  .dp-header { padding: 32px 20px; }
+  .dp-body   { padding: 36px 20px 60px; }
+  .dp-grid   { grid-template-columns: 1fr; }
+  .dp-title  { font-size: clamp(1.8rem, 8vw, 2.8rem); }
+}

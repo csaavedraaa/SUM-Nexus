@@ -17,8 +17,10 @@ const STATS = [
 ]
 
 import { useState } from 'react'
+import DetailPage from '../components/DetailPage'
 
 export default function Presencia() {
+  const [openDetail, setOpenDetail] = useState(false)
   const [active, setActive] = useState(null)
   const loc = active ? LOCATIONS.find(l => l.id === active) : null
 
@@ -193,6 +195,24 @@ export default function Presencia() {
           </div>
         </div>
       </div>
+    
+      <div className="ver-mas-wrap reveal d3"><button className="btn-ver-mas" onClick={() => setOpenDetail(true)}>Ver presencia completa</button></div>
+
+      <DetailPage isOpen={openDetail} onClose={() => setOpenDetail(false)}
+  eyebrow="Presencia Nacional" title="México, <em>nuestro territorio</em>"
+  lead="580+ colaboradores en 6 ubicaciones estratégicas cubriendo las zonas industriales y portuarias más importantes del Golfo de México.">
+  <img className="dp-img" src="https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?w=1200&q=80&fit=crop" alt="México mapa" />
+  <h3>Matriz — Tampico, Tamaulipas</h3>
+  <p>Calzada Blanca 1091-B, Col. Morelos, Tampico, Tam. C.P. 89290. Desde Tampico coordinamos todas las operaciones nacionales. Teléfono: +52 (833) 369 0070.</p>
+  <div className="dp-grid">
+    <div className="dp-feature"><h4>Reynosa, Tamps.</h4><p>Atendemos la industria maquiladora y automotriz del norte y la frontera con EUA.</p></div>
+    <div className="dp-feature"><h4>Poza Rica, Ver.</h4><p>Cobertura de la Cuenca de Burgos y zona de producción petrolera norte de Veracruz.</p></div>
+    <div className="dp-feature"><h4>Veracruz, Ver.</h4><p>Puerto industrial más importante del Golfo. Terminal de contenedores y plantas petroquímicas.</p></div>
+    <div className="dp-feature"><h4>Paraíso, Tab.</h4><p>Zona de refinación y producción PEMEX Tabasco. Soporte para plataformas offshore.</p></div>
+    <div className="dp-feature"><h4>Cd. del Carmen, Camp.</h4><p>Hub del sur del Golfo. Plataformas, buques de apoyo y servicio submarino.</p></div>
+    <div className="dp-feature"><h4>Expansión 2025-26</h4><p>Evaluando Coatzacoalcos y Villahermosa para fortalecer la cobertura del sureste.</p></div>
+  </div>
+</DetailPage>
     </section>
   )
 }

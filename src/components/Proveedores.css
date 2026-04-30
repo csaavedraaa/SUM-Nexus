@@ -17,8 +17,3 @@
   filter: grayscale(1) opacity(.4); transition: filter .3s;
 }
 .prov-logo:hover { filter: grayscale(0) opacity(1); }
-
-@media (max-width: 768px) {
-  .prov-item  { padding: 0 20px; }
-  .prov-logo  { height: 24px; max-width: 80px; }
-}

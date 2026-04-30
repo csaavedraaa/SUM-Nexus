@@ -2,14 +2,13 @@ import { useState, useEffect } from 'react'
 import './Header.css'
 
 const NAV_LINKS = [
-  { href: '#sectores',   label: 'Sectores'    },
-  { href: '#nosotros',   label: 'Nosotros'    },
-  { href: '#presencia',  label: 'Presencia'   },
-  { href: '#tullbox',    label: 'Tullbox'     },
-  { href: '#tecnologia', label: 'Tecnología'  },
-  { href: '#blog',       label: 'Blog'        },
-  { href: '#sspa',       label: 'SSPA'        },
-  { href: '#bolsa',      label: 'Empleo'      },
+  { href: '#sectores',  label: 'Sectores'  },
+  { href: '#nosotros',  label: 'Nosotros'  },
+  { href: '#tullbox',   label: 'Tullbox'   },
+  { href: '#proyectos', label: 'Proyectos' },
+  { href: '#sspa',      label: 'SSPA'      },
+  { href: '#catalogs',  label: 'Catálogos' },
+  { href: '#bolsa',     label: 'Empleo'    },
 ]
 
 export default function Header() {
@@ -32,19 +31,28 @@ export default function Header() {
   return (
     <header className={`hdr${scrolled ? ' scrolled' : ''}`}>
       <div className="hdr-inner">
+        {/* LOGO REAL */}
         <a href="#hero" className="hdr-logo" onClick={e => scrollTo(e, '#hero')}>
-          <img src="/logo-sumimsa_completo.png" alt="SUMIMSA" className="hdr-logo-img" />
+          <img
+            src="/logo-sumimsa_completo.png"
+            alt="SUMIMSA — Un Solo Proveedor"
+            className="hdr-logo-img"
+          />
         </a>
 
+        {/* NAV */}
         <nav className={`hdr-nav${open ? ' open' : ''}`}>
           {NAV_LINKS.map(({ href, label }) => (
-            <a key={href} href={href} onClick={e => scrollTo(e, href)}>{label}</a>
+            <a key={href} href={href} onClick={e => scrollTo(e, href)}>
+              {label}
+            </a>
           ))}
           <a href="#contacto" className="nav-cta" onClick={e => scrollTo(e, '#contacto')}>
             Contacto
           </a>
         </nav>
 
+        {/* HAMBURGER */}
         <button
           className={`menu-btn${open ? ' active' : ''}`}
           onClick={() => setOpen(v => !v)}

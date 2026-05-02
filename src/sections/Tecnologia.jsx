@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import './Tecnologia.css'
 import DetailPage from '../components/DetailPage'
 
@@ -158,26 +159,30 @@ export default function Tecnologia() {
           ))}
         </div>
       </div>
-    
-      <div className="ver-mas-wrap reveal d3"><button className="btn-ver-mas" onClick={() => setOpenTech(true)}>Explorar capacidades tecnológicas</button></div>
+
+      <div className="ver-mas-wrap reveal d3">
+        <button className="btn-ver-mas" onClick={() => setOpenTech(true)}>
+          Explorar capacidades tecnológicas
+        </button>
+      </div>
 
       <DetailPage isOpen={openTech} onClose={() => setOpenTech(false)}
-  eyebrow="Transformación Digital" title="Inteligencia <em>Industrial</em>"
-  lead="SUMIMSA ha invertido en tecnología para ofrecer visibilidad, control y eficiencia en tiempo real a sus clientes y operaciones.">
-  <img className="dp-img" src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=80&fit=crop" alt="Dashboard" />
-  <h3>KPI Dashboard</h3>
-  <p>Tableros ejecutivos que integran datos de todas las plazas en tiempo real: órdenes de compra, inventarios, fill rate, OTIF, alertas de reabastecimiento y rentabilidad por cliente. Accesibles desde PC, tablet y móvil.</p>
-  <h3>Rastreo de Activos</h3>
-  <p>Sistema de geolocalización para nuestra flota y para herramienta de alto valor en programas Tullbox. Los clientes pueden ver en tiempo real el estatus de su entrega.</p>
-  <h3>Portal de Compras Digitales</h3>
-  <p>Plataforma web donde nuestros clientes colocan órdenes, consultan disponibilidad, aprueban cotizaciones y descargan facturas. Integración con SAP, Oracle y Microsoft Dynamics.</p>
-  <div className="dp-grid">
-    <div className="dp-feature"><h4>S&OP Automatizado</h4><p>Pronósticos con histórico y señales de mercado para recomendaciones de compra automáticas.</p></div>
-    <div className="dp-feature"><h4>Integración EDI/API</h4><p>Conexión directa con ERP del cliente para órdenes automáticas sin intervención manual.</p></div>
-    <div className="dp-feature"><h4>CFDI 4.0</h4><p>Facturación electrónica automática al momento de la entrega confirmada.</p></div>
-    <div className="dp-feature"><h4>App Tullbox</h4><p>Solicitud de herramienta, registro de consumo y consulta de inventario desde el celular.</p></div>
-  </div>
-</DetailPage>
+        eyebrow="Transformación Digital" title="Inteligencia <em>Industrial</em>"
+        lead="SUMIMSA ha invertido en tecnología para ofrecer visibilidad, control y eficiencia en tiempo real a sus clientes y operaciones.">
+        <img className="dp-img" src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=80&fit=crop" alt="Dashboard" />
+        <h3>KPI Dashboard</h3>
+        <p>Tableros ejecutivos que integran datos de todas las plazas en tiempo real: órdenes de compra, inventarios, fill rate, OTIF, alertas de reabastecimiento y rentabilidad por cliente. Accesibles desde PC, tablet y móvil.</p>
+        <h3>Rastreo de Activos</h3>
+        <p>Sistema de geolocalización para nuestra flota y para herramienta de alto valor en programas Tullbox. Los clientes pueden ver en tiempo real el estatus de su entrega.</p>
+        <h3>Portal de Compras Digitales</h3>
+        <p>Plataforma web donde nuestros clientes colocan órdenes, consultan disponibilidad, aprueban cotizaciones y descargan facturas. Integración con SAP, Oracle y Microsoft Dynamics.</p>
+        <div className="dp-grid">
+          <div className="dp-feature"><h4>S&OP Automatizado</h4><p>Pronósticos con histórico y señales de mercado para recomendaciones de compra automáticas.</p></div>
+          <div className="dp-feature"><h4>Integración EDI/API</h4><p>Conexión directa con ERP del cliente para órdenes automáticas sin intervención manual.</p></div>
+          <div className="dp-feature"><h4>CFDI 4.0</h4><p>Facturación electrónica automática al momento de la entrega confirmada.</p></div>
+          <div className="dp-feature"><h4>App Tullbox</h4><p>Solicitud de herramienta, registro de consumo y consulta de inventario desde el celular.</p></div>
+        </div>
+      </DetailPage>
     </section>
   )
 }

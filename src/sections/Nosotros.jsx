@@ -1,4 +1,9 @@
+import { useState } from 'react'
+import DetailPage from '../components/DetailPage'
+
 export default function Nosotros() {
+  const [openNosotros, setOpenNosotros] = useState(false)
+
   const rows = [
     ['Fundada en',    'Tampico, Tamps.'],
     ['Tipo',          '100% Mexicana'],
@@ -8,6 +13,7 @@ export default function Nosotros() {
     ['Estatus',       '● Activo'],
   ]
   const chips = ['Calidad','Confianza','Innovación','Seguridad','Liderazgo','México']
+
   return (
     <section id="nosotros" className="section section-alt">
       <div className="container">
@@ -33,6 +39,7 @@ export default function Nosotros() {
               <span style={{fontSize:'.6rem',color:'rgba(255,255,255,.75)',textTransform:'uppercase',letterSpacing:1.5}}>Años de experiencia</span>
             </div>
           </div>
+
           {/* Text */}
           <div className="reveal d2">
             <div className="eyebrow"><div className="eyebrow-line" /><span className="eyebrow-text">Acerca de SUMIMSA</span></div>
@@ -49,9 +56,62 @@ export default function Nosotros() {
             <div className="chips">
               {chips.map(c=><div key={c} className="chip">{c}</div>)}
             </div>
+
+            <div style={{marginTop: 32}}>
+              <button className="btn-ver-mas" onClick={() => setOpenNosotros(true)}>
+                Conocer más sobre SUMIMSA
+              </button>
+            </div>
           </div>
         </div>
       </div>
+
+      <DetailPage
+        isOpen={openNosotros}
+        onClose={() => setOpenNosotros(false)}
+        eyebrow="Acerca de SUMIMSA"
+        title="Empresa de <em>clase mundial</em>"
+        lead="SUMIMSA nació en Tampico con un compromiso: ser el único proveedor que la industria mexicana necesita. Más de 15 años después, ese compromiso nos define."
+      >
+        <img className="dp-img" src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=1200&q=80&fit=crop" alt="SUMIMSA operaciones" />
+
+        <h3>Nuestra Historia</h3>
+        <p>SUMIMSA inicia operaciones en Tampico, Tamaulipas, con la visión de convertirse en la empresa de suministro industrial más confiable de México. Desde el primer día, apostamos por la calidad, la confianza y el servicio personalizado como pilares de nuestra identidad.</p>
+        <p>Con más de 15 años en el mercado, hemos crecido de una plaza en Tampico a una red de 7 ubicaciones estratégicas en el Golfo de México, con más de 580 colaboradores comprometidos con la excelencia.</p>
+
+        <h3>Misión</h3>
+        <p>Ser el proveedor integral de herramientas, equipos y servicios industriales que la industria mexicana necesita para operar con excelencia, seguridad y eficiencia. Nos comprometemos a ofrecer calidad, confiabilidad y servicio excepcional en cada interacción.</p>
+
+        <h3>Visión</h3>
+        <p>Consolidarnos como la empresa de suministro industrial de clase mundial número uno en México, reconocida por nuestros clientes, proveedores y colaboradores como el socio estratégico que transforma la cadena de suministro industrial del país.</p>
+
+        <div className="dp-grid">
+          <div className="dp-feature">
+            <h4>+15 Años</h4>
+            <p>Más de quince años operando con excelencia en los sectores industriales más exigentes de México.</p>
+          </div>
+          <div className="dp-feature">
+            <h4>580+ Colaboradores</h4>
+            <p>Equipo altamente calificado distribuido en 7 plazas a lo largo del Golfo de México.</p>
+          </div>
+          <div className="dp-feature">
+            <h4>100% Mexicana</h4>
+            <p>Empresa con capital 100% mexicano, comprometida con el desarrollo industrial del país.</p>
+          </div>
+          <div className="dp-feature">
+            <h4>Clase Mundial</h4>
+            <p>Estándares internacionales de calidad, certificaciones y procesos que nos distinguen del resto.</p>
+          </div>
+          <div className="dp-feature">
+            <h4>4 Sectores</h4>
+            <p>Petrolero, Naval, Metal-Mecánico y Energético. Expertos en cada industria que atendemos.</p>
+          </div>
+          <div className="dp-feature">
+            <h4>Proveedores Líderes</h4>
+            <p>Distribuidores directos de las marcas más reconocidas: Stanley, DeWalt, MSA, Honeywell y más.</p>
+          </div>
+        </div>
+      </DetailPage>
     </section>
   )
 }

@@ -1,4 +1,6 @@
+import { useState } from 'react'
 import './Esquemas.css'
+import DetailPage from '../components/DetailPage'
 
 const ITEMS = [
   { num:'01', icon:'🤝', title:'Venta Directa',        desc:'Atención personalizada con nuestros representantes especializados por sector.',        img:'https://images.unsplash.com/photo-1521791136064-7986c2920216?w=700&q=80&fit=crop' },
@@ -10,6 +12,8 @@ const ITEMS = [
 ]
 
 export default function Esquemas() {
+  const [openEsq, setOpenEsq] = useState(false)
+
   return (
     <section className="section section-navy">
       <div className="container">
@@ -40,7 +44,54 @@ export default function Esquemas() {
             </div>
           ))}
         </div>
+
+        <div className="ver-mas-wrap reveal d2">
+          <button className="btn-ver-mas white" onClick={() => setOpenEsq(true)}>
+            Ver todos los esquemas
+          </button>
+        </div>
       </div>
+
+      <DetailPage
+        isOpen={openEsq}
+        onClose={() => setOpenEsq(false)}
+        eyebrow="Esquemas de Comercialización"
+        title="Flexibles. <em>Competitivos.</em>"
+        lead="SUMIMSA se adapta a la forma en que tú operas. Desde venta directa hasta programas On Site, tenemos el esquema comercial que mejor se ajusta a tu empresa."
+      >
+        <img className="dp-img" src="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=1200&q=80&fit=crop" alt="Comercialización" />
+
+        <h3>01 — Venta Directa</h3>
+        <p>Atención personalizada con representantes comerciales especializados por sector. Visitas a instalaciones, cotizaciones en sitio y seguimiento postventa. Ideal para compras puntuales o proyectos específicos donde valoras el trato directo con un experto.</p>
+
+        <h3>02 — Consignación</h3>
+        <p>SUMIMSA coloca inventario en tus instalaciones sin costo inicial. Solo pagas lo que consumes. Es el modelo ideal para mantener disponibilidad inmediata de herramienta y consumibles críticos sin comprometer tu capital de trabajo.</p>
+
+        <h3>03 — Contrato Abierto</h3>
+        <p>Negociamos condiciones comerciales (precios, plazos, niveles de servicio) una sola vez y las dejamos en un contrato marco. A partir de ahí, tus órdenes de compra se atienden automáticamente sin renegociar cada vez. Elimina burocracia y reduce tiempos de ciclo de compra.</p>
+
+        <h3>04 — Inventarios Dedicados</h3>
+        <p>Desarrollamos un plan de inventario específico para tu operación: identificamos los SKUs críticos, definimos mínimos y máximos, y SUMIMSA garantiza la disponibilidad. Tú nunca te quedas sin los materiales que necesitas para operar.</p>
+
+        <div className="dp-grid">
+          <div className="dp-feature">
+            <h4>05 — Órdenes Abiertas</h4>
+            <p>Una orden de compra por el monto o período acordado. Vas consumiendo contra ella según necesidad sin generar nuevas órdenes.</p>
+          </div>
+          <div className="dp-feature">
+            <h4>06 — On Site</h4>
+            <p>Un representante SUMIMSA en tus instalaciones. Gestiona el inventario, identifica necesidades y coordina el suministro directamente en tu planta.</p>
+          </div>
+          <div className="dp-feature">
+            <h4>¿Cuál es el mejor para ti?</h4>
+            <p>Nuestro equipo comercial te ayuda a identificar el esquema que más se adapta a tu operación, sector y necesidades financieras.</p>
+          </div>
+          <div className="dp-feature">
+            <h4>Combinaciones</h4>
+            <p>Muchos clientes combinan esquemas: Tullbox On Site + Contrato Abierto para maximizar eficiencia y control presupuestal.</p>
+          </div>
+        </div>
+      </DetailPage>
     </section>
   )
 }

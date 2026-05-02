@@ -9,7 +9,9 @@ import Proveedores  from './components/Proveedores'
 import Tullbox      from './sections/Tullbox'
 import Proyectos    from './sections/Proyectos'
 import SSPA         from './sections/SSPA'
+import Tecnologia   from './sections/Tecnologia'
 import Noticias     from './sections/Noticias'
+import Blog         from './sections/Blog'
 import Catalogos    from './sections/Catalogos'
 import Bolsa        from './sections/Bolsa'
 import Privacidad   from './sections/Privacidad'
@@ -45,7 +47,9 @@ export default function App() {
         <Tullbox />
         <Proyectos />
         <SSPA />
+        <Tecnologia />
         <Noticias />
+        <Blog />
         <Catalogos />
         <Bolsa />
         <Privacidad />

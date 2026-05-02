@@ -1,3 +1,6 @@
+import { useState } from 'react'
+import DetailPage from '../components/DetailPage'
+
 const PROJS = [
   { cat:'Petrolero',    title:'Suministro integral en plataformas offshore del Golfo de México',    img:'https://images.unsplash.com/photo-1615811361523-6bd03d7748e7?w=800&q=80&fit=crop' },
   { cat:'Naval',        title:'Equipamiento de buques en puertos Tampico – Veracruz',               img:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=700&q=80&fit=crop' },
@@ -14,6 +17,8 @@ const cardStyle = (large=false) => ({
 })
 
 export default function Proyectos() {
+  const [openProj, setOpenProj] = useState(false)
+
   return (
     <section id="proyectos" className="section section-alt">
       <div className="container">
@@ -36,7 +41,51 @@ export default function Proyectos() {
             </div>
           ))}
         </div>
+
+        <div className="ver-mas-wrap reveal d2">
+          <button className="btn-ver-mas" onClick={() => setOpenProj(true)}>
+            Ver todos los proyectos
+          </button>
+        </div>
       </div>
+
+      <DetailPage
+        isOpen={openProj}
+        onClose={() => setOpenProj(false)}
+        eyebrow="Proyectos"
+        title="Ejecutados con <em>Precisión</em>"
+        lead="Soluciones industriales entregadas con excelencia operativa en los sectores más exigentes de México. Cada proyecto refleja nuestra capacidad, experiencia y compromiso."
+      >
+        <img className="dp-img" src="https://images.unsplash.com/photo-1615811361523-6bd03d7748e7?w=1200&q=80&fit=crop" alt="Proyectos SUMIMSA" />
+
+        <h3>Suministro Offshore — Golfo de México</h3>
+        <p>Suministro integral a plataformas petroleras offshore en el Golfo de México: herramienta de precisión, EPP certificado, consumibles industriales y equipos especializados. Entregas coordinadas desde nuestras bases en Tampico, Ciudad del Carmen y Paraíso con tiempos de respuesta garantizados menores a 24 horas.</p>
+
+        <h3>Programa Tullbox — Planta Industrial Tamaulipas</h3>
+        <p>Instalación y operación de contenedor Tullbox In Situ en planta de manufactura de la zona industrial de Tamaulipas. Resultado: reducción del 85% en tiempo de búsqueda de herramienta, eliminación del 100% de extravíos de herramienta de alto valor y ahorro significativo en capital de trabajo inmovilizado en inventario.</p>
+
+        <h3>Equipamiento Naval — Tampico / Veracruz</h3>
+        <p>Equipamiento de embarcaciones de cabotaje y líneas de navegación interior con herramienta de cubierta, EPP certificado SOLAS y equipos de seguridad marítima. Atención directa en terminales portuarias de Tampico y Veracruz con entrega a bordo.</p>
+
+        <div className="dp-grid">
+          <div className="dp-feature">
+            <h4>Parque Eólico — Norte MX</h4>
+            <p>Herramienta especializada y EPP para altura para instalación de aerogeneradores en Tamaulipas y Nuevo León.</p>
+          </div>
+          <div className="dp-feature">
+            <h4>Planta Automotriz</h4>
+            <p>Equipamiento integral de taller con programa MRO (Mantenimiento, Reparación y Operación) bajo contrato abierto.</p>
+          </div>
+          <div className="dp-feature">
+            <h4>Inspección — Refinería</h4>
+            <p>Servicios de inspección especializada con equipos certificados PEMEX en refinería del norte de Veracruz.</p>
+          </div>
+          <div className="dp-feature">
+            <h4>Buques de Servicio — Carmen</h4>
+            <p>Suministro continuo a flota de buques de apoyo offshore desde nuestra base en Cd. del Carmen, Campeche.</p>
+          </div>
+        </div>
+      </DetailPage>
     </section>
   )
 }

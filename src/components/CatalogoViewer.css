@@ -1,0 +1,296 @@
+/* ═══════════════════════════════════════
+   CATÁLOGO VIEWER – Modal PageFlip
+═══════════════════════════════════════ */
+
+.cv-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: cvFadeIn .18s ease;
+}
+
+@keyframes cvFadeIn { from { opacity: 0 } to { opacity: 1 } }
+
+.cv-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(7, 14, 36, .85);
+  backdrop-filter: blur(8px);
+}
+
+.cv-panel {
+  position: relative;
+  z-index: 1;
+  background: #eaecf2;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  width: min(97vw, 1320px);
+  max-height: 96vh;
+  overflow: hidden;
+  box-shadow: 0 40px 100px rgba(0,0,0,.6), 0 0 0 1px rgba(255,255,255,.05);
+  animation: cvUp .22s ease;
+}
+
+@keyframes cvUp {
+  from { transform: translateY(20px); opacity: 0 }
+  to   { transform: translateY(0);    opacity: 1 }
+}
+
+/* ─── Header ─────────────────────────── */
+.cv-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 13px 20px;
+  background: var(--navy, #0d1e4a);
+  flex-shrink: 0;
+  border-bottom: 3px solid var(--cv-accent, #009bdb);
+}
+
+.cv-header-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.cv-header-num {
+  font-family: var(--font-mono, 'Space Mono', monospace);
+  font-size: .55rem;
+  color: var(--cv-accent, #009bdb);
+  letter-spacing: 2px;
+  background: rgba(255,255,255,.07);
+  border: 1px solid rgba(255,255,255,.1);
+  padding: 4px 9px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.cv-titulo {
+  font-family: var(--font-display, 'Oswald', sans-serif);
+  font-size: .98rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  color: #fff;
+  margin: 0;
+}
+
+.cv-pages-info {
+  font-family: var(--font-mono, 'Space Mono', monospace);
+  font-size: .5rem;
+  color: rgba(255,255,255,.3);
+  letter-spacing: 1px;
+  margin-top: 2px;
+  display: block;
+}
+
+.cv-close {
+  background: rgba(255,255,255,.07);
+  border: 1px solid rgba(255,255,255,.12);
+  color: rgba(255,255,255,.6);
+  width: 34px; height: 34px;
+  border-radius: 4px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background .15s, color .15s;
+}
+.cv-close:hover { background: rgba(255,255,255,.15); color: #fff; }
+
+/* ─── Progress bar ───────────────────── */
+.cv-progress-bar {
+  height: 2px;
+  background: rgba(0,0,0,.1);
+  flex-shrink: 0;
+}
+.cv-progress-fill {
+  height: 100%;
+  transition: width .35s ease;
+}
+
+/* ─── Estado (cargando / error) ─────── */
+.cv-estado {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  min-height: 300px;
+  padding: 40px 32px;
+  text-align: center;
+  color: var(--muted, #64748b);
+  font-size: .85rem;
+}
+
+.cv-spinner {
+  width: 38px; height: 38px;
+  border: 3px solid rgba(0,0,0,.1);
+  border-radius: 50%;
+  animation: spin .7s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg) } }
+
+.cv-hint {
+  font-family: var(--font-mono, 'Space Mono', monospace);
+  font-size: .58rem;
+  color: var(--muted, #94a3b8);
+  letter-spacing: .5px;
+}
+
+.cv-error-msg  { color: #dc2626; font-weight: 600; margin: 0; }
+.cv-error-code {
+  font-family: var(--font-mono, 'Space Mono', monospace);
+  font-size: .65rem;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #991b1b;
+  padding: 6px 12px;
+  border-radius: 3px;
+  max-width: 500px;
+  word-break: break-all;
+}
+.cv-error-hint {
+  font-size: .78rem;
+  color: var(--muted, #64748b);
+  margin: 0;
+}
+.cv-error-hint code {
+  font-family: var(--font-mono, 'Space Mono', monospace);
+  font-size: .7rem;
+  background: #f1f5f9;
+  padding: 2px 5px;
+  border-radius: 2px;
+}
+
+.cv-error-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 6px;
+}
+
+/* ─── Book area ──────────────────────── */
+.cv-book-area {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: #d6d9e4;
+  background-image:
+    radial-gradient(ellipse at 15% 20%, rgba(0,155,219,.07) 0%, transparent 55%),
+    radial-gradient(ellipse at 85% 80%, rgba(13,30,74,.08) 0%, transparent 55%);
+  padding: 24px 16px;
+  min-height: 380px;
+}
+.cv-book-area.cv-oculto { display: none; }
+
+.cv-book-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  filter: drop-shadow(0 20px 40px rgba(0,0,0,.30));
+}
+
+/* Sombra suelo */
+.cv-book-wrap::after {
+  content: '';
+  position: absolute;
+  bottom: -20px;
+  left: 8%; width: 84%; height: 20px;
+  background: radial-gradient(ellipse, rgba(0,0,0,.20) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.cv-flip-root {
+  position: relative;
+}
+
+/* StPageFlip agrega su propio wrapper — evitar desbordamiento */
+.cv-flip-root > div {
+  overflow: visible !important;
+}
+
+/* ─── Controles ──────────────────────── */
+.cv-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 12px 20px;
+  background: var(--navy, #0d1e4a);
+  flex-shrink: 0;
+  border-top: 1px solid rgba(255,255,255,.05);
+}
+
+.cv-ctrl-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-display, 'Oswald', sans-serif);
+  font-size: .73rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: rgba(255,255,255,.7);
+  background: rgba(255,255,255,.07);
+  border: 1px solid rgba(255,255,255,.1);
+  padding: 8px 16px;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background .15s, color .15s, border-color .15s;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.cv-ctrl-btn:hover:not(:disabled) {
+  background: var(--cv-accent, #009bdb);
+  border-color: var(--cv-accent, #009bdb);
+  color: #fff;
+}
+.cv-ctrl-btn:disabled { opacity: .28; cursor: not-allowed; }
+
+.cv-dl-btn { margin-left: 4px; }
+
+/* Paginador numérico */
+.cv-paginador {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 3px;
+  padding: 6px 14px;
+}
+.cv-pag-input {
+  font-family: var(--font-mono, 'Space Mono', monospace);
+  font-size: .72rem;
+  color: #fff;
+  background: transparent;
+  border: none;
+  outline: none;
+  width: 38px;
+  text-align: center;
+  -moz-appearance: textfield;
+}
+.cv-pag-input::-webkit-inner-spin-button,
+.cv-pag-input::-webkit-outer-spin-button { -webkit-appearance: none; }
+.cv-pag-sep, .cv-pag-total {
+  font-family: var(--font-mono, 'Space Mono', monospace);
+  font-size: .65rem;
+  color: rgba(255,255,255,.3);
+}
+
+/* ─── Responsive ─────────────────────── */
+@media (max-width: 640px) {
+  .cv-panel { width: 100vw; height: 100dvh; max-height: 100dvh; border-radius: 0; }
+  .cv-controls { gap: 8px; flex-wrap: wrap; padding: 10px 12px; }
+  .cv-ctrl-btn { font-size: .67rem; padding: 7px 12px; }
+  .cv-book-area { padding: 10px 8px; }
+}

@@ -17,7 +17,8 @@ const SLIDES = [
     accentColor: '#00c4f0',
   },
   {
-    img: 'https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=1600&q=80&fit=crop',
+    img: 'https://images.unsplash.com/photo-1572970388430-a7fff761e597?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+   // img: 'https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=1600&q=80&fit=crop',
     badge: 'Sector Energético',
     h1: ['Energía', 'RENOVABLE', 'Sostenible'],
     sub: 'Solar, eólica, hidroeléctrica y geotérmica. Expertos en inspección para la modernización energética.',

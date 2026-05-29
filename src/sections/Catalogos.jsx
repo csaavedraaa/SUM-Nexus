@@ -1,50 +1,199 @@
-const CATS = [
-  { icon:'🛢️', title:'Petrolero',      desc:'Herramientas y equipos para exploración y producción de hidrocarburos',  img:'https://images.unsplash.com/photo-1615811361523-6bd03d7748e7?w=400&q=70&fit=crop' },
-  { icon:'⚓',  title:'Naval',          desc:'Suministros y equipamiento para operaciones marítimas',                  img:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=70&fit=crop' },
-  { icon:'⚙️', title:'Metal-Mecánico', desc:'Herramienta industrial y equipos de manufactura',                       img:'https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?w=400&q=70&fit=crop' },
+import { useState } from 'react'
+import CatalogoViewer from '../components/CatalogoViewer'
+import './Catalogos.css'
+
+const CATALOGOS = [
+  {
+    id: '01',
+    titulo: 'Cables y Accesorios',
+    descripcion: 'Cables de acero, fibra y accesorios para izaje y amarre.',
+    accent: '#009bdb',
+    icono: '🔗',
+    paginas: 132,
+    pdf: '/catalogos/01_CABLES_Y_ACCESORIOS.pdf',
+  },
+  {
+    id: '02',
+    titulo: 'Cabos y Accesorios Marinos',
+    descripcion: 'Cabos sintéticos y naturales para aplicaciones navales.',
+    accent: '#00c4f0',
+    icono: '⚓',
+    paginas: null,
+    pdf: '/catalogos/02_CABOS_Y_ACCESORIOS_MARINOS.pdf',
+  },
+  {
+    id: '03',
+    titulo: 'Herramienta Manual',
+    descripcion: 'Herramientas de mano para mantenimiento e industria.',
+    accent: '#f47920',
+    icono: '🔧',
+    paginas: null,
+    pdf: '/catalogos/03_HERRAMIENTA_MANUAL.pdf',
+  },
+  {
+    id: '04',
+    titulo: 'Herramienta Eléctrica',
+    descripcion: 'Equipos eléctricos para corte, perforación y acabado.',
+    accent: '#ffb347',
+    icono: '⚡',
+    paginas: null,
+    pdf: '/catalogos/04_HERRAMIENTA_ELECTRICA.pdf',
+  },
+  {
+    id: '05',
+    titulo: 'Herramienta Hidráulica',
+    descripcion: 'Sistemas hidráulicos de alta presión para aplicaciones industriales.',
+    accent: '#009bdb',
+    icono: '💧',
+    paginas: null,
+    pdf: '/catalogos/05_HERRAMIENTA_HIDRAULICA.pdf',
+  },
+  {
+    id: '06',
+    titulo: 'Herramienta Neumática',
+    descripcion: 'Herramientas de aire comprimido para líneas de producción.',
+    accent: '#00c4f0',
+    icono: '🌬️',
+    paginas: null,
+    pdf: '/catalogos/06_HERRAMIENTA_NEUMATICA.pdf',
+  },
+  {
+    id: '07',
+    titulo: 'Corte y Desbaste',
+    descripcion: 'Discos, brocas y abrasivos para metalurgia y construcción.',
+    accent: '#f47920',
+    icono: '⚙️',
+    paginas: null,
+    pdf: '/catalogos/07_CORTE_Y_DESBASTE.pdf',
+  },
+  {
+    id: '08',
+    titulo: 'Industria Petrolera',
+    descripcion: 'Equipamiento especializado para exploración y producción.',
+    accent: '#f47920',
+    icono: '🛢️',
+    paginas: null,
+    pdf: '/catalogos/08_INDUSTRIA_PETROLERA.pdf',
+  },
+  {
+    id: '09',
+    titulo: 'Herramienta de Medición',
+    descripcion: 'Instrumentos de precisión para control de calidad y metrología.',
+    accent: '#009bdb',
+    icono: '📐',
+    paginas: null,
+    pdf: '/catalogos/09_HERRAMIENTA_DE_MEDICION.pdf',
+  },
+  {
+    id: '10',
+    titulo: 'Contraderrames y Tapates',
+    descripcion: 'Sistemas de contención y materiales absorbentes para derrames.',
+    accent: '#00c4f0',
+    icono: '🟢',
+    paginas: null,
+    pdf: '/catalogos/10_CONTRADERRAMES_Y_TAPATES.pdf',
+  },
+  {
+    id: '11',
+    titulo: 'Equipo para Pintar',
+    descripcion: 'Equipos de aplicación, atomización y acabados industriales.',
+    accent: '#ffb347',
+    icono: '🎨',
+    paginas: null,
+    pdf: '/catalogos/11_EQUIPO_PARA_PINTAR.pdf',
+  },
+  {
+    id: '12',
+    titulo: 'Sistemas de Limpieza',
+    descripcion: 'Equipos y productos para limpieza industrial y mantenimiento.',
+    accent: '#009bdb',
+    icono: '🧹',
+    paginas: null,
+    pdf: '/catalogos/12_SISTEMAS_DE_LIMPIEZA.pdf',
+  },
 ]
-const URL = 'https://online.fliphtml5.com/Sumimsa/wiem/#p=8'
 
 export default function Catalogos() {
+  const [catalogo, setCatalogo] = useState(null)
+
   return (
-    <section id="catalogs" className="section">
+    <section id="catalogs" className="section catalogos-section">
       <div className="container">
-        <div className="reveal">
-          <div className="eyebrow"><div className="eyebrow-line" /><span className="eyebrow-text">Catálogos</span></div>
-          <h2 className="s-h2">Nuestros<br /><em>productos</em></h2>
-        </div>
-        <div className="reveal d1" style={{display:'grid',gridTemplateColumns:'repeat(4,1fr)',gap:1,background:'var(--border)',marginTop:52}}>
-          {/* Main card */}
-          <div style={{gridColumn:'1/-1',background:'var(--navy)',display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'space-between',gap:32,padding:'32px 40px'}}>
-            <div>
-              <h3 style={{fontFamily:'var(--font-display)',fontSize:'1.5rem',fontWeight:700,textTransform:'uppercase',color:'#fff',marginBottom:6}}>📚 Catálogo Digital Interactivo</h3>
-              <p style={{color:'rgba(255,255,255,.5)',fontSize:'.83rem'}}>Nuestro catálogo completo en formato de revista digital.</p>
-              <a href={URL} target="_blank" rel="noopener noreferrer" className="btn-main" style={{marginTop:16,display:'inline-block',fontSize:'.82rem',padding:'11px 26px'}}>
-                Ver catálogo completo ↗
-              </a>
-            </div>
+
+        <div className="reveal catalogos-header">
+          <div className="eyebrow">
+            <div className="eyebrow-line" />
+            <span className="eyebrow-text">Biblioteca Digital</span>
           </div>
-          {/* Sector cards */}
-          {CATS.map(c=>(
-            <a key={c.title} href={URL} target="_blank" rel="noopener noreferrer"
-              style={{background:'#fff',padding:'26px 22px',display:'flex',flexDirection:'column',gap:12,position:'relative',transition:'background .2s',textDecoration:'none'}}
-              onMouseEnter={e=>e.currentTarget.style.background='var(--off)'}
-              onMouseLeave={e=>e.currentTarget.style.background='#fff'}>
-              <img src={c.img} alt={c.title} loading="lazy" style={{width:'100%',height:110,objectFit:'cover',borderRadius:2}} />
-              <div style={{fontFamily:'var(--font-display)',fontSize:'.95rem',fontWeight:700,textTransform:'uppercase',letterSpacing:.5,color:'var(--navy)'}}>{c.title}</div>
-              <p style={{fontSize:'.77rem',color:'var(--muted)',lineHeight:1.6,flex:1,margin:0}}>{c.desc}</p>
-              <span style={{fontFamily:'var(--font-mono)',fontSize:'.6rem',color:'var(--cyan)',letterSpacing:2,textTransform:'uppercase'}}>Ver catálogo →</span>
-            </a>
+          <h2 className="s-h2">Nuestros<br /><em>catálogos</em></h2>
+          <p className="catalogos-subtitle">
+            Explora nuestra línea completa de productos. Selecciona cualquier
+            catálogo para visualizarlo en formato interactivo.
+          </p>
+        </div>
+
+        <div className="catalogos-grid reveal d1">
+          {CATALOGOS.map((cat, i) => (
+            <button
+              key={cat.id}
+              className="libro-card"
+              onClick={() => setCatalogo(cat)}
+              style={{ '--card-accent': cat.accent, animationDelay: `${i * 0.05}s` }}
+              aria-label={`Abrir catálogo ${cat.titulo}`}
+            >
+              <div className="libro-lomo">
+                <span className="libro-lomo-num">{cat.id}</span>
+                <span className="libro-lomo-title">{cat.titulo}</span>
+              </div>
+
+              <div className="libro-portada">
+                <div className="libro-portada-top">
+                  <span className="libro-num-badge">{cat.id}</span>
+                  {cat.paginas && (
+                    <span className="libro-paginas">{cat.paginas} págs.</span>
+                  )}
+                </div>
+                <div className="libro-icono">{cat.icono}</div>
+                <div className="libro-info">
+                  <h3 className="libro-titulo">{cat.titulo}</h3>
+                  <p className="libro-desc">{cat.descripcion}</p>
+                </div>
+                <div className="libro-cta">
+                  <span>Ver catálogo</span>
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                    <path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </div>
+              </div>
+            </button>
           ))}
         </div>
-        <div style={{background:'var(--off)',border:'1px solid var(--border)',borderLeft:'3px solid var(--amber)',padding:'18px 22px',marginTop:18,display:'flex',gap:12,alignItems:'flex-start'}}>
-          <span style={{fontSize:'1.1rem',flexShrink:0,marginTop:2}}>💡</span>
-          <div>
-            <h5 style={{fontFamily:'var(--font-display)',fontSize:'.83rem',fontWeight:700,textTransform:'uppercase',letterSpacing:1,color:'var(--amber)',marginBottom:3}}>Recomendación de plataforma</h5>
-            <p style={{fontSize:'.77rem',color:'var(--muted)',lineHeight:1.7,margin:0}}>Para una experiencia más moderna te recomendamos <strong>Issuu</strong> (issuu.com) o <strong>Publuu</strong> (publuu.com) — ambos gratuitos, visualización tipo revista y mejor rendimiento en móvil.</p>
+
+        <div className="catalogos-footer reveal d2">
+          <div className="catalogos-footer-item">
+            <span className="catalogos-footer-icon">📁</span>
+            <span>{CATALOGOS.length} catálogos disponibles</span>
+          </div>
+          <div className="catalogos-footer-sep" />
+          <div className="catalogos-footer-item">
+            <span className="catalogos-footer-icon">🔄</span>
+            <span>Actualización continua</span>
+          </div>
+          <div className="catalogos-footer-sep" />
+          <div className="catalogos-footer-item">
+            <span className="catalogos-footer-icon">📱</span>
+            <span>Compatible con móvil y escritorio</span>
           </div>
         </div>
+
       </div>
+
+      {catalogo && (
+        <CatalogoViewer
+          catalogo={catalogo}
+          onClose={() => setCatalogo(null)}
+        />
+      )}
     </section>
   )
 }

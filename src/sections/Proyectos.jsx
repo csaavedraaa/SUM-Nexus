@@ -1,12 +1,32 @@
 import { useState } from 'react'
 import DetailPage from '../components/DetailPage'
 
-const PROJS = [
-  { cat:'Petrolero',    title:'Suministro integral en plataformas offshore del Golfo de México',    img:'https://images.unsplash.com/photo-1615811361523-6bd03d7748e7?w=800&q=80&fit=crop' },
-  { cat:'Naval',        title:'Equipamiento de buques en puertos Tampico – Veracruz',               img:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=700&q=80&fit=crop' },
-  { cat:'Tullbox',      title:'Programa Tullbox In Situ — Planta industrial Tamaulipas',            img:'/Contenedor_Tullbox.jpg' },
-  { cat:'Energético',   title:'Herramienta para parque eólico norte de México',                     img:'https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=700&q=80&fit=crop' },
-  { cat:'Metal-Mecán.', title:'Equipamiento integral de taller — planta automotriz',                img:'https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?w=700&q=80&fit=crop' },
+const LINEAS = [
+  {
+    cat: 'Top Drive',
+    title: 'Top Drive',
+    img: 'https://images.unsplash.com/photo-1615811361523-6bd03d7748e7?w=800&q=80&fit=crop',
+  },
+  {
+    cat: 'Control de Sólidos',
+    title: 'Control de Sólidos',
+    img: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=700&q=80&fit=crop',
+  },
+  {
+    cat: 'Preventores',
+    title: 'Preventores',
+    img: '/Contenedor_Tullbox.jpg',
+  },
+  {
+    cat: 'Bombas de Lodo',
+    title: 'Bombas de Lodo y Sistemas de Circulación',
+    img: 'https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=700&q=80&fit=crop',
+  },
+  {
+    cat: 'Sistemas de Seguridad',
+    title: 'Sistemas de Seguridad y Cero Derrames',
+    img: 'https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?w=700&q=80&fit=crop',
+  },
 ]
 
 const cardStyle = (large=false) => ({
@@ -23,11 +43,14 @@ export default function Proyectos() {
     <section id="proyectos" className="section section-alt">
       <div className="container">
         <div className="reveal">
-          <div className="eyebrow"><div className="eyebrow-line" /><span className="eyebrow-text">Proyectos</span></div>
+          <div className="eyebrow"><div className="eyebrow-line" /><span className="eyebrow-text">Proyectos Estratégicos</span></div>
           <h2 className="s-h2">Ejecutados<br /><em>con precisión</em></h2>
+          <p style={{fontSize:'.92rem',color:'var(--muted)',lineHeight:1.8,maxWidth:740,marginTop:14}}>
+            Suministro y servicios de mantenimiento (incluido el refaccionamiento) de los componentes críticos a los Equipos de Perforación, que permita la continuidad operativa, evitando tiempos de espera no productivos y el cumplimiento de las metas en la incorporación de reservas conforme a los programas Operativos.
+          </p>
         </div>
         <div className="reveal d1" style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gridTemplateRows:'auto auto',gap:1,background:'var(--border)',marginTop:52}}>
-          {PROJS.map((p,i)=>(
+          {LINEAS.map((p,i)=>(
             <div key={i} style={cardStyle(i===0)}>
               <img src={p.img} alt={p.cat} loading="lazy"
                 style={{position:'absolute',inset:0,width:'100%',height:'100%',objectFit:'cover',transition:'transform .6s,filter .4s',filter:'brightness(.7)'}} />
@@ -52,37 +75,36 @@ export default function Proyectos() {
       <DetailPage
         isOpen={openProj}
         onClose={() => setOpenProj(false)}
-        eyebrow="Proyectos"
+        eyebrow="Proyectos Estratégicos"
         title="Ejecutados con <em>Precisión</em>"
-        lead="Soluciones industriales entregadas con excelencia operativa en los sectores más exigentes de México. Cada proyecto refleja nuestra capacidad, experiencia y compromiso."
+        lead="Suministro y servicios de mantenimiento de los componentes críticos a los Equipos de Perforación, garantizando continuidad operativa y cumplimiento de metas conforme a los programas Operativos."
       >
         <img className="dp-img" src="https://images.unsplash.com/photo-1615811361523-6bd03d7748e7?w=1200&q=80&fit=crop" alt="Proyectos SUMIMSA" />
 
-        <h3>Suministro Offshore — Golfo de México</h3>
-        <p>Suministro integral a plataformas petroleras offshore en el Golfo de México: herramienta de precisión, EPP certificado, consumibles industriales y equipos especializados. Entregas coordinadas desde nuestras bases en Tampico, Ciudad del Carmen y Paraíso con tiempos de respuesta garantizados menores a 24 horas.</p>
-
-        <h3>Programa Tullbox — Planta Industrial Tamaulipas</h3>
-        <p>Instalación y operación de contenedor Tullbox In Situ en planta de manufactura de la zona industrial de Tamaulipas. Resultado: reducción del 85% en tiempo de búsqueda de herramienta, eliminación del 100% de extravíos de herramienta de alto valor y ahorro significativo en capital de trabajo inmovilizado en inventario.</p>
-
-        <h3>Equipamiento Naval — Tampico / Veracruz</h3>
-        <p>Equipamiento de embarcaciones de cabotaje y líneas de navegación interior con herramienta de cubierta, EPP certificado SOLAS y equipos de seguridad marítima. Atención directa en terminales portuarias de Tampico y Veracruz con entrega a bordo.</p>
-
         <div className="dp-grid">
           <div className="dp-feature">
-            <h4>Parque Eólico — Norte MX</h4>
-            <p>Herramienta especializada y EPP para altura para instalación de aerogeneradores en Tamaulipas y Nuevo León.</p>
+            <h4>Top Drive</h4>
+            <p>Suministro de refacciones, consumibles y servicios de mantenimiento para sistemas Top Drive en operaciones de perforación terrestres y marítimas.</p>
           </div>
           <div className="dp-feature">
-            <h4>Planta Automotriz</h4>
-            <p>Equipamiento integral de taller con programa MRO (Mantenimiento, Reparación y Operación) bajo contrato abierto.</p>
+            <h4>Control de Sólidos</h4>
+            <p>Inspección, venta, refacciones y mantenimiento para equipos de control de sólidos. Incluye medición de Fuerza G y fabricación de estructuras para instalación de equipos.</p>
           </div>
           <div className="dp-feature">
-            <h4>Inspección — Refinería</h4>
-            <p>Servicios de inspección especializada con equipos certificados PEMEX en refinería del norte de Veracruz.</p>
+            <h4>Preventores</h4>
+            <p>Reparación, mantenimiento e inspección de preventores de reventones (BOP). Cumplimiento de normas API y estándares PEMEX para operaciones de perforación.</p>
           </div>
           <div className="dp-feature">
-            <h4>Buques de Servicio — Carmen</h4>
-            <p>Suministro continuo a flota de buques de apoyo offshore desde nuestra base en Cd. del Carmen, Campeche.</p>
+            <h4>Bombas de Lodo y Sistemas de Circulación</h4>
+            <p>Suministro de refacciones críticas, reparación y mantenimiento de bombas de lodo y sistemas de circulación para equipos de perforación y mantenimiento de pozos.</p>
+          </div>
+          <div className="dp-feature">
+            <h4>Sistemas de Seguridad y Cero Derrames</h4>
+            <p>Instalación, desinstalación y mantenimiento a Sistemas de Seguridad RSS y Cero Derrames ZSS. Contraderrames y equipamiento para protección ambiental.</p>
+          </div>
+          <div className="dp-feature">
+            <h4>Programa Tullbox In Situ</h4>
+            <p>Centro de servicio integral instalado en planta, con 847 partidas de herramientas y 4,311 partidas de consumibles para atención continua 24/7.</p>
           </div>
         </div>
       </DetailPage>

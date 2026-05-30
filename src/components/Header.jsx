@@ -2,13 +2,13 @@ import { useState, useEffect } from 'react'
 import './Header.css'
 
 const NAV_LINKS = [
-  { href: '#sectores',  label: 'Sectores'  },
-  { href: '#nosotros',  label: 'Nosotros'  },
-  { href: '#tullbox',   label: 'Tullbox'   },
-  { href: '#proyectos', label: 'Proyectos' },
-  { href: '#sspa',      label: 'SSPA'      },
-  { href: '#catalogs',  label: 'Catálogos' },
-  { href: '#bolsa',     label: 'Empleo'    },
+  { href: '#servicios', label: 'Servicios'  },
+  { href: '#nosotros',  label: 'Nosotros'   },
+  { href: '#tullbox',   label: 'Tullbox'    },
+  { href: '#proyectos', label: 'Proyectos'  },
+  { href: '#sspa',      label: 'SSPA'       },
+  { href: '#catalogs',  label: 'Catálogo'   },
+  { href: '#bolsa',     label: 'Empleo'     },
 ]
 
 export default function Header() {
@@ -31,7 +31,6 @@ export default function Header() {
   return (
     <header className={`hdr${scrolled ? ' scrolled' : ''}`}>
       <div className="hdr-inner">
-        {/* LOGO REAL */}
         <a href="#hero" className="hdr-logo" onClick={e => scrollTo(e, '#hero')}>
           <img
             src="/logo-sumimsa_completo.png"
@@ -40,7 +39,6 @@ export default function Header() {
           />
         </a>
 
-        {/* NAV */}
         <nav className={`hdr-nav${open ? ' open' : ''}`}>
           {NAV_LINKS.map(({ href, label }) => (
             <a key={href} href={href} onClick={e => scrollTo(e, href)}>
@@ -52,7 +50,6 @@ export default function Header() {
           </a>
         </nav>
 
-        {/* HAMBURGER */}
         <button
           className={`menu-btn${open ? ' active' : ''}`}
           onClick={() => setOpen(v => !v)}

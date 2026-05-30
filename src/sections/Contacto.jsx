@@ -5,10 +5,10 @@ const SOCIALS = [
   {label:'yt', href:'https://www.youtube.com/@SUMIMSAOFICIAL'},
 ]
 const CARDS = [
-  {icon:'📍',title:'Matriz',         text:'Calzada Blanca 1091-B, Col. Morelos, Tampico, Tamps. C.P. 89290'},
-  {icon:'📞',title:'Teléfono',       text:'+52 (833) 369 0070'},
-  {icon:'✉️',title:'Ventas',         text:'ventas@sumimsa.com.mx', href:'mailto:ventas@sumimsa.com.mx'},
-  {icon:'🌐',title:'Web',            text:'www.sumimsa.com.mx', href:'https://www.sumimsa.com.mx'},
+  {icon:'📍',title:'Matriz',   text:'Av. Hidalgo #3309, Centro Esmeralda. Col. Guadalupe, Tampico, Tams. C.P. 89120'},
+  {icon:'📞',title:'Teléfono', text:'+52 (833) 369 0070'},
+  {icon:'✉️',title:'Ventas',   text:'ventas@sumimsa.com.mx', href:'mailto:ventas@sumimsa.com.mx'},
+  {icon:'🌐',title:'Web',      text:'www.sumimsa.com.mx',    href:'https://www.sumimsa.com.mx'},
 ]
 
 export default function Contacto() {

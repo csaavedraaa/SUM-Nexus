@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import Header       from './components/Header'
 import Hero         from './sections/Hero'
 import Ticker       from './components/Ticker'
+import Servicios    from './sections/Servicios'
 import Sectores     from './sections/Sectores'
 import Esquemas     from './sections/Esquemas'
 import Nosotros     from './sections/Nosotros'
@@ -22,7 +23,6 @@ import Cursor       from './components/Cursor'
 import Stars        from './components/Stars'
 
 export default function App() {
-  // Scroll reveal
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in') }),
@@ -40,6 +40,7 @@ export default function App() {
       <main>
         <Hero />
         <Ticker />
+        <Servicios />
         <Sectores />
         <Esquemas />
         <Nosotros />

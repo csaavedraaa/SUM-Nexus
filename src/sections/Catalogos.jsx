@@ -5,8 +5,8 @@ import './Catalogos.css'
 const CATALOGOS = [
   {
     id: '01',
-    titulo: 'Cables y Accesorios',
-    descripcion: 'Cables de acero, fibra y accesorios para izaje y amarre.',
+    titulo: 'Cables y Accesorios de Izaje',
+    descripcion: 'Cables de acero, fibra y accesorios para izaje y amarre certificados.',
     accent: '#009bdb',
     icono: '🔗',
     paginas: 132,
@@ -15,7 +15,7 @@ const CATALOGOS = [
   {
     id: '02',
     titulo: 'Cabos y Accesorios Marinos',
-    descripcion: 'Cabos sintéticos y naturales para aplicaciones navales.',
+    descripcion: 'Cabos sintéticos y naturales para aplicaciones navales y marítimas.',
     accent: '#00c4f0',
     icono: '⚓',
     paginas: null,
@@ -24,7 +24,7 @@ const CATALOGOS = [
   {
     id: '03',
     titulo: 'Herramienta Manual',
-    descripcion: 'Herramientas de mano para mantenimiento e industria.',
+    descripcion: 'Herramientas de mano para mantenimiento e industria en general.',
     accent: '#f47920',
     icono: '🔧',
     paginas: null,
@@ -33,7 +33,7 @@ const CATALOGOS = [
   {
     id: '04',
     titulo: 'Herramienta Eléctrica',
-    descripcion: 'Equipos eléctricos para corte, perforación y acabado.',
+    descripcion: 'Equipos eléctricos para corte, perforación y acabado industrial.',
     accent: '#ffb347',
     icono: '⚡',
     paginas: null,
@@ -59,7 +59,7 @@ const CATALOGOS = [
   },
   {
     id: '07',
-    titulo: 'Corte y Desbaste',
+    titulo: 'Herramienta de Corte y Desbaste',
     descripcion: 'Discos, brocas y abrasivos para metalurgia y construcción.',
     accent: '#f47920',
     icono: '⚙️',
@@ -77,7 +77,7 @@ const CATALOGOS = [
   },
   {
     id: '09',
-    titulo: 'Herramienta de Medición',
+    titulo: 'Herramientas de Medición',
     descripcion: 'Instrumentos de precisión para control de calidad y metrología.',
     accent: '#009bdb',
     icono: '📐',
@@ -86,7 +86,7 @@ const CATALOGOS = [
   },
   {
     id: '10',
-    titulo: 'Contraderrames y Tapates',
+    titulo: 'Contraderrames y Tapetes',
     descripcion: 'Sistemas de contención y materiales absorbentes para derrames.',
     accent: '#00c4f0',
     icono: '🟢',
@@ -104,7 +104,7 @@ const CATALOGOS = [
   },
   {
     id: '12',
-    titulo: 'Sistemas de Limpieza',
+    titulo: 'Sistema de Limpieza',
     descripcion: 'Equipos y productos para limpieza industrial y mantenimiento.',
     accent: '#009bdb',
     icono: '🧹',
@@ -125,9 +125,9 @@ export default function Catalogos() {
             <div className="eyebrow-line" />
             <span className="eyebrow-text">Biblioteca Digital</span>
           </div>
-          <h2 className="s-h2">Nuestros<br /><em>catálogos</em></h2>
+          <h2 className="s-h2">Nuestro<br /><em>Catálogo</em></h2>
           <p className="catalogos-subtitle">
-            Explora nuestra línea completa de productos. Selecciona cualquier
+            Explora nuestra línea completa de productos por familia. Selecciona cualquier
             catálogo para visualizarlo en formato interactivo.
           </p>
         </div>
@@ -172,7 +172,7 @@ export default function Catalogos() {
         <div className="catalogos-footer reveal d2">
           <div className="catalogos-footer-item">
             <span className="catalogos-footer-icon">📁</span>
-            <span>{CATALOGOS.length} catálogos disponibles</span>
+            <span>{CATALOGOS.length} familias de productos</span>
           </div>
           <div className="catalogos-footer-sep" />
           <div className="catalogos-footer-item">

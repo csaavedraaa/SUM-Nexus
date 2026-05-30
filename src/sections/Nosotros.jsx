@@ -57,10 +57,16 @@ export default function Nosotros() {
               {chips.map(c=><div key={c} className="chip">{c}</div>)}
             </div>
 
-            <div style={{marginTop: 32}}>
+            <div style={{marginTop: 32, display:'flex', gap:12, flexWrap:'wrap'}}>
               <button className="btn-ver-mas" onClick={() => setOpenNosotros(true)}>
                 Conocer más sobre SUMIMSA
               </button>
+              <a href="#sectores"
+                className="btn-ver-mas"
+                style={{textDecoration:'none'}}
+                onClick={e=>{e.preventDefault();const el=document.querySelector('#sectores');if(el)window.scrollTo({top:el.offsetTop-68,behavior:'smooth'})}}>
+                Ver Sectores →
+              </a>
             </div>
           </div>
         </div>
@@ -76,14 +82,33 @@ export default function Nosotros() {
         <img className="dp-img" src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=1200&q=80&fit=crop" alt="SUMIMSA operaciones" />
 
         <h3>Nuestra Historia</h3>
-        <p>SUMIMSA inicia operaciones en Tampico, Tamaulipas, con la visión de convertirse en la empresa de suministro industrial más confiable de México. Desde el primer día, apostamos por la calidad, la confianza y el servicio personalizado como pilares de nuestra identidad.</p>
-        <p>Con más de 15 años en el mercado, hemos crecido de una plaza en Tampico a una red de 7 ubicaciones estratégicas en el Golfo de México, con más de 580 colaboradores comprometidos con la excelencia.</p>
+        <p>SUMIMSA inicia operaciones en Tampico, Tamaulipas, con la visión de convertirse en la empresa de suministro industrial más confiable de México. Con más de 15 años en el mercado, hemos crecido de una plaza en Tampico a una red de 7 ubicaciones estratégicas en el Golfo de México, con más de 580 colaboradores comprometidos con la excelencia.</p>
 
         <h3>Misión</h3>
         <p>Ser el proveedor integral de herramientas, equipos y servicios industriales que la industria mexicana necesita para operar con excelencia, seguridad y eficiencia. Nos comprometemos a ofrecer calidad, confiabilidad y servicio excepcional en cada interacción.</p>
 
         <h3>Visión</h3>
         <p>Consolidarnos como la empresa de suministro industrial de clase mundial número uno en México, reconocida por nuestros clientes, proveedores y colaboradores como el socio estratégico que transforma la cadena de suministro industrial del país.</p>
+
+        <h3>Nuestros Sectores</h3>
+        <div className="dp-grid">
+          <div className="dp-feature">
+            <h4>Sector Petrolero</h4>
+            <p>La industria petrolera en México es un pilar fundamental de la economía. SUMIMSA suministra soluciones integrales a empresas de exploración, producción y refinación de petróleo y gas, con respaldo de marcas de prestigio y precios competitivos.</p>
+          </div>
+          <div className="dp-feature">
+            <h4>Sector Naviero</h4>
+            <p>Con 7 ubicaciones estratégicas cubrimos la extensa red de puertos mexicanos. Ofrecemos soluciones, herramientas y servicios para toda la diversidad de actividades navieras: transporte de contenedores, carga a granel, hidrocarburos y productos químicos.</p>
+          </div>
+          <div className="dp-feature">
+            <h4>Sector Metal Mecánico</h4>
+            <p>Personal altamente calificado y el respaldo de fabricantes líderes para ofrecer servicio completo en fabricación, ingeniería, diseño, mantenimiento y logística, con condiciones de trabajo seguras y saludables.</p>
+          </div>
+          <div className="dp-feature">
+            <h4>Sector Energético</h4>
+            <p>Trabajamos con clientes que promueven el desarrollo de energías renovables: solar, eólica, hidroeléctrica y geotérmica. Expertos en inspección y pruebas especiales para el sector energético.</p>
+          </div>
+        </div>
 
         <div className="dp-grid">
           <div className="dp-feature">
@@ -97,14 +122,6 @@ export default function Nosotros() {
           <div className="dp-feature">
             <h4>100% Mexicana</h4>
             <p>Empresa con capital 100% mexicano, comprometida con el desarrollo industrial del país.</p>
-          </div>
-          <div className="dp-feature">
-            <h4>Clase Mundial</h4>
-            <p>Estándares internacionales de calidad, certificaciones y procesos que nos distinguen del resto.</p>
-          </div>
-          <div className="dp-feature">
-            <h4>4 Sectores</h4>
-            <p>Petrolero, Naval, Metal-Mecánico y Energético. Expertos en cada industria que atendemos.</p>
           </div>
           <div className="dp-feature">
             <h4>Proveedores Líderes</h4>

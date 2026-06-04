@@ -1,19 +1,70 @@
 .prov-strip {
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
-  padding: 28px 0; background: #fff; overflow: hidden;
+  padding: 32px 0;
+  background: #fff;
+  overflow: hidden;
+  position: relative;
 }
-.prov-inner {
-  display: flex; align-items: center;
-  white-space: nowrap;
-  animation: tick 36s linear infinite;
+
+/* Fade en los bordes */
+.prov-strip::before,
+.prov-strip::after {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 80px;
+  z-index: 2;
+  pointer-events: none;
 }
+.prov-strip::before { left: 0;  background: linear-gradient(to right, #fff, transparent); }
+.prov-strip::after  { right: 0; background: linear-gradient(to left,  #fff, transparent); }
+
+/* Track animado */
+.prov-track {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  animation: provScroll 40s linear infinite;
+}
+
+.prov-track:hover { animation-play-state: paused; }
+
+@keyframes provScroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* Cada logo */
 .prov-item {
-  display: inline-flex; align-items: center;
-  justify-content: center; padding: 0 36px; flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 40px;
+  flex-shrink: 0;
+  min-width: 140px;
 }
+
 .prov-logo {
-  height: 32px; max-width: 110px; object-fit: contain;
-  filter: grayscale(1) opacity(.4); transition: filter .3s;
+  height: 36px;
+  max-width: 120px;
+  width: auto;
+  object-fit: contain;
+  filter: grayscale(1) opacity(.45);
+  transition: filter .3s;
+  display: block;
 }
+
 .prov-logo:hover { filter: grayscale(0) opacity(1); }
+
+/* Fallback texto cuando la imagen no carga */
+.prov-fallback {
+  display: none;
+  font-family: var(--font-display);
+  font-size: .72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--muted);
+  white-space: nowrap;
+}

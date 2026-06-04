@@ -1,11 +1,30 @@
-.tb-wrap {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0;
-  border: 1px solid var(--border);
-  margin-top: 52px;
-  overflow: hidden;
+.tullbox-grid { display:grid; grid-template-columns:1fr 1fr; gap:0; border:1px solid var(--border); margin-top:52px; overflow:hidden; }
+.tullbox-info { padding:52px; background:var(--navy); position:relative; overflow:hidden; }
+.tullbox-info-bg { position:absolute; inset:0; pointer-events:none; }
+.tullbox-brand { font-family:var(--font-display); font-size:clamp(2.4rem,5vw,4.2rem); font-weight:700; text-transform:uppercase; letter-spacing:-2px; line-height:1; margin-bottom:6px; position:relative; z-index:1; }
+.tullbox-tagline { font-family:var(--font-mono); font-size:.6rem; color:rgba(255,255,255,.3); letter-spacing:3px; text-transform:uppercase; margin-bottom:26px; position:relative; z-index:1; }
+.tullbox-desc { font-size:.88rem; color:rgba(255,255,255,.7); line-height:1.85; margin-bottom:26px; position:relative; z-index:1; }
+.tullbox-feats { display:flex; flex-direction:column; border:1px solid rgba(255,255,255,.08); margin-bottom:28px; position:relative; z-index:1; }
+.tullbox-feat { display:flex; align-items:center; gap:12px; padding:13px 16px; border-bottom:1px solid rgba(255,255,255,.06); }
+.tullbox-feat p { font-size:.8rem; color:rgba(255,255,255,.5); margin:0; }
+.tullbox-btns { display:flex; gap:12px; flex-wrap:wrap; position:relative; z-index:1; }
+.tullbox-photo { position:relative; min-height:480px; overflow:hidden; background:#0a1428; }
+.tullbox-photo img { width:100%; height:100%; object-fit:cover; display:block; min-height:480px; }
+.tullbox-photo-overlay { position:absolute; inset:0; background:linear-gradient(to top,rgba(13,30,74,.75) 0%,transparent 60%); }
+.tullbox-photo-caption { position:absolute; bottom:28px; left:28px; z-index:2; }
+.tullbox-photo-tag { font-family:var(--font-mono); font-size:.55rem; letter-spacing:3px; text-transform:uppercase; margin-bottom:6px; }
+.tullbox-photo-title { font-family:var(--font-display); font-size:1.25rem; font-weight:700; text-transform:uppercase; color:#fff; line-height:1.2; }
+
+@media (max-width:900px) {
+  .tullbox-grid { grid-template-columns:1fr; }
+  .tullbox-info { padding:36px 24px; }
+  .tullbox-photo { min-height:280px; } .tullbox-photo img { min-height:280px; }
 }
-@media (max-width: 1100px) {
-  .tb-wrap { grid-template-columns: 1fr; }
+@media (max-width:480px) {
+  .tullbox-info { padding:24px 16px; }
+  .tullbox-btns { flex-direction:column; }
+  .tullbox-btns .btn-main, .tullbox-btns .btn-ver-mas { text-align:center; justify-content:center; width:100%; }
+  .tullbox-photo { min-height:200px; } .tullbox-photo img { min-height:200px; }
+  .tullbox-photo-caption { bottom:14px; left:14px; }
+  .tullbox-photo-title { font-size:.95rem; }
 }

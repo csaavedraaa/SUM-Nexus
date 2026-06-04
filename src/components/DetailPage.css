@@ -157,3 +157,49 @@
   .dp-grid   { grid-template-columns: 1fr; }
   .dp-title  { font-size: clamp(1.8rem, 8vw, 2.8rem); }
 }
+
+/* ── Mini footer dentro del overlay ── */
+.dp-footer {
+  background: var(--navy);
+  padding: 32px 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+  border-top: 1px solid rgba(255,255,255,.08);
+}
+
+.dp-footer-back {
+  margin-bottom: 0 !important;
+}
+
+.dp-footer-nav {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.dp-footer-link {
+  font-family: var(--font-mono);
+  font-size: .58rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: rgba(255,255,255,.3);
+  text-decoration: none;
+  padding: 5px 10px;
+  border: 1px solid rgba(255,255,255,.08);
+  transition: color .2s, border-color .2s;
+  text-transform: capitalize;
+}
+
+.dp-footer-link:hover {
+  color: var(--cyan);
+  border-color: var(--cyan);
+}
+
+@media (max-width: 600px) {
+  .dp-footer { padding: 24px 20px; flex-direction: column; align-items: flex-start; }
+  .dp-footer-nav { gap: 4px; }
+  .dp-footer-link { font-size: .52rem; padding: 4px 8px; }
+}

@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import { NAV_LINKS } from './Header'
 import './DetailPage.css'
 
 export default function DetailPage({ isOpen, onClose, eyebrow, title, lead, children }) {
@@ -64,9 +65,9 @@ export default function DetailPage({ isOpen, onClose, eyebrow, title, lead, chil
             Volver al inicio
           </button>
           <div className="dp-footer-nav">
-            {['#servicios','#nosotros','#tullbox','#proyectos','#sspa','#catalogs','#bolsa','#contacto'].map(href => (
+            {[...NAV_LINKS, { href: '#contacto', label: 'Contacto' }].map(({ href, label }) => (
               <a key={href} href={href} className="dp-footer-link">
-                {href.replace('#','').replace('catalogs','catálogo')}
+                {label}
               </a>
             ))}
           </div>

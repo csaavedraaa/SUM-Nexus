@@ -12,6 +12,49 @@ const PTS = [
 const METRICS = [['Seguridad Industrial','100%'],['Salud Ocupacional','100%'],['Protección Ambiental','100%']]
 const ICONS   = [['🦺','Seguridad Industrial'],['🏥','Salud en el Trabajo'],['🌿','Protección Ambiental'],['📋','Mejora Continua']]
 
+// Sistema de Gestión Integral — documentos y canales requeridos por dirección
+const SGI_ITEMS = [
+  {
+    icon: '📄',
+    title: 'Política del Sistema de Gestión Integral',
+    desc: 'Nuestros compromisos de calidad, seguridad, salud y protección ambiental.',
+    href: '/sspa/politica-sgi.pdf',
+    cta: 'Descargar PDF',
+    pending: true,
+  },
+  {
+    icon: '🏅',
+    title: 'Certificaciones',
+    desc: 'Certificaciones y reconocimientos vigentes de nuestro sistema de gestión.',
+    href: '/sspa/certificaciones.pdf',
+    cta: 'Ver certificaciones',
+    pending: true,
+  },
+  {
+    icon: '⚖️',
+    title: 'Código de Ética',
+    desc: 'Principios de conducta que rigen nuestra relación con clientes, proveedores y colaboradores.',
+    href: '/sspa/codigo-de-etica.pdf',
+    cta: 'Descargar PDF',
+    pending: true,
+  },
+  {
+    icon: '✉️',
+    title: 'Buzón de Dudas y Sugerencias',
+    desc: 'Un canal confidencial para reportar dudas, quejas o sugerencias sobre nuestras operaciones.',
+    href: '#contacto',
+    cta: 'Enviar mensaje',
+    scrollTarget: '#contacto',
+  },
+  {
+    icon: '📞',
+    title: 'Canales de Recepción',
+    desc: 'Tel. +52 (833) 369 0070 · ventas@sumimsa.com.mx',
+    href: 'mailto:ventas@sumimsa.com.mx',
+    cta: 'Escribir correo',
+  },
+]
+
 export default function SSPA() {
   const [openSSPA, setOpenSSPA] = useState(false)
 
@@ -62,6 +105,37 @@ export default function SSPA() {
                   <h5 className="sspa-point-title">{title}</h5>
                   <p className="sspa-point-desc">{desc}</p>
                 </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Sistema de Gestión Integral */}
+        <div className="reveal d2" style={{marginTop:52}}>
+          <h3 className="sgi-title">Sistema de Gestión Integral</h3>
+          <div className="sgi-grid">
+            {SGI_ITEMS.map(item => (
+              <div key={item.title} className="sgi-card">
+                <div className="sgi-card-icon">{item.icon}</div>
+                <h5 className="sgi-card-title">{item.title}</h5>
+                <p className="sgi-card-desc">{item.desc}</p>
+                {item.pending ? (
+                  <span className="sgi-card-cta pending">Próximamente</span>
+                ) : item.scrollTarget ? (
+                  <a
+                    href={item.href}
+                    className="sgi-card-cta"
+                    onClick={e => {
+                      e.preventDefault()
+                      const el = document.querySelector(item.scrollTarget)
+                      if (el) window.scrollTo({ top: el.offsetTop - 68, behavior: 'smooth' })
+                    }}
+                  >
+                    {item.cta} →
+                  </a>
+                ) : (
+                  <a href={item.href} className="sgi-card-cta">{item.cta} →</a>
+                )}
               </div>
             ))}
           </div>

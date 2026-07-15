@@ -96,10 +96,86 @@
   display: flex; gap: 12px; flex-wrap: wrap;
 }
 
+/* ── Trayectoria (línea del tiempo) ─────────────── */
+.nos-subhead {
+  font-family: var(--font-display); font-size: 1rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .5px; color: var(--navy);
+  margin-bottom: 26px;
+}
+.nos-timeline-wrap { margin-top: 72px; }
+.nos-values-wrap {
+  margin: 32px 0 8px;
+  padding-top: 32px;
+  border-top: 1px solid var(--border);
+}
+
+.nos-timeline {
+  display: flex;
+  position: relative;
+}
+.nos-timeline::before {
+  content: ''; position: absolute; top: 5px; left: 0; right: 0;
+  height: 1px; background: var(--border);
+}
+.nos-timeline-item {
+  flex: 1; position: relative; padding-right: 24px;
+}
+.nos-timeline-item:last-child { padding-right: 0; }
+.nos-timeline-dot {
+  width: 11px; height: 11px; border-radius: 50%;
+  background: #fff; border: 2px solid var(--cyan);
+  position: relative; z-index: 1; margin-bottom: 16px;
+}
+.nos-timeline-stage {
+  font-family: var(--font-display); font-size: .82rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .5px; color: var(--navy);
+}
+.nos-timeline-tag {
+  font-family: var(--font-mono); font-size: .62rem; color: var(--cyan);
+  text-transform: uppercase; letter-spacing: 1px; margin: 4px 0 9px;
+}
+.nos-timeline-desc { font-size: .78rem; color: var(--muted); line-height: 1.65; margin: 0; }
+
+/* ── Valores institucionales ─────────────── */
+.nos-subhead-center { text-align: center; }
+
+.nos-values {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 44px;
+}
+.nos-value {
+  display: flex; flex-direction: column; align-items: center;
+  width: 130px; text-align: center;
+}
+.nos-value-icon {
+  width: 76px; height: 76px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.7rem; border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, var(--navy) 0%, #071433 100%);
+  box-shadow: 0 0 0 1px var(--border), 0 8px 20px rgba(13,30,74,.18);
+  margin-bottom: 14px;
+}
+.nos-value-title {
+  font-family: var(--font-display); font-size: .78rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .5px; color: var(--navy);
+  line-height: 1.3; margin: 0;
+}
+
 /* ── Responsive ─────────────── */
 @media (max-width: 900px) {
   .nos-grid { grid-template-columns: 1fr; gap: 48px; }
   .nos-terminal-wrap { padding-right: 0; padding-bottom: 36px; }
+  .nos-values { gap: 32px; }
+}
+
+@media (max-width: 640px) {
+  .nos-timeline { flex-direction: column; gap: 26px; }
+  .nos-timeline::before { display: none; }
+  .nos-timeline-item { padding-right: 0; padding-left: 22px; border-left: 1px solid var(--border); }
+  .nos-timeline-dot { position: absolute; left: -6.5px; top: 0; margin-bottom: 0; }
+  .nos-timeline-stage { margin-top: -2px; }
 }
 
 @media (max-width: 480px) {
@@ -107,4 +183,6 @@
   .nos-terminal-title { display: none; }
   .nos-quote         { font-size: .98rem; }
   .nos-btns          { flex-direction: column; }
+  .nos-value         { width: 100px; }
+  .nos-value-icon    { width: 64px; height: 64px; font-size: 1.4rem; }
 }

@@ -1,14 +1,16 @@
 import { useState, useEffect } from 'react'
 import './Header.css'
 
-const NAV_LINKS = [
-  { href: '#servicios', label: 'Servicios'  },
-  { href: '#nosotros',  label: 'Nosotros'   },
-  { href: '#tullbox',   label: 'Tullbox'    },
-  { href: '#proyectos', label: 'Proyectos'  },
-  { href: '#sspa',      label: 'SSPA'       },
-  { href: '#catalogs',  label: 'Catálogo'   },
-  { href: '#bolsa',     label: 'Empleo'     },
+export const NAV_LINKS = [
+  { href: '#nosotros',  label: 'Nosotros', children: [
+      { href: '#nosotros', label: 'Resumen' },
+      { href: '#sspa',     label: 'SSPA' },
+    ] },
+  { href: '#servicios', label: 'Servicios'        },
+  { href: '#proyectos', label: 'Proyectos'        },
+  { href: '#tullbox',   label: 'Proyecto Tullbox' },
+  { href: '#catalogs',  label: 'Catálogo'         },
+  { href: '#bolsa',     label: 'Talento'          },
 ]
 
 // Cierra cualquier DetailPage abierto y navega a la sección
@@ -47,6 +49,7 @@ export default function Header() {
 
   const handleNav = (e, href) => {
     e.preventDefault()
+    e.currentTarget.blur() // evita que :focus-within deje el dropdown abierto tras el clic
     navigateTo(href, setOpen)
   }
 
@@ -76,10 +79,23 @@ export default function Header() {
         </a>
 
         <nav className={`hdr-nav${open ? ' open' : ''}`}>
-          {NAV_LINKS.map(({ href, label }) => (
-            <a key={href} href={href} onClick={e => handleNav(e, href)}>
-              {label}
-            </a>
+          {NAV_LINKS.map(({ href, label, children }) => (
+            <div key={href} className="hdr-nav-item">
+              <a href={href} onClick={e => handleNav(e, href)}>
+                {label}
+                {children && <span className="hdr-caret" aria-hidden="true">▾</span>}
+              </a>
+              {children && (
+                <div className="hdr-dropdown">
+                  {children.map((c, i) => (
+                    <a key={c.href + c.label} href={c.href} onClick={e => handleNav(e, c.href)}>
+                      <span className="hdr-dropdown-num">{String(i + 1).padStart(2, '0')}</span>
+                      {c.label}
+                    </a>
+                  ))}
+                </div>
+              )}
+            </div>
           ))}
           <a href="#contacto" className="nav-cta" onClick={e => handleNav(e, '#contacto')}>
             Contacto

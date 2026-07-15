@@ -2,14 +2,14 @@ import { useEffect } from 'react'
 import Header       from './components/Header'
 import Hero         from './sections/Hero'
 import Ticker       from './components/Ticker'
+import Nosotros     from './sections/Nosotros'
 import Servicios    from './sections/Servicios'
 import Sectores     from './sections/Sectores'
 import Esquemas     from './sections/Esquemas'
-import Nosotros     from './sections/Nosotros'
 import Proveedores  from './components/Proveedores'
-import Tullbox      from './sections/Tullbox'
+import CasosExito   from './components/CasosExito'
 import Proyectos    from './sections/Proyectos'
-import SSPA         from './sections/SSPA'
+import Tullbox      from './sections/Tullbox'
 import Tecnologia   from './sections/Tecnologia'
 import Noticias     from './sections/Noticias'
 import Blog         from './sections/Blog'
@@ -40,14 +40,14 @@ export default function App() {
       <main>
         <Hero />
         <Ticker />
+        <Nosotros />
+        <Proveedores label="Marcas que representamos" />
+        <CasosExito />
         <Servicios />
         <Sectores />
         <Esquemas />
-        <Nosotros />
-        <Proveedores />
-        <Tullbox />
         <Proyectos />
-        <SSPA />
+        <Tullbox />
         <Tecnologia />
         <Noticias />
         <Blog />

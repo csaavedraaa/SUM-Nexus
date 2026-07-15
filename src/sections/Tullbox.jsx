@@ -22,7 +22,7 @@ export default function Tullbox() {
             <div className="eyebrow-line" style={{background: YELLOW}} />
             <span className="eyebrow-text" style={{color: YELLOW}}>Marca Complementaria</span>
           </div>
-          <h2 className="s-h2">Conoce <em style={{color: YELLOW}}>Tullbox</em></h2>
+          <h2 className="s-h2">Conoce el <em style={{color: YELLOW}}>Proyecto Tullbox</em></h2>
         </div>
 
         <div className="tullbox-grid reveal d1">
@@ -71,7 +71,7 @@ export default function Tullbox() {
       <DetailPage
         isOpen={openTullbox}
         onClose={() => setOpenTullbox(false)}
-        eyebrow="Tullbox"
+        eyebrow="Proyecto Tullbox"
         title="Programa <em>In Situ</em>"
         lead="SUMIMSA diseñó el programa Tullbox, que consiste en un conjunto de servicios integrales basado en una metodología sistemática de diagnóstico « In situ » para ofrecer servicios de: Suministro, Mantenimiento, Calibración, Capacitación y Asesoría e innovación tecnológica de equipos y herramientas."
       >

@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import DetailPage from '../components/DetailPage'
+import SSPA from './SSPA'
 import './Nosotros.css'
 
 export default function Nosotros() {
@@ -13,7 +14,20 @@ export default function Nosotros() {
     ['Clasificación', 'Clase Mundial'],
     ['Estatus',       '● Activo'],
   ]
-  const chips = ['Calidad','Confianza','Innovación','Seguridad','Liderazgo','México']
+  const timeline = [
+    ['Fundación',  'Tampico, Tamps.',    'Inicio de operaciones con la visión de ser el proveedor industrial más confiable de México.'],
+    ['Expansión',  '7 plazas',           'Crecimos de una plaza en Tampico a una red de ubicaciones estratégicas en todo el Golfo de México.'],
+    ['Equipo',     '580+ colaboradores', 'Un equipo comprometido con la excelencia en cada operación.'],
+    ['Hoy',        '+15 años',           'Empresa de clase mundial en los sectores Petrolero, Naval, Metal-Mecánico y Energético.'],
+  ]
+
+  const valores = [
+    ['Integridad',           '🤝'],
+    ['Eficiencia',           '📈'],
+    ['Trabajo Colaborativo', '👥'],
+    ['Responsabilidad',      '✅'],
+    ['Enfoque al Cliente',   '🎯'],
+  ]
 
   return (
     <section id="nosotros" className="section section-alt">
@@ -56,9 +70,6 @@ export default function Nosotros() {
             <p style={{fontSize:'.9rem',color:'var(--muted)',lineHeight:1.8,marginBottom:12}}>
               Somos una empresa 100% mexicana, distribuidora directa de herramientas, equipos y accesorios de las marcas más reconocidas en el mercado, con servicios integrales de calidad, trabajando en forma efectiva y segura.
             </p>
-            <div className="chips">
-              {chips.map(c => <div key={c} className="chip">{c}</div>)}
-            </div>
             <div className="nos-btns">
               <button className="btn-ver-mas" onClick={() => setOpenNosotros(true)}>
                 Conocer más sobre SUMIMSA
@@ -70,7 +81,25 @@ export default function Nosotros() {
             </div>
           </div>
         </div>
+
+        {/* Línea del tiempo ejecutiva */}
+        <div className="reveal d2 nos-timeline-wrap">
+          <div className="nos-subhead">Nuestra trayectoria</div>
+          <div className="nos-timeline">
+            {timeline.map(([stage, tag, desc]) => (
+              <div key={stage} className="nos-timeline-item">
+                <div className="nos-timeline-dot" />
+                <div className="nos-timeline-stage">{stage}</div>
+                <div className="nos-timeline-tag">{tag}</div>
+                <p className="nos-timeline-desc">{desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
       </div>
+
+      <SSPA />
 
       <DetailPage
         isOpen={openNosotros}
@@ -80,12 +109,24 @@ export default function Nosotros() {
         lead="SUMIMSA nació en Tampico con un compromiso: ser el único proveedor que la industria mexicana necesita. Más de 15 años después, ese compromiso nos define."
       >
         <img className="dp-img" src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=1200&q=80&fit=crop" alt="SUMIMSA operaciones" />
-        <h3>Nuestra Historia</h3>
-        <p>SUMIMSA inicia operaciones en Tampico, Tamaulipas, con la visión de convertirse en la empresa de suministro industrial más confiable de México. Con más de 15 años en el mercado, hemos crecido de una plaza en Tampico a una red de 7 ubicaciones estratégicas en el Golfo de México, con más de 580 colaboradores comprometidos con la excelencia.</p>
+
         <h3>Misión</h3>
         <p>Ser el proveedor integral de herramientas, equipos y servicios industriales que la industria mexicana necesita para operar con excelencia, seguridad y eficiencia.</p>
         <h3>Visión</h3>
         <p>Consolidarnos como la empresa de suministro industrial de clase mundial número uno en México, reconocida por nuestros clientes, proveedores y colaboradores como el socio estratégico que transforma la cadena de suministro industrial del país.</p>
+
+        <div className="nos-values-wrap">
+          <div className="nos-subhead nos-subhead-center">Valores Institucionales</div>
+          <div className="nos-values">
+            {valores.map(([label, icon]) => (
+              <div key={label} className="nos-value">
+                <span className="nos-value-icon">{icon}</span>
+                <h5 className="nos-value-title">{label}</h5>
+              </div>
+            ))}
+          </div>
+        </div>
+
         <h3>Nuestros Sectores</h3>
         <div className="dp-grid">
           <div className="dp-feature"><h4>Sector Petrolero</h4><p>SUMIMSA suministra soluciones integrales a empresas de exploración, producción y refinación de petróleo y gas, con respaldo de marcas de prestigio y precios competitivos.</p></div>

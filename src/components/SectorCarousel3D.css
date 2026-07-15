@@ -1,0 +1,82 @@
+.s3d-wrap {
+  position: relative;
+  width: 100%;
+  height: 620px;
+  background: radial-gradient(circle at 50% 30%, #0c1d47 0%, #050f28 70%);
+  overflow: hidden;
+}
+
+.s3d-hint {
+  position: absolute; bottom: 18px; left: 50%; transform: translateX(-50%);
+  font-family: var(--font-mono); font-size: .65rem; letter-spacing: 1.5px;
+  color: rgba(255,255,255,.4); text-transform: uppercase;
+  pointer-events: none; z-index: 2;
+}
+
+.s3d-card {
+  width: 240px; height: 300px;
+  position: relative;
+  border-radius: 2px;
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: 0 20px 50px rgba(0,0,0,.5);
+  transition: transform .25s ease, box-shadow .25s ease;
+  user-select: none;
+  backface-visibility: hidden;
+  pointer-events: auto;
+  touch-action: none;
+}
+.s3d-card:hover {
+  transform: scale(1.06) translateY(-8px);
+  box-shadow: 0 28px 60px rgba(0,155,219,.35);
+}
+
+.s3d-card-img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%; object-fit: cover;
+  pointer-events: none;
+}
+.s3d-card-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(5,15,40,.95) 10%, rgba(5,15,40,.55) 45%, rgba(5,15,40,.15) 100%);
+}
+
+.s3d-card-num {
+  position: relative; z-index: 1;
+  font-family: var(--font-mono); font-size: .6rem;
+  color: rgba(255,255,255,.5); letter-spacing: 3px;
+  padding: 16px 18px 0;
+}
+
+.s3d-card-body {
+  position: absolute; left: 0; right: 0; bottom: 0;
+  padding: 0 18px 18px;
+  z-index: 1;
+}
+.s3d-card-title {
+  font-family: var(--font-display); font-size: 1.15rem; font-weight: 700;
+  font-style: italic; text-transform: uppercase; letter-spacing: .5px;
+  color: #fff; line-height: 1.1; margin: 0 0 8px;
+}
+.s3d-card-text {
+  font-size: .72rem; color: rgba(255,255,255,.78);
+  line-height: 1.55; margin: 0 0 10px;
+  display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.s3d-card-cta {
+  font-family: var(--font-mono); font-size: .6rem; color: var(--cyan);
+  letter-spacing: 1.5px; text-transform: uppercase;
+}
+
+@media (max-width: 900px) {
+  .s3d-wrap { height: 460px; }
+  .s3d-card { width: 190px; height: 250px; }
+}
+
+@media (max-width: 640px) {
+  .s3d-wrap { height: 400px; }
+  .s3d-card { width: 160px; height: 220px; }
+  .s3d-card-title { font-size: .95rem; }
+  .s3d-card-text { display: none; }
+}

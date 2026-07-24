@@ -60,15 +60,15 @@ export default function Footer() {
             <a href="https://www.sumimsa.com.mx" target="_blank" rel="noopener noreferrer">
               www.sumimsa.com.mx
             </a>
-            <a href="/sumimsa-aviso-privacidad.pdf" download>📄 Aviso de Privacidad</a>
-            <a href="/sumimsa-gdpr-rgpd.pdf" download>📄 RGPD / GDPR</a>
+            <a href="/sumimsa-aviso-privacidad.pdf" download>Aviso de Privacidad</a>
+            <a href="/sumimsa-gdpr-rgpd.pdf" download>RGPD / GDPR</a>
           </div>
 
         </div>
 
         <div className="footer-bar">
           <p>© 2025 SUMIMSA — Suministros Marinos e Industriales de México S.A. de C.V.</p>
-          <p>🇲🇽 Hecho en México</p>
+          <p>Hecho en México</p>
         </div>
       </div>
     </footer>

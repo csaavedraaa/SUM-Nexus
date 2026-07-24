@@ -5,8 +5,13 @@
 .tullbox-tagline { font-family:var(--font-mono); font-size:.6rem; color:rgba(255,255,255,.3); letter-spacing:3px; text-transform:uppercase; margin-bottom:26px; position:relative; z-index:1; }
 .tullbox-desc { font-size:.88rem; color:rgba(255,255,255,.7); line-height:1.85; margin-bottom:26px; position:relative; z-index:1; }
 .tullbox-feats { display:flex; flex-direction:column; border:1px solid rgba(255,255,255,.08); margin-bottom:28px; position:relative; z-index:1; }
-.tullbox-feat { display:flex; align-items:center; gap:12px; padding:13px 16px; border-bottom:1px solid rgba(255,255,255,.06); }
+.tullbox-feat { display:flex; align-items:center; gap:14px; padding:13px 16px; border-bottom:1px solid rgba(255,255,255,.06); }
 .tullbox-feat p { font-size:.8rem; color:rgba(255,255,255,.5); margin:0; }
+.tullbox-feat-num {
+  font-family:var(--font-mono); font-size:.6rem; font-weight:700;
+  color:#f5c400; letter-spacing:1px; flex-shrink:0;
+  width:24px; text-align:center;
+}
 .tullbox-btns { display:flex; gap:12px; flex-wrap:wrap; position:relative; z-index:1; }
 .tullbox-photo { position:relative; min-height:480px; overflow:hidden; background:#0a1428; }
 .tullbox-photo img { width:100%; height:100%; object-fit:cover; display:block; min-height:480px; }

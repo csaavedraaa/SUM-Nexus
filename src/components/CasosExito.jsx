@@ -1,4 +1,11 @@
+import LogoTicker from './LogoTicker'
 import './CasosExito.css'
+
+const CLIENTES = [
+  'pemex', 'halliburton', 'baker-hughes', 'saipem', 'slb', 'cosl', 'grupo-mexico',
+  'nabors', 'mexoil', 'semar', 'borr-drilling', 'gsm', 'carso', 'latina', 'cfe',
+  'ihsa', 'fontis-energy', 'parker-drilling', 'diavaz', 'opex',
+]
 
 const CASOS = [
   {
@@ -49,15 +56,10 @@ export default function CasosExito() {
           ))}
         </div>
 
-        <div className="casos-clientes reveal d2">
-          <div className="casos-clientes-label">Algunas empresas con las que hemos colaborado</div>
-          <img
-            className="casos-clientes-img"
-            src="/logos/clientes.png"
-            alt="Clientes de SUMIMSA: Pemex, Halliburton, Baker Hughes, Grupo México, CFE, Saipem y más"
-            loading="lazy"
-          />
-        </div>
+      </div>
+
+      <div className="reveal d2 casos-clientes">
+        <LogoTicker items={CLIENTES} basePath="/logos/clientes" label="Algunas empresas con las que hemos colaborado" speed={38} />
       </div>
     </div>
   )

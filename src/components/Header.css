@@ -30,7 +30,7 @@
   text-transform: uppercase; letter-spacing: 1px;
   border-radius: 4px; transition: color .2s, background .2s;
 }
-.hdr-nav a:hover { color: var(--navy); background: var(--panel); }
+.hdr-nav a:hover { color: var(--navy); background: var(--off); }
 
 /* NAV DROPDOWN */
 .hdr-nav-item { position: relative; }

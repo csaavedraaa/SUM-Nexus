@@ -33,20 +33,7 @@
 }
 .caso-link:hover { text-decoration: underline; }
 
-.casos-clientes {
-  margin-top: 48px;
-  padding-top: 40px;
-  border-top: 1px solid var(--border);
-  text-align: center;
-}
-.casos-clientes-label {
-  font-family: var(--font-mono); font-size: .68rem; color: var(--muted);
-  letter-spacing: 2px; text-transform: uppercase;
-  margin-bottom: 24px;
-}
-.casos-clientes-img {
-  max-width: 900px; width: 100%; height: auto;
-}
+.casos-clientes { margin-top: 44px; }
 
 @media (max-width: 900px) {
   .casos-grid { grid-template-columns: 1fr; }

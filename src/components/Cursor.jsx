@@ -1,5 +1,4 @@
 import { useEffect, useRef } from 'react'
-import './Cursor.css'
 
 export default function Cursor() {
   const dotRef  = useRef(null)

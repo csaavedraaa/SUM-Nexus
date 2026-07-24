@@ -1,11 +1,12 @@
-import { useState } from 'react'
-import DetailPage from '../components/DetailPage'
+﻿import { useState, useEffect } from 'react'
+import ServiciosDiagram from '../components/ServiciosDiagram'
+import ServicioShowroom from '../components/ServicioShowroom'
+import Esquemas from './Esquemas'
 import './Servicios.css'
 
 const SERVICIOS = [
   {
     id: '01',
-    icono: '⚙️',
     titulo: 'Control de Sólidos',
     subtitulo: 'Inspección, venta y refacciones',
     resumen: 'Sistema con alta capacidad de procesamiento. Optimización del proceso de perforación para mayores tasas y reducción de tiempos no productivos (NPT).',
@@ -24,12 +25,11 @@ const SERVICIOS = [
         'Reporte diario del rastreo del fluido de perforación',
         'Técnicos de servicio in situ bien capacitados',
       ],
-      img: 'https://images.unsplash.com/photo-1615811361523-6bd03d7748e7?w=1000&q=80&fit=crop',
+      img: '/img/servicios/control-de-solidos.jpg',
     }
   },
   {
     id: '02',
-    icono: '📡',
     titulo: 'Medición de Fuerza G',
     subtitulo: 'Equipos de control de sólidos',
     resumen: 'Medición de eficiencia mecánica en vibradores mediante acelerómetro. Detecta fallas en el factor de vibración y optimiza el rendimiento de los equipos.',
@@ -43,12 +43,11 @@ const SERVICIOS = [
         'Optimización del rendimiento de los equipos',
         'Correcciones preventivas antes de fallas mayores',
       ],
-      img: 'https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?w=1000&q=80&fit=crop',
+      img: '/img/servicios/fuerza-g.jpg',
     }
   },
   {
     id: '03',
-    icono: '🔍',
     titulo: 'Inspección para Elementos de Izaje',
     subtitulo: 'Visual, electromagnética y lubricación',
     resumen: 'Inspección visual y electromagnética de cables de acero. Servicio de limpieza y lubricación en sitio. Capacidades hasta 3 7/8" (96mm).',
@@ -66,12 +65,11 @@ const SERVICIOS = [
         'Capacidades máximas de hasta 3 7/8" (96mm)',
         'Preservar y alargar la vida útil de los productos',
       ],
-      img: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1000&q=80&fit=crop',
+      img: '/img/servicios/inspeccion-izaje.jpg',
     }
   },
   {
     id: '04',
-    icono: '🔆',
     titulo: 'Grabado Láser y RFID',
     subtitulo: 'Trazabilidad de herramientas',
     resumen: 'Grabado láser YAG de estado sólido para metales y materiales sintéticos. Códigos 2D Datamatrix para trazabilidad "cuna a tumba".',
@@ -86,12 +84,11 @@ const SERVICIOS = [
         'Resultados de alta calidad y durabilidad',
         'Tecnología de grabado por rayo láser de última generación',
       ],
-      img: 'https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=1000&q=80&fit=crop',
+      img: '/img/servicios/grabado-laser.jpg',
     }
   },
   {
     id: '05',
-    icono: '📲',
     titulo: 'Chip de Trazabilidad',
     subtitulo: 'NFC / QR para activos industriales',
     resumen: 'Un chip por cada artículo. Consulta certificados, órdenes de compra, inspecciones, fotografías y auditorías desde cualquier dispositivo NFC o lector QR.',
@@ -109,18 +106,17 @@ const SERVICIOS = [
         'Compatible con dispositivos NFC y lectores QR',
         'Información modificable en todo momento',
       ],
-      img: 'https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=1000&q=80&fit=crop',
+      img: '/img/servicios/chip-trazabilidad.jpg',
     }
   },
   {
     id: '06',
-    icono: '🏭',
-    titulo: 'Taller de Estrobos',
+    titulo: 'Taller de Estrobos y Eslingas',
     subtitulo: 'Fabricación y certificación ASME B30.9',
-    resumen: 'Fabricadores de estrobos de cable de acero inoxidable hasta 1 3/4". Certificación ASME B30.9-2021. Trazabilidad completa con placa de identificación.',
+    resumen: 'Fabricadores de estrobos y eslingas de cable de acero inoxidable hasta 1 3/4". Certificación ASME B30.9-2021. Trazabilidad completa con placa de identificación.',
     accent: '#ffb347',
     detalle: {
-      intro: 'Somos fabricantes de estrobos de cable de acero inoxidable de hasta 1 3/4 pulgadas de diámetro, con uno o dos lazos o bucles cerrados mediante un casquillo de acero prensado. Certificados bajo norma ASME B30.9-2021.',
+      intro: 'Somos fabricantes de estrobos y eslingas de cable de acero inoxidable de hasta 1 3/4 pulgadas de diámetro, con uno o dos lazos o bucles cerrados mediante un casquillo de acero prensado. Certificados bajo norma ASME B30.9-2021.',
       beneficios: [
         'Fabricación estándar de estrobos del 1/4" al 1 3/4"',
         'Certificación ASME B30.9-2021',
@@ -131,13 +127,20 @@ const SERVICIOS = [
         'Recomendación de certificación anual',
         'Criterios de rechazo documentados',
       ],
-      img: 'https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?w=1000&q=80&fit=crop',
+      img: '/img/servicios/estrobos-eslingas.jpg',
     }
   },
 ]
 
 export default function Servicios() {
   const [activo, setActivo] = useState(null)
+  const [displayActivo, setDisplayActivo] = useState(null)
+
+  // Conserva el último servicio mostrado mientras cierra, para que la
+  // transición de salida anime sobre contenido real en vez de desaparecer de golpe.
+  useEffect(() => {
+    if (activo) setDisplayActivo(activo)
+  }, [activo])
 
   const scrollContacto = () => {
     const el = document.querySelector('#contacto')
@@ -154,7 +157,7 @@ export default function Servicios() {
             <div className="eyebrow-line" />
             <span className="eyebrow-text">Servicios Especializados</span>
           </div>
-          <h2 className="s-h2">Nuestros<br /><em>servicios</em></h2>
+          <h2 className="s-h2"><em>Soluciones</em></h2>
           <p className="servicios-lead">
             Todos nuestros servicios están acompañados por un reporte técnico en el cual se
             determinan las condiciones de los productos, conclusiones, recomendaciones y
@@ -162,41 +165,16 @@ export default function Servicios() {
           </p>
         </div>
 
-        {/* Grid de servicios */}
-        <div className="servicios-grid reveal d1">
-          {SERVICIOS.map((srv, i) => (
-            <div
-              key={srv.id}
-              className="srv-card"
-              style={{ '--srv-accent': srv.accent }}
-            >
-              <div className="srv-card-top">
-                <span className="srv-num">{srv.id}</span>
-                <span className="srv-icono">{srv.icono}</span>
-              </div>
-              <h3 className="srv-titulo">{srv.titulo}</h3>
-              <p className="srv-sub">{srv.subtitulo}</p>
-              <p className="srv-resumen">{srv.resumen}</p>
-              <div className="srv-actions">
-                <button
-                  className="srv-btn-detail"
-                  onClick={() => setActivo(srv)}
-                >
-                  Ver más
-                </button>
-                <button
-                  className="srv-btn-cotizar"
-                  onClick={scrollContacto}
-                >
-                  Cotizar servicio →
-                </button>
-              </div>
-            </div>
-          ))}
-        </div>
+        {/* Diagrama interactivo — cada nodo abre el detalle del servicio real */}
+        <ServiciosDiagram items={SERVICIOS} onSelect={setActivo} />
+      </div>
 
-        {/* CTA global */}
-        <div className="servicios-cta reveal d2">
+      {/* Esquemas de comercialización — cierra Servicios antes del CTA final */}
+      <Esquemas />
+
+      {/* CTA global */}
+      <div className="servicios-cta-band">
+        <div className="container servicios-cta reveal">
           <div className="servicios-cta-text">
             <span>¿Necesitas un servicio a la medida?</span>
             <span className="servicios-cta-sub">Nuestro equipo técnico te asesora sin costo.</span>
@@ -205,39 +183,15 @@ export default function Servicios() {
             Contactar un especialista →
           </button>
         </div>
-
       </div>
 
-      {/* Detail overlay */}
-      {activo && (
-        <DetailPage
-          isOpen={!!activo}
-          onClose={() => setActivo(null)}
-          eyebrow={`Servicio ${activo.id}`}
-          title={activo.titulo}
-          lead={activo.detalle.intro}
-        >
-          <img
-            className="dp-img"
-            src={activo.detalle.img}
-            alt={activo.titulo}
-          />
-
-          <h3>Beneficios del servicio</h3>
-          <ul className="dp-lista">
-            {activo.detalle.beneficios.map((b, i) => (
-              <li key={i}>{b}</li>
-            ))}
-          </ul>
-
-          <div className="dp-cotizar-wrap">
-            <p>Todos los servicios incluyen reporte técnico con condiciones del producto, conclusiones, recomendaciones y referencias técnicas.</p>
-            <button className="btn-main" onClick={() => { setActivo(null); scrollContacto() }}>
-              Cotizar este servicio →
-            </button>
-          </div>
-        </DetailPage>
-      )}
+      {/* Showroom del servicio */}
+      <ServicioShowroom
+        servicio={activo || displayActivo}
+        isOpen={!!activo}
+        onClose={() => setActivo(null)}
+        onCotizar={() => { setActivo(null); scrollContacto() }}
+      />
     </section>
   )
 }

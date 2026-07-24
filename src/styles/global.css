@@ -17,7 +17,6 @@
   --text:    #1a2744;
   --border:  #d4dce8;
   --off:     #f4f6fa;
-  --light:   #eef2f8;
 
   --font-display: 'Oswald', sans-serif;
   --font-mono:    'Space Mono', monospace;
@@ -39,7 +38,7 @@ button { cursor: pointer; font-family: inherit; }
 
 /* ── LAYOUT ─────────────────────────────────────────────────── */
 .container { max-width: 1280px; margin: 0 auto; padding: 0 48px; }
-.section    { padding: 100px 0; }
+.section    { padding: 100px 0; scroll-margin-top: 68px; }
 .section-alt  { background: var(--off); }
 .section-navy { background: var(--navy); color: #fff; }
 
@@ -53,8 +52,9 @@ button { cursor: pointer; font-family: inherit; }
   font-family: var(--font-display);
   font-size: clamp(2.4rem, 5vw, 4rem);
   font-weight: 700; text-transform: uppercase;
-  letter-spacing: -1.5px; line-height: .9;
+  letter-spacing: -1.5px; line-height: 1.05;
   color: var(--navy); margin-bottom: 20px;
+  overflow: visible;
 }
 .section-navy .s-h2 { color: #fff; }
 .s-h2 em { color: var(--cyan); font-style: normal; }
@@ -118,11 +118,6 @@ button { cursor: pointer; font-family: inherit; }
 }
 .btn-ver-mas.white:hover { background: rgba(255,255,255,.1); color: #fff; border-color: rgba(255,255,255,.6); }
 
-/* Cyan variant */
-.btn-ver-mas.cyan {
-  background: var(--cyan); color: #fff; border-color: var(--cyan);
-}
-.btn-ver-mas.cyan:hover { background: var(--navy); border-color: var(--navy); }
 
 /* ── SCROLL REVEAL ──────────────────────────────────────────── */
 .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
@@ -186,15 +181,6 @@ button { cursor: pointer; font-family: inherit; }
 .fgrid.dark .form-footer-bar { background: rgba(255,255,255,.04); border-color: rgba(255,255,255,.06); }
 .fgrid.dark .form-footer-bar p { color: rgba(255,255,255,.22); }
 
-/* ── CHIPS ─────────────────────────────────────────────────── */
-.chips { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 22px; }
-.chip {
-  border: 1px solid var(--border); padding: 7px 14px;
-  font-family: var(--font-display); font-size: .78rem;
-  text-transform: uppercase; letter-spacing: 1px; color: var(--muted);
-  transition: all .2s; cursor: default;
-}
-.chip:hover { border-color: var(--cyan); color: var(--cyan); background: rgba(0,155,219,.04); }
 
 /* ── PDF DOWNLOAD BUTTON ───────────────────────────────────── */
 .pdf-dl {

@@ -1,5 +1,6 @@
-import { useState } from 'react'
-import DetailPage from '../components/DetailPage'
+import { useState, useEffect } from 'react'
+import '../components/SectorShowroom.css'
+import '../components/ServicioShowroom.css'
 import './SSPA.css'
 
 const PTS = [
@@ -10,12 +11,12 @@ const PTS = [
   ['05','Cero contaminación','Prevenimos la contaminación y contribuimos al desarrollo sostenible buscando el equilibrio con el medio ambiente en cada operación.'],
 ]
 const METRICS = [['Seguridad Industrial','100%'],['Salud Ocupacional','100%'],['Protección Ambiental','100%']]
-const ICONS   = [['🦺','Seguridad Industrial'],['🏥','Salud en el Trabajo'],['🌿','Protección Ambiental'],['📋','Mejora Continua']]
+const ICONS   = ['Seguridad Industrial','Salud en el Trabajo','Protección Ambiental','Mejora Continua']
 
 // Sistema de Gestión Integral — documentos y canales requeridos por dirección
 const SGI_ITEMS = [
   {
-    icon: '📄',
+    icon: '',
     title: 'Política del Sistema de Gestión Integral',
     desc: 'Nuestros compromisos de calidad, seguridad, salud y protección ambiental.',
     href: '/sspa/politica-sgi.pdf',
@@ -23,7 +24,7 @@ const SGI_ITEMS = [
     pending: true,
   },
   {
-    icon: '🏅',
+    icon: '',
     title: 'Certificaciones',
     desc: 'Certificaciones y reconocimientos vigentes de nuestro sistema de gestión.',
     href: '/sspa/certificaciones.pdf',
@@ -31,7 +32,7 @@ const SGI_ITEMS = [
     pending: true,
   },
   {
-    icon: '⚖️',
+    icon: '',
     title: 'Código de Ética',
     desc: 'Principios de conducta que rigen nuestra relación con clientes, proveedores y colaboradores.',
     href: '/sspa/codigo-de-etica.pdf',
@@ -39,7 +40,7 @@ const SGI_ITEMS = [
     pending: true,
   },
   {
-    icon: '✉️',
+    icon: '',
     title: 'Buzón de Dudas y Sugerencias',
     desc: 'Un canal confidencial para reportar dudas, quejas o sugerencias sobre nuestras operaciones.',
     href: '#contacto',
@@ -47,13 +48,102 @@ const SGI_ITEMS = [
     scrollTarget: '#contacto',
   },
   {
-    icon: '📞',
+    icon: '',
     title: 'Canales de Recepción',
     desc: 'Tel. +52 (833) 369 0070 · ventas@sumimsa.com.mx',
     href: 'mailto:ventas@sumimsa.com.mx',
     cta: 'Escribir correo',
   },
 ]
+
+const BENEFICIOS = [
+  ['Seguridad Industrial',   'Todos los incidentes se pueden y deben prevenir. EPP certificado NOM-017-STPS y ANSI/ISEA.'],
+  ['Salud Ocupacional',      'Capacitaciones periódicas sobre riesgos industriales, ergonomía y primeros auxilios.'],
+  ['Protección Ambiental',   'Operaciones diseñadas para minimizar el impacto ambiental con proveedores sostenibles.'],
+  ['Mejora Continua',        'Política SSPA revisada periódicamente para incorporar las mejores prácticas de la industria.'],
+  ['Responsabilidad Compartida', 'Cada colaborador, sin importar su nivel, es responsable de las condiciones seguras de trabajo.'],
+  ['Cero Incidentes',        'No es una meta: es nuestro estándar. Prevenimos la contaminación y promovemos el desarrollo sostenible.'],
+]
+
+const SPECS = [
+  ['NOM-017-STPS',       'Todo nuestro EPP cumple con la norma oficial mexicana vigente para equipos de protección personal.'],
+  ['ANSI/ISEA',          'Herramientas y equipos certificados bajo estándares internacionales ANSI e ISEA.'],
+  ['Capacitación Gratuita', 'Programa de capacitación en seguridad industrial para clientes, sin costo adicional.'],
+  ['Auditorías en Sitio','Auditorías de seguridad en las instalaciones del cliente, disponibles para contratos corporativos.'],
+]
+
+function SSPAShowroom({ isOpen, onClose }) {
+  useEffect(() => {
+    document.body.style.overflow = isOpen ? 'hidden' : ''
+    return () => { document.body.style.overflow = '' }
+  }, [isOpen])
+
+  useEffect(() => {
+    const handler = (e) => { if (e.key === 'Escape' && isOpen) onClose() }
+    window.addEventListener('keydown', handler)
+    return () => window.removeEventListener('keydown', handler)
+  }, [isOpen, onClose])
+
+  const scrollContacto = () => {
+    onClose()
+    setTimeout(() => {
+      const el = document.querySelector('#contacto')
+      if (el) window.scrollTo({ top: el.offsetTop - 68, behavior: 'smooth' })
+    }, 460)
+  }
+
+  return (
+    <div className={`showroom-overlay${isOpen ? ' open' : ''}`}>
+      <button className="showroom-close" onClick={onClose} aria-label="Cerrar">✕</button>
+      <div className="showroom-scroll">
+        <div className="showroom-hero" style={{ backgroundImage: `url(https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=1400&q=80&fit=crop)` }}>
+          <div className="showroom-hero-overlay" />
+          <div className="showroom-hero-content">
+            <div className="showroom-eyebrow">
+              <span className="showroom-eyebrow-num">SSPA</span> — Política de Seguridad
+            </div>
+            <h2 className="showroom-title">Seguridad como Valor Fundamental</h2>
+            <p className="showroom-lead">En SUMIMSA, la seguridad no es un requisito regulatorio — es un valor que forma parte del ADN de nuestra empresa. Cero incidentes no es una meta: es nuestro estándar.</p>
+          </div>
+        </div>
+
+        <div className="showroom-body">
+          <div className="showroom-subhead">Nuestros compromisos</div>
+          <div className="sw-benefits">
+            {BENEFICIOS.map(([titulo, desc]) => (
+              <div key={titulo} className="sw-benefit" style={{'--sw-accent': '#f5c400'}}>
+                <span className="sw-benefit-check" style={{background:'#f5c400', color:'var(--navy)'}}>✓</span>
+                <span><strong style={{display:'block', marginBottom:2, color:'var(--navy)'}}>{titulo}</strong>{desc}</span>
+              </div>
+            ))}
+          </div>
+
+          <div className="showroom-subhead">Estándares y programas</div>
+          <div className="showroom-specs">
+            {SPECS.map(([titulo, desc]) => (
+              <div key={titulo} className="showroom-spec">
+                <div className="showroom-spec-dot" style={{background:'#f5c400'}} />
+                <div>
+                  <h5>{titulo}</h5>
+                  <p>{desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="showroom-cta-wrap">
+            <p style={{color:'var(--muted)', fontSize:'.82rem', margin:'0 auto 16px', maxWidth:520}}>
+              ¿Tienes dudas sobre nuestras políticas de seguridad? Nuestro equipo técnico te asesora sin costo.
+            </p>
+            <button className="showroom-cta" onClick={scrollContacto}>
+              Contactar un especialista →
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
 
 export default function SSPA() {
   const [openSSPA, setOpenSSPA] = useState(false)
@@ -63,10 +153,10 @@ export default function SSPA() {
       <div className="container">
         <div className="reveal">
           <div className="eyebrow">
-            <div className="eyebrow-line" style={{background:'var(--green)'}} />
-            <span className="eyebrow-text" style={{color:'var(--green)'}}>Política SSPA</span>
+            <div className="eyebrow-line" style={{background:'#f5c400'}} />
+            <span className="eyebrow-text" style={{color:'#f5c400'}}>Política SSPA</span>
           </div>
-          <h2 className="s-h2">Seguridad.<br /><em style={{color:'var(--green)'}}>Sin excepciones.</em></h2>
+          <h2 className="s-h2">Seguridad.<br /><em style={{color:'#f5c400'}}>Sin excepciones.</em></h2>
         </div>
 
         <div className="sspa-layout reveal d1">
@@ -85,9 +175,8 @@ export default function SSPA() {
               </div>
             ))}
             <div className="sspa-icons-grid">
-              {ICONS.map(([ic,lbl]) => (
+              {ICONS.map((lbl) => (
                 <div key={lbl} className="sspa-icon-item">
-                  <span style={{fontSize:'.95rem',flexShrink:0}}>{ic}</span>
                   <span style={{fontSize:'.7rem',color:'var(--muted)',lineHeight:1.3}}>{lbl}</span>
                 </div>
               ))}
@@ -150,30 +239,7 @@ export default function SSPA() {
 
       <style>{`@keyframes fillw{from{width:0}}`}</style>
 
-      <DetailPage
-        isOpen={openSSPA}
-        onClose={() => setOpenSSPA(false)}
-        eyebrow="Política SSPA"
-        title="Seguridad como <em>Valor Fundamental</em>"
-        lead="En SUMIMSA, la seguridad no es un requisito regulatorio — es un valor que forma parte del ADN de nuestra empresa. Cero incidentes no es una meta: es nuestro estándar."
-      >
-        <img className="dp-img" src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=1200&q=80&fit=crop" alt="Seguridad Industrial SUMIMSA" />
-        <h3>Seguridad Industrial</h3>
-        <p>Todos nuestros productos de EPP cumplen con las normas NOM-017-STPS y estándares ANSI/ISEA. Nuestro equipo técnico está certificado para asesorar en la selección del equipo de protección adecuado para cada aplicación y riesgo específico.</p>
-        <p>La Política SSPA de SUMIMSA establece que todos los incidentes se pueden y se deben prevenir. Cada colaborador, sin importar su nivel jerárquico, es responsable de mantener y promover las condiciones seguras de trabajo.</p>
-        <h3>Salud Ocupacional</h3>
-        <p>Promovemos activamente la cultura de salud ocupacional entre nuestros clientes y colaboradores, con capacitaciones periódicas sobre riesgos industriales, ergonomía y primeros auxilios.</p>
-        <h3>Protección Ambiental</h3>
-        <p>Nuestras operaciones están diseñadas para minimizar el impacto ambiental. Trabajamos con proveedores comprometidos con prácticas sostenibles y fomentamos la economía circular en el manejo de herramientas y equipos.</p>
-        <h3>Mejora Continua</h3>
-        <p>Revisamos y actualizamos nuestra política SSPA de forma periódica para incorporar las mejores prácticas de la industria y las lecciones aprendidas de nuestras operaciones.</p>
-        <div className="dp-grid">
-          <div className="dp-feature"><h4>NOM-017-STPS</h4><p>Todo nuestro EPP cumple con la norma oficial mexicana vigente para equipos de protección personal.</p></div>
-          <div className="dp-feature"><h4>ANSI/ISEA</h4><p>Herramienta y equipos certificados bajo estándares internacionales ANSI e ISEA.</p></div>
-          <div className="dp-feature"><h4>Capacitación Gratuita</h4><p>Programa de capacitación en seguridad industrial para clientes, sin costo adicional.</p></div>
-          <div className="dp-feature"><h4>Auditorías en Sitio</h4><p>Auditorías de seguridad en las instalaciones del cliente disponibles para contratos corporativos.</p></div>
-        </div>
-      </DetailPage>
+      <SSPAShowroom isOpen={openSSPA} onClose={() => setOpenSSPA(false)} />
     </section>
   )
 }

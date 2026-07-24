@@ -5,12 +5,10 @@ import Ticker       from './components/Ticker'
 import Nosotros     from './sections/Nosotros'
 import Servicios    from './sections/Servicios'
 import Sectores     from './sections/Sectores'
-import Esquemas     from './sections/Esquemas'
 import Proveedores  from './components/Proveedores'
 import CasosExito   from './components/CasosExito'
 import Proyectos    from './sections/Proyectos'
 import Tullbox      from './sections/Tullbox'
-import Tecnologia   from './sections/Tecnologia'
 import Noticias     from './sections/Noticias'
 import Blog         from './sections/Blog'
 import Catalogos    from './sections/Catalogos'
@@ -45,10 +43,8 @@ export default function App() {
         <CasosExito />
         <Servicios />
         <Sectores />
-        <Esquemas />
         <Proyectos />
         <Tullbox />
-        <Tecnologia />
         <Noticias />
         <Blog />
         <Catalogos />

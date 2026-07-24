@@ -1,0 +1,86 @@
+import { Suspense, useRef, useEffect, useState } from 'react'
+import { Canvas, useFrame } from '@react-three/fiber'
+import { OrbitControls, useGLTF, Html, Stage } from '@react-three/drei'
+import * as THREE from 'three'
+import './ModelViewer.css'
+
+function Model({ src, hotspots, activeHotspot, onHotspotSelect }) {
+  const { scene } = useGLTF(src)
+  const ref = useRef()
+  const [box, setBox] = useState(null)
+
+  useEffect(() => {
+    setBox(new THREE.Box3().setFromObject(scene))
+  }, [scene])
+
+  useFrame((_, delta) => {
+    if (ref.current && activeHotspot == null) ref.current.rotation.y += delta * 0.35
+  })
+
+  const size = box ? box.getSize(new THREE.Vector3()) : null
+
+  return (
+    <group ref={ref}>
+      <primitive object={scene} />
+      {box && hotspots?.map((h, i) => (
+        <Html
+          key={i}
+          position={[
+            box.min.x + h.fx * size.x,
+            box.min.y + h.fy * size.y,
+            box.min.z + (h.fz ?? 0.5) * size.z,
+          ]}
+          center
+          distanceFactor={6}
+          style={{ pointerEvents: 'auto' }}
+        >
+          <button
+            type="button"
+            className={`mv-hotspot${activeHotspot === i ? ' active' : ''}`}
+            onClick={(e) => { e.stopPropagation(); onHotspotSelect?.(activeHotspot === i ? null : i) }}
+            title={h.label}
+          >
+            {i + 1}
+          </button>
+        </Html>
+      ))}
+    </group>
+  )
+}
+
+export default function ModelViewer({ src, interactive = true, hotspots, activeHotspot, onHotspotSelect }) {
+  return (
+    <div className="model-viewer">
+      <Canvas
+        dpr={[1, 1.75]}
+        camera={{ position: [2.2, 1.6, 2.6], fov: 40 }}
+        gl={{ antialias: true, preserveDrawingBuffer: true }}
+      >
+        <color attach="background" args={['#eef1f5']} />
+        <ambientLight intensity={0.7} />
+        <directionalLight position={[4, 6, 4]} intensity={1.4} />
+        <directionalLight position={[-4, 2, -3]} intensity={0.5} color="#8fb8ff" />
+
+        <Suspense fallback={null}>
+          <Stage environment="city" intensity={0.4} adjustCamera={1.3}>
+            <Model src={src} hotspots={hotspots} activeHotspot={activeHotspot} onHotspotSelect={onHotspotSelect} />
+          </Stage>
+        </Suspense>
+
+        {interactive && (
+          <OrbitControls
+            enablePan
+            screenSpacePanning
+            panSpeed={0.8}
+            enableZoom
+            zoomToCursor
+            minDistance={0.8}
+            maxDistance={8}
+            enableDamping
+            dampingFactor={0.08}
+          />
+        )}
+      </Canvas>
+    </div>
+  )
+}

@@ -1,0 +1,18 @@
+.rig-showroom {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  overflow: hidden;
+  touch-action: none;
+  box-shadow: 0 0 0 6px #fff, 0 12px 40px rgba(13, 30, 74, .25);
+}
+
+.rig-showroom canvas {
+  display: block;
+  border-radius: 50%;
+  cursor: grab;
+}
+
+.rig-showroom canvas:active {
+  cursor: grabbing;
+}

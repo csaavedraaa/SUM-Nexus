@@ -300,14 +300,14 @@ export default function CatalogoViewer({ catalogo, onClose }) {
         {/* Error */}
         {fase === 'error' && (
           <div className="cv-estado">
-            <span style={{ fontSize: '2.2rem' }}>⚠️</span>
+            <span style={{ fontSize: '2.2rem', fontWeight: 700, color: '#f47920' }}>!</span>
             <p className="cv-error-msg">No se pudo cargar el catálogo.</p>
             {errorMsg && <code className="cv-error-code">{errorMsg}</code>}
             <p className="cv-error-hint">
               Verifica que el archivo esté en <code>public/catalogos/{catalogo.pdf.split('/').pop()}</code>
             </p>
             <div className="cv-error-actions">
-              <button className="cv-ctrl-btn" onClick={init}>🔄 Reintentar</button>
+              <button className="cv-ctrl-btn" onClick={init}>Reintentar</button>
               <a href={catalogo.pdf} target="_blank" rel="noopener noreferrer" className="cv-ctrl-btn">Abrir PDF ↗</a>
             </div>
           </div>
@@ -317,7 +317,7 @@ export default function CatalogoViewer({ catalogo, onClose }) {
         <div className={`cv-book-area${fase !== 'listo' ? ' cv-oculto' : ''}`}>
           {/* Hint táctil — solo en móvil */}
           <div className="cv-pinch-hint">
-            <span>👌 Pellizca para hacer zoom</span>
+            <span>Pellizca para hacer zoom</span>
           </div>
           <div className="cv-book-scroll">
             <div ref={wrapRef} className="cv-book-wrap">

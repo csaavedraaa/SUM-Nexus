@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TULLBOX — Selecciona tu Unidad</title>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;600;700&family=Space+Mono:wght@400;700&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy:  #0d1e4a;
+      --cyan:  #009bdb;
+      --amber: #f5c400;
+      --muted: rgba(255,255,255,.42);
+      --border: rgba(255,255,255,.12);
+    }
+    html, body { height: 100%; }
+    body {
+      background: #050c20;
+      font-family: 'Inter', sans-serif;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── GRID DE FONDO ── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0; z-index: 0;
+      background-image:
+        linear-gradient(rgba(0,155,219,.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,155,219,.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+    }
+
+    /* ── HEADER ── */
+    header {
+      position: relative; z-index: 10;
+      padding: 36px 48px 0;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .logo { display: flex; align-items: baseline; }
+    .logo-t { font-family: 'Oswald', sans-serif; font-size: 2rem; font-weight: 700; color: #fff; letter-spacing: -0.5px; }
+    .logo-b { font-family: 'Oswald', sans-serif; font-size: 2rem; font-weight: 700; color: var(--amber); letter-spacing: -0.5px; }
+    .logo-sub { margin-left: 14px; font-family: 'Space Mono', monospace; font-size: .55rem; color: var(--muted); letter-spacing: 2.5px; text-transform: uppercase; line-height: 1.4; }
+    .header-badge {
+      font-family: 'Space Mono', monospace; font-size: .55rem;
+      color: var(--muted); letter-spacing: 2px; text-transform: uppercase;
+      border: 1px solid var(--border); padding: 7px 14px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .header-badge::before {
+      content: '';
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--cyan);
+      box-shadow: 0 0 6px var(--cyan);
+      animation: blink 2s ease infinite;
+    }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.3} }
+
+    /* ── HERO TEXT ── */
+    .hero {
+      position: relative; z-index: 10;
+      text-align: center;
+      padding: 72px 24px 40px;
+    }
+    .hero-eyebrow {
+      font-family: 'Space Mono', monospace; font-size: .6rem;
+      color: var(--amber); letter-spacing: 4px; text-transform: uppercase;
+      margin-bottom: 20px;
+      display: flex; align-items: center; justify-content: center; gap: 12px;
+    }
+    .hero-eyebrow::before, .hero-eyebrow::after {
+      content: ''; display: inline-block; width: 32px; height: 1px; background: var(--amber); opacity: .5;
+    }
+    .hero-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(2.4rem, 6vw, 4.2rem);
+      font-weight: 700; text-transform: uppercase;
+      letter-spacing: -1.5px; line-height: 1.05;
+      color: #fff; margin-bottom: 16px;
+    }
+    .hero-title em { color: var(--amber); font-style: normal; }
+    .hero-lead {
+      font-size: .9rem; color: var(--muted);
+      max-width: 480px; margin: 0 auto; line-height: 1.8;
+    }
+
+    /* ── CARDS ── */
+    .cards {
+      position: relative; z-index: 10;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      max-width: 1060px; margin: 0 auto;
+      padding: 0 24px 80px;
+      flex: 1;
+    }
+
+    .card {
+      position: relative; overflow: hidden;
+      background: rgba(255,255,255,.025);
+      border: 1px solid var(--border);
+      cursor: pointer;
+      text-decoration: none; color: inherit;
+      display: block;
+      transition: border-color .3s, background .3s;
+      clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 0 100%);
+    }
+    .card:hover { border-color: rgba(0,155,219,.4); background: rgba(0,155,219,.04); }
+    .card.amber:hover { border-color: rgba(245,196,0,.4); background: rgba(245,196,0,.03); }
+
+    /* Imagen de fondo */
+    .card-bg {
+      position: absolute; inset: 0;
+      background-size: cover; background-position: center;
+      transition: transform .6s ease, filter .4s;
+      filter: brightness(.25) saturate(.5);
+    }
+    .card:hover .card-bg {
+      transform: scale(1.04);
+      filter: brightness(.35) saturate(.7);
+    }
+
+    /* Gradiente sobre imagen */
+    .card-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(5,12,32,.85) 0%, rgba(5,12,32,.5) 100%);
+    }
+
+    /* Línea de acento lateral */
+    .card-accent {
+      position: absolute; top: 0; left: 0;
+      width: 3px; height: 100%;
+      background: var(--cyan);
+      transform: scaleY(0); transform-origin: top;
+      transition: transform .35s cubic-bezier(.22,1,.36,1);
+    }
+    .card.amber .card-accent { background: var(--amber); }
+    .card:hover .card-accent { transform: scaleY(1); }
+
+    .card-content {
+      position: relative; z-index: 2;
+      padding: 48px 44px 44px;
+      display: flex; flex-direction: column; justify-content: flex-end;
+      min-height: 440px;
+    }
+
+    .card-number {
+      font-family: 'Space Mono', monospace; font-size: .55rem;
+      color: var(--muted); letter-spacing: 3px; text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+
+    .card-icon {
+      font-size: 2.6rem; margin-bottom: 20px;
+      transition: transform .3s;
+    }
+    .card:hover .card-icon { transform: scale(1.15) rotate(-4deg); }
+    .card-content--split {
+      flex-direction: row;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .card-content--split .card-text {
+      display: flex; flex-direction: column; justify-content: flex-end;
+      flex: 1; min-width: 0;
+    }
+    .card-content--split .card-icon {
+      flex-shrink: 0;
+      align-self: flex-end;
+    }
+    .card-icon img {
+      width: 180px; height: auto;
+      display: block;
+      filter: drop-shadow(0 6px 20px rgba(0,155,219,.45));
+    }
+
+    .card-tag {
+      font-family: 'Space Mono', monospace; font-size: .55rem;
+      color: var(--cyan); letter-spacing: 3px; text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .card.amber .card-tag { color: var(--amber); }
+
+    .card-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+      font-weight: 700; text-transform: uppercase;
+      letter-spacing: -.5px; line-height: 1.05;
+      color: #fff; margin-bottom: 14px;
+    }
+
+    .card-desc {
+      font-size: .82rem; color: rgba(255,255,255,.5);
+      line-height: 1.75; margin-bottom: 28px;
+      max-width: 300px;
+    }
+
+    .card-pills {
+      display: flex; flex-wrap: wrap; gap: 6px;
+      margin-bottom: 28px;
+    }
+    .pill {
+      font-family: 'Space Mono', monospace; font-size: .52rem;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      border: 1px solid var(--border); color: rgba(255,255,255,.4);
+      padding: 4px 10px;
+    }
+    .card.cyan .pill-accent { border-color: rgba(0,155,219,.4); color: var(--cyan); }
+    .card.amber .pill-accent { border-color: rgba(245,196,0,.4); color: var(--amber); }
+
+    .card-cta {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-family: 'Oswald', sans-serif; font-size: .82rem;
+      font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
+      color: #fff; background: rgba(0,155,219,.15);
+      border: 1px solid rgba(0,155,219,.35); padding: 12px 22px;
+      transition: background .2s, border-color .2s, gap .2s;
+      width: fit-content;
+    }
+    .card.amber .card-cta { background: rgba(245,196,0,.1); border-color: rgba(245,196,0,.35); }
+    .card:hover .card-cta { gap: 14px; }
+    .card.cyan:hover .card-cta { background: rgba(0,155,219,.25); border-color: var(--cyan); }
+    .card.amber:hover .card-cta { background: rgba(245,196,0,.18); border-color: var(--amber); }
+
+    /* ── FOOTER ── */
+    footer {
+      position: relative; z-index: 10;
+      text-align: center; padding: 0 24px 32px;
+    }
+    .footer-text {
+      font-family: 'Space Mono', monospace; font-size: .52rem;
+      color: rgba(255,255,255,.18); letter-spacing: 2px; text-transform: uppercase;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 760px) {
+      header { padding: 24px 24px 0; }
+      .hero { padding: 48px 20px 28px; }
+      .cards { grid-template-columns: 1fr; padding: 0 16px 60px; }
+      .card-content { min-height: 320px; padding: 32px 28px 28px; }
+      .header-badge { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="logo">
+    <span class="logo-t">TULL</span><span class="logo-b">BOX</span>
+    <span class="logo-sub">Experiencia Inmersiva<br/>360°</span>
+  </div>
+  <div class="header-badge">Tour virtual activo</div>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">Selecciona una unidad</div>
+  <h1 class="hero-title">Explora el interior<br/><em>de tu TULLBOX</em></h1>
+  <p class="hero-lead">Navega en 360° por el interior de nuestras unidades. Descubre cada herramienta, cajón y estación de trabajo disponible.</p>
+</div>
+
+<!-- CARDS -->
+<div class="cards">
+
+  <!-- Unidad Marítima -->
+  <a href="/tullbox-tour.html" class="card cyan">
+    <div class="card-bg" style="background-image: url('/img/tullbox-closed.png')"></div>
+    <div class="card-overlay"></div>
+    <div class="card-accent"></div>
+    <div class="card-content card-content--split">
+      <div class="card-text">
+        <div class="card-number">01 / 02</div>
+        <div class="card-tag">Contenedor marino</div>
+        <h2 class="card-title">Unidad<br/>Marítima</h2>
+        <p class="card-desc">Contenedor especializado para operaciones en puertos y plataformas offshore. Cajones Snap-on, equipo de soldadura, hidráulica y rodamientos SKF.</p>
+        <div class="card-pills">
+          <span class="pill pill-accent">Snap-on</span>
+          <span class="pill pill-accent">Enerpac</span>
+          <span class="pill pill-accent">SKF</span>
+          <span class="pill">Multi-escena</span>
+        </div>
+        <div class="card-cta">Entrar al tour →</div>
+      </div>
+      <div class="card-icon"><img src="/img/contenedor-marino.png" alt="Unidad Marítima" /></div>
+    </div>
+  </a>
+
+  <!-- Unidad Terrestre -->
+  <a href="/tullbox-terrestre.html" class="card amber">
+    <div class="card-bg" style="background-image: url('/img/tullbox-terrestre.png')"></div>
+    <div class="card-overlay"></div>
+    <div class="card-accent"></div>
+    <div class="card-content">
+      <div class="card-number">02 / 02</div>
+      <div class="card-icon">🏗️</div>
+      <div class="card-tag">Contenedor terrestre</div>
+      <h2 class="card-title">Unidad<br/>Terrestre</h2>
+      <p class="card-desc">Unidad para instalaciones fijas e industria en tierra. Milwaukee, Snap-on, estación de gestión, almacenaje modular y estantería de carga pesada.</p>
+      <div class="card-pills">
+        <span class="pill pill-accent">Milwaukee</span>
+        <span class="pill pill-accent">Snap-on</span>
+        <span class="pill">Estación PC</span>
+        <span class="pill">6 puntos</span>
+      </div>
+      <div class="card-cta">Entrar al tour →</div>
+    </div>
+  </a>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p class="footer-text">SUMIMSA · TULLBOX Virtual Experience · Experiencia de inmersión 360°</p>
+</footer>
+
+</body>
+</html>

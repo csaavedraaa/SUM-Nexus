@@ -1,4 +1,4 @@
-import './Proveedores.css'
+import LogoTicker from './LogoTicker'
 
 const MARCAS = [
   'american-block', 'derrick', 'gd', 'katch-kan', 'hmh', 'southwest', 'samson', 'wom',
@@ -9,24 +9,5 @@ const MARCAS = [
 ]
 
 export default function Proveedores({ label }) {
-  const doubled = [...MARCAS, ...MARCAS]
-  return (
-    <div className="prov-wrap">
-      {label && <div className="prov-label">{label}</div>}
-      <div className="prov-strip">
-        <div className="prov-track">
-          {doubled.map((slug, i) => (
-            <div key={i} className="prov-item">
-              <img
-                className="prov-logo"
-                src={`/logos/marcas/${slug}.png`}
-                alt={slug.replace(/-/g, ' ')}
-                loading="lazy"
-              />
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  )
+  return <LogoTicker items={MARCAS} basePath="/logos/marcas" label={label} speed={45} />
 }

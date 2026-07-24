@@ -6,7 +6,11 @@ export const NAV_LINKS = [
       { href: '#nosotros', label: 'Resumen' },
       { href: '#sspa',     label: 'SSPA' },
     ] },
-  { href: '#servicios', label: 'Servicios'        },
+  { href: '#servicios', label: 'Servicios', children: [
+      { href: '#servicios', label: 'Soluciones' },
+      { href: '#esquemas',  label: 'Esquemas'   },
+      { href: '#sectores',  label: 'Sectores'   },
+    ] },
   { href: '#proyectos', label: 'Proyectos'        },
   { href: '#tullbox',   label: 'Proyecto Tullbox' },
   { href: '#catalogs',  label: 'Catálogo'         },

@@ -1,24 +1,186 @@
-.esq-grid {
-  display: grid; grid-template-columns: repeat(3,1fr);
-  gap: 1px; background: rgba(255,255,255,.08); margin-top: 52px;
+/* Sección — fondo con imagen del stand SUMIMSA */
+.esq-section {
+  position: relative;
+  padding-bottom: 56px;
+  background:
+    url('/img/fondo-esquemas.png') center 20% / cover no-repeat;
+  color: #fff;
+  overflow: hidden;
 }
-.esq-card {
-  background: rgba(255,255,255,.04); display: flex;
-  flex-direction: column; position: relative; overflow: hidden;
-  transition: background .3s;
+.esq-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 900px 500px at 50% 0%, rgba(0,155,219,.12), transparent 65%),
+    linear-gradient(180deg, rgba(10,24,56,.92) 0%, rgba(13,30,74,.88) 50%, rgba(10,24,56,.92) 100%);
+  pointer-events: none;
+  z-index: 0;
 }
-.esq-card:hover { background: rgba(255,255,255,.07); }
-.esq-img-wrap { width:100%; height:140px; overflow:hidden; position:relative; flex-shrink:0; }
-.esq-img-wrap img { width:100%; height:100%; object-fit:cover; transition:transform .6s,filter .4s; filter:brightness(.5); }
-.esq-card:hover .esq-img-wrap img { transform:scale(1.07); filter:brightness(.35); }
-.esq-img-overlay { position:absolute; inset:0; background:linear-gradient(to bottom,transparent 20%,rgba(13,30,74,.85) 100%); }
-.esq-img-num { position:absolute; top:12px; left:16px; font-family:var(--font-mono); font-size:.6rem; color:rgba(255,255,255,.4); letter-spacing:3px; }
-.esq-img-icon { position:absolute; bottom:12px; right:14px; width:36px; height:36px; border:1px solid rgba(255,255,255,.2); display:flex; align-items:center; justify-content:center; font-size:1.1rem; background:rgba(0,0,0,.25); backdrop-filter:blur(4px); transition:border-color .3s; }
-.esq-card:hover .esq-img-icon { border-color:rgba(0,155,219,.6); }
-.esq-body { padding:22px 22px 28px; flex:1; display:flex; flex-direction:column; gap:8px; }
-.esq-title { font-family:var(--font-display); font-size:1rem; font-weight:700; text-transform:uppercase; letter-spacing:.5px; color:#fff; }
-.esq-desc { font-size:.81rem; color:rgba(255,255,255,.45); line-height:1.7; flex:1; }
-.esq-bar { position:absolute; bottom:0; left:0; right:0; height:2px; width:0; background:var(--cyan); transition:width .5s; }
-.esq-card:hover .esq-bar { width:100%; }
-@media(max-width:1100px){ .esq-grid{ grid-template-columns:1fr 1fr; } }
-@media(max-width:700px){ .esq-grid{ grid-template-columns:1fr; } }
+.esq-section > * { position: relative; z-index: 1; }
+
+/* Encabezado compacto, alineado a la izquierda */
+.esq-header {
+  max-width: 620px;
+  text-align: left;
+}
+.esq-header .s-h2 { margin-bottom: 14px; color: #fff; }
+.esq-header .s-h2 em { color: var(--cyan2); }
+.esq-header .s-lead { max-width: 520px; margin: 0; }
+
+/* Distribución orbital: filas conectadas a los lados, hub al centro */
+.esq-orbit {
+  display: grid;
+  grid-template-columns: 1fr minmax(300px, 420px) 1fr;
+  align-items: center;
+  gap: 0 8px;
+  max-width: 1280px;
+  margin: 72px auto 0;
+}
+
+.esq-col { display: flex; flex-direction: column; gap: 22px; }
+.esq-col-left  { align-items: stretch; }
+.esq-col-right { align-items: stretch; }
+
+/* Fila = tarjeta + línea punteada + badge circular */
+.esq-row {
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+.esq-row-left  { justify-content: flex-end; }
+.esq-row-right { justify-content: flex-start; }
+
+.esq-item {
+  all: unset;
+  cursor: pointer;
+  box-sizing: border-box;
+  display: flex; align-items: flex-start; gap: 12px;
+  width: 100%;
+  max-width: 280px;
+  padding: 14px 16px;
+  background: rgba(255,255,255,.03);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 10px;
+  transition: background .25s, border-color .25s, transform .25s, box-shadow .25s;
+}
+.esq-row-left .esq-item  { text-align: right; flex-direction: row-reverse; }
+
+.esq-row:hover .esq-item,
+.esq-row.active .esq-item {
+  background: rgba(255,255,255,.06);
+  border-color: var(--esq-accent, var(--cyan2));
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px -8px rgba(0,196,240,.35);
+}
+
+.esq-item-num {
+  font-family: var(--font-display); font-size: 1.1rem; font-weight: 700;
+  color: var(--esq-accent, var(--cyan)); line-height: 1; flex-shrink: 0; min-width: 26px;
+  transition: color .25s, text-shadow .25s;
+}
+.esq-row:hover .esq-item-num,
+.esq-row.active .esq-item-num { text-shadow: 0 0 12px var(--esq-accent, var(--cyan2)); }
+
+.esq-item-body { display: flex; flex-direction: column; gap: 3px; }
+.esq-item-title {
+  font-family: var(--font-display); font-size: .82rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .5px; color: #fff;
+}
+.esq-item-desc { font-size: .72rem; color: rgba(255,255,255,.45); line-height: 1.5; }
+
+/* Línea punteada de conexión hacia el hub */
+.esq-connector {
+  flex: 1 1 32px;
+  min-width: 20px;
+  max-width: 48px;
+  height: 0;
+  border-top: 2px dotted rgba(255,255,255,.22);
+  transition: border-color .25s;
+}
+.esq-row:hover .esq-connector,
+.esq-row.active .esq-connector { border-top-color: var(--esq-accent, var(--cyan2)); }
+
+/* Punto que se ilumina al conectar la tarjeta con el hub */
+.esq-badge {
+  flex-shrink: 0;
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.3);
+  box-shadow: 0 0 0 4px rgba(255,255,255,.03);
+  transition: background .25s, box-shadow .25s, transform .25s;
+}
+.esq-row:hover .esq-badge,
+.esq-row.active .esq-badge {
+  background: var(--esq-accent, var(--cyan2));
+  box-shadow: 0 0 16px 3px var(--esq-accent, var(--cyan2));
+  transform: scale(1.5);
+}
+
+/* Hub central */
+.esq-hub {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  display: flex; align-items: center; justify-content: center;
+}
+
+/* Animated SVG hub */
+.esq-hub-svg {
+  width: 92%; height: 92%;
+  overflow: visible;
+  position: relative; z-index: 1;
+}
+
+/* Ring rotation — transform-origin: 0 0 works because elements
+   live inside translate(160,160), so local (0,0) = hub center */
+.esq-svg-ring {
+  transform-origin: 0 0;
+}
+.esq-svg-ring-outer { animation: esq-spin-cw  35s linear infinite; }
+.esq-svg-ring-mid   { animation: esq-spin-ccw 22s linear infinite; }
+.esq-svg-ring-inner { animation: esq-spin-cw  50s linear infinite; }
+.esq-svg-radar      { animation: esq-spin-cw   8s linear infinite; }
+
+/* Core glow pulse */
+.esq-svg-pulse { animation: esq-pulse 3s ease-in-out infinite; }
+
+/* Center hexagon shimmer */
+.esq-svg-hex { animation: esq-hex-shimmer 4.5s ease-in-out infinite; }
+
+/* Active node halo */
+.esq-svg-node-glow { animation: esq-node-halo 1s ease-in-out infinite; }
+
+@keyframes esq-spin-cw  { to { transform: rotate(360deg);  } }
+@keyframes esq-spin-ccw { to { transform: rotate(-360deg); } }
+
+@keyframes esq-pulse {
+  0%, 100% { opacity: .45; }
+  50%       { opacity: .9;  }
+}
+
+@keyframes esq-hex-shimmer {
+  0%, 100% { opacity: .75; }
+  50%       { opacity: 1;   }
+}
+
+@keyframes esq-node-halo {
+  0%, 100% { opacity: .15; transform: scale(1);    }
+  50%       { opacity: .35; transform: scale(1.45); }
+}
+
+/* Mascota flotante */
+.esq-svg-mascot { animation: esq-mascot-float 3.5s ease-in-out infinite; }
+
+@keyframes esq-mascot-float {
+  0%, 100% { transform: translateY(0px);  }
+  50%       { transform: translateY(-7px); }
+}
+
+@media (max-width: 960px) {
+  .esq-orbit { grid-template-columns: 1fr; max-width: 420px; gap: 40px; }
+  .esq-row-left, .esq-row-right { justify-content: flex-start; }
+  .esq-row-left .esq-item { flex-direction: row; text-align: left; }
+  .esq-item { max-width: none; }
+  .esq-hub { order: -1; max-width: 340px; margin: 0 auto; }
+}

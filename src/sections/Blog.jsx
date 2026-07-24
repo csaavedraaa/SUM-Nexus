@@ -13,6 +13,25 @@ const ARTICLES = [
     readTime: '7 min',
     img: 'https://images.unsplash.com/photo-1553413077-190dd305871c?w=900&q=80&fit=crop',
     featured: true,
+    detalle: {
+      lead: 'La planificación de ventas y operaciones en sectores críticos como el petrolero enfrenta retos únicos que no existen en la manufactura convencional.',
+      body: (
+        <>
+          <p>Las ventanas de tiempo son estrechas, los materiales tienen lead times de semanas o meses, y la tolerancia al desabasto es literalmente cero — una plataforma sin herramienta o EPP puede significar la detención de una operación millonaria.</p>
+          <p>En SUMIMSA hemos construido un modelo S&OP adaptado a la realidad del mercado mexicano que integra señales de demanda del cliente, capacidad de entrega, stock de seguridad inteligente y pronósticos basados en histórico de consumo por plataforma y temporada.</p>
+          <h3>¿Por qué falla el S&OP tradicional en Oil & Gas?</h3>
+          <p>Los modelos S&OP diseñados para manufactura asumen demanda relativamente estable y lead times predecibles. En la industria petrolera, ambos supuestos se rompen: la demanda fluctúa con el precio del crudo, las paradas de mantenimiento no siguen calendario, y los proveedores globales imponen mínimos de compra altos con entregas a 8-12 semanas.</p>
+          <h3>Nuestro enfoque: S&OP por horizonte</h3>
+          <p>Dividimos el ciclo en tres horizontes: operacional (0-4 semanas), táctico (1-3 meses) y estratégico (3-12 meses). Cada horizonte tiene su propia rutina de revisión, sus KPIs y sus palancas de ajuste. El resultado: un OTIF mayor al 97% en entregas a plataforma offshore.</p>
+          <div className="dp-grid">
+            <div className="dp-feature"><h4>Stock de Seguridad Dinámico</h4><p>Calculamos el stock mínimo en función de variabilidad de demanda y lead time real, no con fórmulas fijas.</p></div>
+            <div className="dp-feature"><h4>Señales Tempranas</h4><p>Integramos órdenes de mantenimiento programado de nuestros clientes como insumo del plan de demanda.</p></div>
+            <div className="dp-feature"><h4>Multi-ubicación</h4><p>Balanceamos inventario entre nuestras 7 plazas para minimizar quiebres y reducir transferencias de emergencia.</p></div>
+            <div className="dp-feature"><h4>Revisión Semanal</h4><p>Un comité de supply chain revisa excepciones cada lunes. Las decisiones se toman en menos de 48 horas.</p></div>
+          </div>
+        </>
+      ),
+    },
   },
   {
     tag: 'Digitalización',
@@ -24,6 +43,26 @@ const ARTICLES = [
     readTime: '5 min',
     img: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&q=80&fit=crop',
     featured: false,
+    detalle: {
+      lead: 'OTIF, Fill Rate, DIO, Cash-to-Cash Cycle y Perfect Order Rate. Los KPIs que todo director de Supply Chain debe tener en su dashboard.',
+      body: (
+        <>
+          <p>Medir sin claridad es ruido. Estos cinco indicadores te dan una foto precisa de la salud de tu cadena de suministro y te permiten actuar sobre las causas raíz, no los síntomas.</p>
+          <h3>Los 5 KPIs del Supply Chain Industrial</h3>
+          <p><strong>1. OTIF (On Time In Full):</strong> Mide si entregaste completo y a tiempo. SUMIMSA mantiene OTIF mayor al 97% en entregas a plataforma offshore.</p>
+          <p><strong>2. Fill Rate:</strong> Porcentaje de líneas de orden entregadas vs solicitadas. Meta: 98%+. Indica qué tan bien anticipas la demanda.</p>
+          <p><strong>3. DIO (Days Inventory Outstanding):</strong> Días de inventario antes de convertirse en venta. El equilibrio entre disponibilidad y capital invertido.</p>
+          <p><strong>4. Perfect Order Rate:</strong> Órdenes entregadas sin error, a tiempo, completas y bien documentadas. El KPI definitivo de excelencia operativa.</p>
+          <p><strong>5. Cash-to-Cash Cycle:</strong> Tiempo entre que pagas a tu proveedor y cobras a tu cliente. Reducirlo mejora el flujo de caja libre.</p>
+          <h3>¿Cómo medirlos en la práctica?</h3>
+          <p>El error más común es calcularlos manualmente en Excel una vez al mes. Para que sean accionables, necesitas datos en tiempo real o al menos semanales, y una definición consensuada de qué cuenta como "a tiempo" o "completo" en tu operación específica.</p>
+          <div className="dp-grid">
+            <div className="dp-feature"><h4>Frecuencia recomendada</h4><p>OTIF y Fill Rate: semanal. DIO y Cash-to-Cash: mensual. Perfect Order Rate: por ciclo de entrega.</p></div>
+            <div className="dp-feature"><h4>Punto de partida</h4><p>Si aún no mides ninguno, empieza por OTIF. Es el más fácil de entender y el que más impacta la relación con el cliente.</p></div>
+          </div>
+        </>
+      ),
+    },
   },
   {
     tag: 'Industria 4.0',
@@ -35,14 +74,32 @@ const ARTICLES = [
     readTime: '8 min',
     img: 'https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=600&q=80&fit=crop',
     featured: false,
+    detalle: {
+      lead: 'Cómo SUMIMSA implementó sensores, códigos QR y un dashboard en tiempo real para eliminar el extravío de herramienta industrial en campo.',
+      body: (
+        <>
+          <p>El problema era claro: en una planta con más de 200 técnicos, el tiempo promedio para localizar una herramienta era de 45 minutos. El extravío anual de herramienta costosa superaba los $180,000 MXN. Y el inventario en papel se actualizaba... cuando alguien se acordaba.</p>
+          <h3>La solución: Tullbox con IoT</h3>
+          <p>Implementamos un contenedor inteligente (Tullbox) con lectores QR en cada cajón, sensores de presencia en las herramientas de mayor valor, y una app móvil para registro de salida y entrada. El dashboard en tiempo real muestra disponibilidad, ubicación y historial por herramienta.</p>
+          <h3>Resultados a los 3 meses</h3>
+          <p>El tiempo de solicitud se redujo de 45 minutos a menos de 2 minutos. El extravío de herramienta bajó a cero. El ROI del proyecto se alcanzó en 11 semanas gracias al ahorro en reposición y al aumento de productividad del equipo técnico.</p>
+          <div className="dp-grid">
+            <div className="dp-feature"><h4>Sin inversión inicial</h4><p>El modelo Tullbox es por suscripción: el cliente paga una cuota mensual que incluye hardware, software y soporte.</p></div>
+            <div className="dp-feature"><h4>Integración ERP</h4><p>El sistema puede conectarse al ERP del cliente vía API para sincronizar órdenes de trabajo y consumos automáticamente.</p></div>
+            <div className="dp-feature"><h4>Calibración incluida</h4><p>Toda herramienta de medición entregada dentro del Tullbox tiene trazabilidad de calibración incluida.</p></div>
+            <div className="dp-feature"><h4>ROI en &lt;3 meses</h4><p>En el caso documentado, el retorno de inversión se alcanzó en 11 semanas de operación.</p></div>
+          </div>
+        </>
+      ),
+    },
   },
 ]
 
 export default function Blog() {
-  const [openBlog, setOpenBlog] = useState(false)
+  const [openArticle, setOpenArticle] = useState(null)
 
   return (
-    <section id="blog" className="section section-alt">
+    <section id="blog" className="section blog-section">
       <div className="container">
         <div className="reveal">
           <div className="eyebrow">
@@ -57,74 +114,52 @@ export default function Blog() {
         </div>
 
         <div className="blog-grid reveal d1">
-          {ARTICLES.map((a, i) => (
-            <div key={i} className={`blog-card${a.featured ? ' blog-featured' : ''}`}>
-              <div className={`blog-img-wrap${a.featured ? ' featured' : ''}`}>
-                <img src={a.img} alt={a.title} loading="lazy" className="blog-img" />
-                <div className="blog-img-overlay" />
-                <span className="blog-tag-float" style={{ background: a.tagColor }}>
-                  {a.tag}
-                </span>
-              </div>
-              <div className="blog-body">
-                <div className={`blog-title${a.featured ? ' lg' : ''}`}>{a.title}</div>
-                <p className="blog-exc">{a.exc}</p>
-                <div className="blog-meta">
-                  <span className="blog-author">
-                    <span className="blog-avatar">👤</span>
-                    {a.author}
+          {ARTICLES.map((a, i) => a.featured ? (
+            <div key={i} className="blog-hero" onClick={() => setOpenArticle(a)}>
+              <img src={a.img} alt={a.title} loading="lazy" className="blog-hero-img" />
+              <div className="blog-hero-scrim" />
+              <span className="blog-tag-float" style={{ background: a.tagColor }}>{a.tag}</span>
+              <div className="blog-hero-body">
+                <div className="blog-hero-title">{a.title}</div>
+                <p className="blog-hero-exc">{a.exc}</p>
+                <div className="blog-hero-meta">
+                  <span className="blog-avatar">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
                   </span>
-                  <div className="blog-meta-right">
-                    <span className="blog-read">{a.readTime}</span>
-                    <span className="blog-date">{a.date}</span>
-                  </div>
+                  <span><strong>{a.author}</strong> · {a.readTime} de lectura</span>
+                  <span className="blog-hero-date">{a.date}</span>
                 </div>
+                <span className="blog-side-link" style={{ marginTop: 16 }}>Leer más <em>→</em></span>
+              </div>
+            </div>
+          ) : (
+            <div key={i} className="blog-side-card" onClick={() => setOpenArticle(a)}>
+              <img src={a.img} alt={a.title} loading="lazy" className="blog-side-img" />
+              <div className="blog-side-body">
+                <span className="blog-side-tag" style={{ color: a.tagColor }}>{a.tag}</span>
+                <div className="blog-side-title">{a.title}</div>
+                <span className="blog-side-link">Leer más <em>→</em></span>
               </div>
             </div>
           ))}
         </div>
-
-        <div className="ver-mas-wrap reveal d2">
-          <button className="btn-ver-mas" onClick={() => setOpenBlog(true)}>
-            Ver todos los artículos
-          </button>
-        </div>
       </div>
 
-      <DetailPage
-        isOpen={openBlog}
-        onClose={() => setOpenBlog(false)}
-        eyebrow="Conocimiento Industrial"
-        title="Blog &amp; <em>Contenido</em>"
-        lead="Insights sobre Supply Chain, S&OP, digitalización industrial y buenas prácticas en los sectores que atendemos. Conocimiento real de nuestra operación."
-      >
-        <img className="dp-img" src="https://images.unsplash.com/photo-1553413077-190dd305871c?w=1200&q=80&fit=crop" alt="Supply Chain" />
-
-        <h3>S&OP en la Industria Petrolera</h3>
-        <p>La planificación de ventas y operaciones en sectores críticos como el petrolero enfrenta retos únicos que no existen en la manufactura convencional. Las ventanas de tiempo son estrechas, los materiales tienen lead times de semanas o meses, y la tolerancia al desabasto es literalmente cero — una plataforma sin herramienta o EPP puede significar la detención de una operación millonaria.</p>
-        <p>En SUMIMSA hemos construido un modelo S&OP adaptado a la realidad del mercado mexicano que integra señales de demanda del cliente, capacidad de entrega, stock de seguridad inteligente y pronósticos basados en histórico de consumo por plataforma y temporada.</p>
-
-        <h3>Los 5 KPIs del Supply Chain Industrial</h3>
-        <p><strong>1. OTIF (On Time In Full):</strong> Mide si entregaste completo y a tiempo. SUMIMSA mantiene OTIF mayor al 97% en entregas a plataforma offshore.</p>
-        <p><strong>2. Fill Rate:</strong> Porcentaje de líneas de orden entregadas vs solicitadas. Meta: 98%+. Indica qué tan bien anticipas la demanda.</p>
-        <p><strong>3. DIO (Days Inventory Outstanding):</strong> Días de inventario antes de convertirse en venta. El equilibrio entre disponibilidad y capital invertido.</p>
-        <p><strong>4. Perfect Order Rate:</strong> Órdenes entregadas sin error, a tiempo, completas y bien documentadas. El KPI definitivo de excelencia operativa.</p>
-        <p><strong>5. Cash-to-Cash Cycle:</strong> Tiempo entre que pagas a tu proveedor y cobras a tu cliente. Reducirlo mejora el flujo de caja libre.</p>
-
-        <h3>Digitalización Industrial: El caso Tullbox</h3>
-        <p>La transición de un sistema de inventario en papel a un modelo digital con sensores IoT y dashboard en tiempo real redujo el tiempo de solicitud de herramienta de 45 minutos a menos de 2 minutos, y eliminó el 100% del extravío de herramienta costosa en campo. El ROI se alcanzó en menos de 3 meses de operación.</p>
-
-        <div className="dp-grid">
-          <div className="dp-feature">
-            <h4>Próximos artículos</h4>
-            <p>Gestión de proveedores estratégicos, negociación en mercados volátiles y resiliencia de la cadena de suministro.</p>
-          </div>
-          <div className="dp-feature">
-            <h4>¿Quieres colaborar?</h4>
-            <p>Si eres experto en supply chain industrial y quieres escribir en nuestro blog, contáctanos en ventas@sumimsa.com.mx</p>
-          </div>
-        </div>
-      </DetailPage>
+      {openArticle && (
+        <DetailPage
+          isOpen={!!openArticle}
+          onClose={() => setOpenArticle(null)}
+          eyebrow={openArticle.tag}
+          title={openArticle.title}
+          lead={openArticle.detalle.lead}
+        >
+          <img className="dp-img" src={openArticle.img} alt={openArticle.title} />
+          <p style={{ fontSize: '.78rem', color: 'var(--muted)', marginBottom: 32 }}>
+            Por <strong>{openArticle.author}</strong> · {openArticle.readTime} de lectura · {openArticle.date}
+          </p>
+          {openArticle.detalle.body}
+        </DetailPage>
+      )}
     </section>
   )
 }

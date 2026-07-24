@@ -11,7 +11,6 @@ const SLIDES = [
   },
   {
     img: '/img/Landing/INDUSTRIA.jpg',
-    //img: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1600&q=80&fit=crop',
     badge: 'Sector Naval',
     h1: ['7 Puertos', 'ESTRATÉGICOS', 'en México'],
     sub: 'Cubrimos la red de puertos mexicanos: desde transporte de contenedores hasta tráfico de hidrocarburos.',
@@ -19,8 +18,6 @@ const SLIDES = [
   },
   {
     img: '/img/Landing/EOLICA.jpg',
-    //img: 'https://images.unsplash.com/photo-1572970388430-a7fff761e597?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-   // img: 'https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=1600&q=80&fit=crop',
     badge: 'Sector Energético',
     h1: ['Energía', 'RENOVABLE', 'Sostenible'],
     sub: 'Solar, eólica, hidroeléctrica y geotérmica. Expertos en inspección para la modernización energética.',
@@ -28,7 +25,6 @@ const SLIDES = [
   },
   {
     img: '/img/Landing/IZAJE.jpg',
-    //img: 'https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?w=1600&q=80&fit=crop',
     badge: 'Metal-Mecánico',
     h1: ['Ingeniería', 'INDUSTRIAL', 'Clase Mundial'],
     sub: 'Fabricación, ingeniería, diseño, mantenimiento y logística. Marcas líderes a tu disposición.',

@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { NAV_LINKS } from './Header'
 import './DetailPage.css'
 
-export default function DetailPage({ isOpen, onClose, eyebrow, title, lead, children }) {
+export default function DetailPage({ isOpen, onClose, eyebrow, title, lead, heroImg, children }) {
   useEffect(() => {
     document.body.style.overflow = isOpen ? 'hidden' : ''
     return () => { document.body.style.overflow = '' }
@@ -35,8 +35,9 @@ export default function DetailPage({ isOpen, onClose, eyebrow, title, lead, chil
       onClick={handleNavClick}
     >
       <div className="dp-scroll-area">
-        {/* Header */}
-        <div className="dp-header">
+        {/* Header — con foto de fondo cuando se pasa heroImg (opt-in, no afecta a quien no lo use) */}
+        <div className={`dp-header${heroImg ? ' has-photo' : ''}`}>
+          {heroImg && <img className="dp-header-photo" src={heroImg} alt="" />}
           <button className="dp-back" onClick={onClose} aria-label="Volver">
             <span className="dp-back-arrow">←</span>
             Volver al inicio

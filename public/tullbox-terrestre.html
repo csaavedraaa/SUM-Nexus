@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TULLBOX — Tour Virtual 360° · Unidad Terrestre</title>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css" />
+  <script src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Space+Mono:wght@400;700&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy:  #0d1e4a;
+      --cyan:  #009bdb;
+      --amber: #f5c400;
+      --red:   #d43b2f;
+      --muted: rgba(255,255,255,.42);
+      --border: rgba(255,255,255,.12);
+    }
+    body { background: #000; font-family: 'Inter', sans-serif; }
+    #panorama { width: 100vw; height: 100vh; }
+
+    /* Pannellum UI */
+    .pnlm-about-msg, .pnlm-panorama-info { display: none !important; }
+    .pnlm-load-button { display: none !important; }
+    .pnlm-controls-container { bottom: 24px !important; right: 24px !important; top: auto !important; }
+    .pnlm-zoom-controls button,
+    .pnlm-fullscreen-toggle-button {
+      background: rgba(5,12,32,.82) !important;
+      border: 1px solid var(--border) !important;
+      color: #fff !important;
+    }
+
+    /* ── TOP BAR ── */
+    .topbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      height: 56px; padding: 0 28px;
+      display: flex; align-items: center; justify-content: space-between;
+      background: linear-gradient(to bottom, rgba(4,9,24,.95) 0%, transparent 100%);
+      pointer-events: none; user-select: none;
+    }
+    .logo { display: flex; align-items: baseline; }
+    .logo-t { font-family: 'Oswald', sans-serif; font-size: 1.55rem; font-weight: 700; color: #fff; letter-spacing: -0.5px; }
+    .logo-b { font-family: 'Oswald', sans-serif; font-size: 1.55rem; font-weight: 700; color: var(--amber); letter-spacing: -0.5px; }
+    .logo-sub { margin-left: 12px; font-family: 'Space Mono', monospace; font-size: .55rem; color: var(--muted); letter-spacing: 2.5px; text-transform: uppercase; }
+    .topbar-hint { font-family: 'Space Mono', monospace; font-size: .55rem; color: var(--muted); letter-spacing: 1.5px; text-transform: uppercase; }
+
+    /* ── SCENE BADGE ── */
+    .scene-badge {
+      position: fixed; top: 68px; left: 50%; transform: translateX(-50%);
+      z-index: 100; pointer-events: none;
+      display: flex; align-items: center; gap: 8px;
+      background: rgba(4,9,24,.88); border: 1px solid var(--border);
+      backdrop-filter: blur(8px);
+      padding: 6px 16px 6px 10px;
+      transition: opacity .4s;
+    }
+    .badge-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--amber);
+    }
+    .badge-text {
+      font-family: 'Space Mono', monospace; font-size: .6rem;
+      color: rgba(255,255,255,.7); letter-spacing: 2px; text-transform: uppercase;
+    }
+
+    /* ── COUNTER ── */
+    .counter {
+      position: fixed; bottom: 22px; left: 26px; z-index: 100;
+      font-family: 'Space Mono', monospace; font-size: .56rem;
+      color: var(--muted); letter-spacing: 2px; text-transform: uppercase;
+      pointer-events: none; user-select: none;
+    }
+    .counter strong { color: var(--cyan); }
+
+    /* ══════════════════════════════════════════
+       HOTSPOT STYLES
+    ══════════════════════════════════════════ */
+    .pnlm-hotspot.pnlm-custom {
+      overflow: visible !important;
+      background: none !important; border: none !important;
+      width: 0 !important; height: 0 !important;
+      cursor: default !important;
+    }
+
+    .hs-wrap { position: relative; width: 0; height: 0; pointer-events: none; }
+
+    .hs-ring {
+      position: absolute; border-radius: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      animation: ring-pulse 2.5s ease-out infinite;
+    }
+    .hs-ring.cyan  { width: 50px; height: 50px; border: 1.5px solid rgba(0,155,219,.5); background: rgba(0,155,219,.1); }
+    .hs-ring.amber { width: 54px; height: 54px; border: 1.5px solid rgba(245,196,0,.55); background: rgba(245,196,0,.1); }
+
+    @keyframes ring-pulse {
+      0%   { transform: translate(-50%,-50%) scale(.7); opacity: .9; }
+      80%  { transform: translate(-50%,-50%) scale(1.7); opacity: 0; }
+      100% { transform: translate(-50%,-50%) scale(.7); opacity: 0; }
+    }
+
+    .hs-dot {
+      position: absolute;
+      width: 22px; height: 22px; border-radius: 50%;
+      border: 2.5px solid rgba(255,255,255,.9);
+      transform: translate(-50%, -50%);
+      cursor: pointer; pointer-events: auto;
+      transition: transform .18s, background .18s;
+      z-index: 2;
+      display: flex; align-items: center; justify-content: center;
+      font-size: .7rem; color: #fff; font-weight: 700;
+    }
+    .hs-dot.cyan  { background: var(--cyan); }
+    .hs-dot.amber { background: var(--amber); color: #000; font-size: .85rem; }
+    .hs-dot:hover { transform: translate(-50%,-50%) scale(1.35); }
+
+    .hs-chip {
+      position: absolute; left: 50%; top: -40px;
+      transform: translateX(-50%);
+      white-space: nowrap;
+      font-family: 'Space Mono', monospace; font-size: .58rem; font-weight: 700;
+      letter-spacing: 1.5px; text-transform: uppercase; color: #fff;
+      background: rgba(5,12,32,.9); border: 1px solid rgba(0,155,219,.4);
+      padding: 4px 10px 3px;
+      pointer-events: none; opacity: 0; transition: opacity .2s;
+    }
+    .hs-chip.amber { border-color: rgba(245,196,0,.5); }
+    .hs-dot:hover ~ .hs-chip { opacity: 1; }
+
+    /* ══════════════════════════════════════════
+       MODAL
+    ══════════════════════════════════════════ */
+    .modal {
+      position: fixed; inset: 0; z-index: 500;
+      display: flex; align-items: center; justify-content: center; padding: 20px;
+      opacity: 0; visibility: hidden;
+      transition: opacity .3s ease, visibility .3s;
+    }
+    .modal.open { opacity: 1; visibility: visible; }
+    .modal-bg {
+      position: absolute; inset: 0;
+      background: rgba(3,7,20,.78); backdrop-filter: blur(6px); cursor: pointer;
+    }
+    .modal-card {
+      position: relative; z-index: 1;
+      background: #09132a; border: 1px solid rgba(0,155,219,.2);
+      width: 100%; max-width: 580px;
+      clip-path: polygon(0 0, calc(100% - 18px) 0, 100% 18px, 100% 100%, 0 100%);
+      box-shadow: 0 32px 80px rgba(0,0,0,.7);
+      transform: translateY(16px) scale(.97);
+      transition: transform .32s cubic-bezier(.22,1,.36,1);
+      overflow: hidden;
+    }
+    .modal.open .modal-card { transform: none; }
+
+    .modal-img-wrap {
+      width: 100%; height: 200px; overflow: hidden;
+      position: relative; cursor: zoom-in;
+    }
+    .modal-img-wrap img {
+      width: 100%; height: 100%; object-fit: cover; object-position: center 40%;
+      transition: transform .4s ease;
+      display: block;
+    }
+    .modal-img-wrap:hover img { transform: scale(1.04); }
+    .modal-img-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, transparent 40%, rgba(9,19,42,.95) 100%);
+    }
+    .modal-img-label {
+      position: absolute; bottom: 12px; right: 14px;
+      font-family: 'Space Mono', monospace; font-size: .52rem;
+      color: rgba(255,255,255,.45); letter-spacing: 1.5px; text-transform: uppercase;
+    }
+
+    .modal-body { padding: 24px 32px 28px; }
+
+    .modal-close {
+      position: absolute; top: 14px; right: 16px; z-index: 2;
+      width: 30px; height: 30px; border-radius: 50%;
+      background: rgba(255,255,255,.07); border: 1px solid var(--border);
+      color: rgba(255,255,255,.5); font-size: .75rem; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background .2s, transform .22s, color .2s;
+    }
+    .modal-close:hover { background: var(--cyan); color: #fff; transform: rotate(90deg); }
+
+    .modal-eyebrow {
+      font-family: 'Space Mono', monospace; font-size: .57rem;
+      color: var(--amber); letter-spacing: 3px; text-transform: uppercase;
+      display: flex; align-items: center; gap: 8px; margin-bottom: 10px;
+    }
+    .modal-eyebrow::before { content: ''; display: inline-block; width: 16px; height: 1.5px; background: var(--amber); }
+    .modal-title {
+      font-family: 'Oswald', sans-serif; font-size: clamp(1.2rem, 3.5vw, 1.75rem);
+      font-weight: 700; text-transform: uppercase; letter-spacing: -.2px;
+      color: #fff; line-height: 1.05; margin-bottom: 4px;
+    }
+    .modal-sub {
+      font-family: 'Space Mono', monospace; font-size: .6rem;
+      color: var(--cyan); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 14px;
+    }
+    .modal-desc {
+      font-size: .84rem; color: rgba(255,255,255,.55); line-height: 1.78;
+      border-left: 2px solid rgba(0,155,219,.25); padding-left: 12px;
+      margin-bottom: 20px;
+    }
+    .modal-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 1px; background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.07);
+    }
+    .spec { background: rgba(255,255,255,.025); padding: 10px 13px; }
+    .spec-k { font-family: 'Space Mono', monospace; font-size: .5rem; color: rgba(255,255,255,.28); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 3px; }
+    .spec-v { font-family: 'Oswald', sans-serif; font-size: .88rem; font-weight: 600; color: var(--cyan); }
+
+    .modal-btn-detail {
+      display: inline-flex; align-items: center; gap: 7px;
+      margin-top: 18px;
+      font-family: 'Oswald', sans-serif; font-size: .76rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .5px;
+      color: var(--amber); background: rgba(245,196,0,.08);
+      border: 1px solid rgba(245,196,0,.3); padding: 9px 18px;
+      cursor: pointer; transition: background .2s, border-color .2s;
+    }
+    .modal-btn-detail:hover { background: rgba(245,196,0,.16); border-color: var(--amber); }
+    .modal-btn-detail.hidden { display: none; }
+
+    /* ══════════════════════════════════════════
+       LIGHTBOX
+    ══════════════════════════════════════════ */
+    .lightbox {
+      position: fixed; inset: 0; z-index: 900;
+      background: rgba(0,0,0,.92); backdrop-filter: blur(8px);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; visibility: hidden;
+      transition: opacity .3s ease, visibility .3s;
+      cursor: zoom-out;
+    }
+    .lightbox.open { opacity: 1; visibility: visible; }
+    .lightbox img {
+      max-width: 94vw; max-height: 92vh;
+      object-fit: contain; display: block;
+      box-shadow: 0 20px 80px rgba(0,0,0,.8);
+    }
+    .lightbox-close {
+      position: absolute; top: 18px; right: 22px;
+      width: 40px; height: 40px; border-radius: 50%;
+      background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.2);
+      color: #fff; font-size: .9rem; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background .2s, transform .22s;
+    }
+    .lightbox-close:hover { background: rgba(255,255,255,.2); transform: rotate(90deg); }
+
+    @media (max-width: 560px) {
+      .modal-body { padding: 18px 16px 20px; }
+      .modal-grid { grid-template-columns: 1fr; }
+      .topbar-hint, .logo-sub { display: none; }
+      .modal-img-wrap { height: 150px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="logo">
+    <span class="logo-t">TULL</span><span class="logo-b">BOX</span>
+    <span class="logo-sub">// Tour Virtual 360°</span>
+  </div>
+  <div style="display:flex;align-items:center;gap:20px;pointer-events:auto;">
+    <span class="topbar-hint">Arrastra · Scroll para zoom · Clic en los puntos</span>
+    <a href="/tullbox.html" style="font-family:'Space Mono',monospace;font-size:.55rem;color:rgba(255,255,255,.5);letter-spacing:2px;text-transform:uppercase;border:1px solid rgba(255,255,255,.15);padding:6px 14px;text-decoration:none;transition:color .2s,border-color .2s;" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,.4)'" onmouseout="this.style.color='rgba(255,255,255,.5)';this.style.borderColor='rgba(255,255,255,.15)'">← Menú</a>
+  </div>
+</div>
+
+<!-- SCENE BADGE -->
+<div class="scene-badge">
+  <div class="badge-dot"></div>
+  <span class="badge-text">Unidad Terrestre</span>
+</div>
+
+<!-- PANORAMA -->
+<div id="panorama"></div>
+
+<!-- COUNTER -->
+<div class="counter"><strong id="cnt">—</strong> puntos de interés</div>
+
+<!-- MODAL -->
+<div class="modal" id="modal">
+  <div class="modal-bg" onclick="closeModal()"></div>
+  <div class="modal-card">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-img-wrap" id="m-img-wrap" onclick="openLightbox()">
+      <img id="m-img" src="" alt="" />
+      <div class="modal-img-overlay"></div>
+      <span class="modal-img-label">Clic para ampliar →</span>
+    </div>
+    <div class="modal-body">
+      <div class="modal-eyebrow" id="m-tag"></div>
+      <h2 class="modal-title" id="m-title"></h2>
+      <p class="modal-sub"   id="m-sub"></p>
+      <p class="modal-desc"  id="m-desc"></p>
+      <div class="modal-grid" id="m-grid"></div>
+      <button class="modal-btn-detail hidden" id="m-btn-detail" onclick="openLightbox()">
+        Ver detalle →
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+  <img id="lb-img" src="" alt="Detalle" />
+</div>
+
+<script>
+/* ════════════════════════════════════════════
+   DATOS DE HOTSPOTS — UNIDAD TERRESTRE
+════════════════════════════════════════════ */
+const HOTSPOTS = [
+  {
+    id: 'milwaukee', pitch: 12, yaw: -121,
+    tag: 'Herramientas Eléctricas',
+    title: 'Línea Milwaukee',
+    sub: 'Herramientas inalámbricas y de alto rendimiento',
+    desc: 'Estantería completa con herramientas Milwaukee: taladros de impacto, sierras recíprocas, atornilladores de batería, cajas organizadoras y accesorios certificados para trabajo industrial pesado.',
+    img: null,
+    specs: [['Marca','Milwaukee Tool'],['Sistema','M18 / M12 FUEL'],['Piezas aprox.','80+ herramientas'],['Batería','18V Li-Ion'],['Garantía','5 años fabricante'],['Clasificación','Heavy-Duty Industrial']],
+  },
+  {
+    id: 'maletines', pitch: 38, yaw: -142,
+    tag: 'Equipos de Campo',
+    title: 'Maletines & Equipos Portátiles',
+    sub: 'Instrumentación y herramienta especializada',
+    desc: 'Maletines de aluminio y ABS con equipos de medición, instrumentación de precisión, cámaras termográficas y kits de diagnóstico para trabajo en campo en instalaciones industriales.',
+    img: null,
+    specs: [['Tipo','Maletines industriales'],['Material','Aluminio / ABS reforzado'],['Protección','IP 67 (equipos internos)'],['Contenido','Instrumentación de precisión'],['Uso','Trabajo en campo'],['Marcas','Fluke · FLIR · DeWalt']],
+  },
+  {
+    id: 'workstation', pitch: 10, yaw: -5,
+    tag: 'Estación de Trabajo',
+    title: 'Centro de Gestión & Diagnóstico',
+    sub: 'Administración de inventario y soporte técnico',
+    desc: 'Estación de trabajo equipada con PC de escritorio, impresora multifuncional y sistema de gestión de inventario. Punto central para registro de herramientas, generación de órdenes de trabajo y soporte técnico al cliente.',
+    img: null,
+    specs: [['Función','Gestión de inventario'],['Sistema','Software SUMIMSA ERP'],['Impresora','Multifuncional industrial'],['Conectividad','Red local + VPN'],['Soporte','Técnico en sitio'],['Disponibilidad','Lunes – Sábado']],
+  },
+  {
+    id: 'snapon', pitch: 12, yaw: 82,
+    tag: 'Caja de Herramientas',
+    title: 'Centro de Herramientas Snap-on',
+    sub: 'Caja rodante profesional de alta capacidad',
+    desc: 'Caja de herramientas Snap-on de 18 cajones con llaves combinadas, dados, carracas, torquímetros y herramientas especiales. Construcción en acero de calibre 18 con sistema de cierre central y ruedas de carga pesada.',
+    img: null,
+    specs: [['Marca','Snap-on'],['Cajones','18 cajones'],['Material','Acero cal. 18'],['Capacidad','680 kg carga estática'],['Ruedas','150 mm doble rodamiento'],['Cierre','Sistema central con llave']],
+  },
+  {
+    id: 'keter', pitch: -2, yaw: 62,
+    tag: 'Almacenaje Organizado',
+    title: 'Sistema de Almacenaje Modular',
+    sub: 'Cajas apilables de organización',
+    desc: 'Sistema de cajas de organización apilables para consumibles, EPP, repuestos y herramienta de mano. Diseño modular que permite configuración vertical para maximizar el aprovechamiento del espacio interior del contenedor.',
+    img: null,
+    specs: [['Sistema','Apilable modular'],['Color','Amarillo — identificación rápida'],['Contenido','EPP · Consumibles · Repuestos'],['Capacidad','25 kg por caja'],['Compatibilidad','Estándar apilable'],['Organización','Etiquetado por categoría']],
+  },
+  {
+    id: 'estanteria', pitch: 8, yaw: 155,
+    tag: 'Estantería de Carga',
+    title: 'Estantería Metálica Industrial',
+    sub: 'Almacenaje de herramienta y accesorios',
+    desc: 'Estantería metálica de carga pesada para almacenaje de herramientas de mano, cables, extensiones eléctricas y accesorios de uso frecuente. Anclada al piso del contenedor con sistema anti-volcadura.',
+    img: null,
+    specs: [['Capacidad','250 kg / nivel'],['Niveles','5 niveles ajustables'],['Material','Acero pintado electrostático'],['Acabado','Recubrimiento polvo epóxico'],['Anclaje','Anti-volcadura integrado'],['Clasificación','Carga pesada industrial']],
+  },
+]
+
+/* ════════════════════════════════════════════
+   HOTSPOT RENDERER
+════════════════════════════════════════════ */
+function makeInfoHotspot(el, args) {
+  el.style.cssText += 'overflow:visible;background:none;border:none;'
+  el.innerHTML =
+    `<div class="hs-wrap">` +
+      `<div class="hs-ring cyan"></div>` +
+      `<div class="hs-dot cyan" onclick="showModal('${args.id}')"></div>` +
+      `<div class="hs-chip">${args.title}</div>` +
+    `</div>`
+}
+
+/* ════════════════════════════════════════════
+   MODAL
+════════════════════════════════════════════ */
+let currentLightboxImg = null
+
+function showModal(id) {
+  const d = HOTSPOTS.find(s => s.id === id)
+  if (!d) return
+
+  document.getElementById('m-tag').textContent   = d.tag
+  document.getElementById('m-title').textContent = d.title
+  document.getElementById('m-sub').textContent   = d.sub
+  document.getElementById('m-desc').textContent  = d.desc
+  document.getElementById('m-grid').innerHTML    =
+    d.specs.map(([k,v]) =>
+      `<div class="spec"><div class="spec-k">${k}</div><div class="spec-v">${v}</div></div>`
+    ).join('')
+
+  const imgWrap   = document.getElementById('m-img-wrap')
+  const imgEl     = document.getElementById('m-img')
+  const btnDetail = document.getElementById('m-btn-detail')
+
+  if (d.img) {
+    imgWrap.style.display = 'block'
+    imgEl.src = d.img
+    btnDetail.classList.remove('hidden')
+    currentLightboxImg = d.img
+  } else {
+    imgWrap.style.display = 'none'
+    btnDetail.classList.add('hidden')
+    currentLightboxImg = null
+  }
+
+  document.getElementById('modal').classList.add('open')
+}
+
+function closeModal() {
+  document.getElementById('modal').classList.remove('open')
+}
+
+/* ════════════════════════════════════════════
+   LIGHTBOX
+════════════════════════════════════════════ */
+function openLightbox() {
+  if (!currentLightboxImg) return
+  document.getElementById('lb-img').src = currentLightboxImg
+  document.getElementById('lightbox').classList.add('open')
+}
+
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open')
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') { closeLightbox(); closeModal(); }
+})
+
+/* ════════════════════════════════════════════
+   PANNELLUM — ESCENA ÚNICA
+════════════════════════════════════════════ */
+const viewer = pannellum.viewer('panorama', {
+  type:    'equirectangular',
+  panorama: '/img/tullbox-terrestre.png',
+  pitch:   8,
+  yaw:     0,
+  hfov:    115,
+  minHfov: 50,
+  maxHfov: 120,
+  autoLoad: true,
+  showZoomCtrl: true,
+  showFullscreenCtrl: true,
+  hotSpots: HOTSPOTS.map(d => ({
+    pitch: d.pitch, yaw: d.yaw,
+    type: 'custom', cssClass: 'pnlm-custom',
+    createTooltipFunc: makeInfoHotspot,
+    createTooltipArgs: d,
+  })),
+})
+
+document.getElementById('cnt').textContent = HOTSPOTS.length
+document.addEventListener('keydown', e => {
+  if (e.key !== 'c' && e.key !== 'C') return
+  const p = viewer.getPitch().toFixed(1)
+  const y = viewer.getYaw().toFixed(1)
+  const msg = `pitch: ${p},  yaw: ${y}`
+  let el = document.getElementById('coords-helper')
+  if (!el) {
+    el = document.createElement('div')
+    el.id = 'coords-helper'
+    el.style.cssText = 'position:fixed;bottom:60px;left:26px;z-index:200;background:rgba(0,0,0,.85);color:#f5c400;font-family:monospace;font-size:13px;padding:8px 14px;border:1px solid rgba(245,196,0,.4);letter-spacing:1px;'
+    document.body.appendChild(el)
+  }
+  el.textContent = msg
+  navigator.clipboard?.writeText(msg)
+})
+
+/* Fallback: forzar carga si el botón sigue visible */
+setTimeout(() => {
+  const btn = document.querySelector('.pnlm-load-button')
+  if (btn && btn.offsetParent !== null) btn.click()
+}, 200)
+</script>
+</body>
+</html>

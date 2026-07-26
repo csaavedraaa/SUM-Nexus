@@ -231,14 +231,14 @@ export default function Bolsa() {
       </div>
 
       {/* ── CÓDIGO DE CONDUCTA ── */}
-      <div style={{ background: 'var(--navy)', padding: '52px 0', borderTop: '2px solid var(--cyan)' }}>
+      <div style={{ background: '#dde4ed', padding: '52px 0' }}>
         <div className="container reveal">
           <div style={{ display: 'grid', gridTemplateColumns: 'auto 1fr', gap: '32px 48px', alignItems: 'start' }}>
             <div>
               <p style={{ fontFamily: 'var(--font-mono)', fontSize: '.58rem', color: 'var(--cyan)', letterSpacing: 3, textTransform: 'uppercase', marginBottom: 8 }}>// Código de conducta</p>
               <div style={{ width: 36, height: 2, background: 'var(--cyan)' }} />
             </div>
-            <p style={{ fontSize: '.87rem', color: 'rgba(255,255,255,.6)', lineHeight: 1.9 }}>
+            <p style={{ fontSize: '.87rem', color: 'var(--muted)', lineHeight: 1.9 }}>
               "Seleccionaremos y asignaremos empleados con base en sus calificaciones, sin distinción de raza, religión, origen nacional, color, género, identidad de género, orientación sexual, edad o discapacidad.{' '}
               <strong style={{ color: 'var(--amber)' }}>No se solicitan pruebas de embarazo ni de VIH</strong>{' '}
               como requisitos de ingreso, permanencia o promoción laboral."

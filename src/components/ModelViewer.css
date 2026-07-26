@@ -7,14 +7,14 @@
 
 .mv-hotspot {
   all: unset;
-  width: 28px;
-  height: 28px;
+  width: 22px;
+  height: 22px;
   border-radius: 50%;
   background: var(--cyan, #009bdb);
-  border: 2.5px solid #fff;
+  border: 2px solid #fff;
   color: #fff;
   font-family: var(--font-display, 'Oswald', sans-serif);
-  font-size: .72rem;
+  font-size: .62rem;
   font-weight: 700;
   display: flex;
   align-items: center;

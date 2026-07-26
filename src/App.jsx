@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import { Routes, Route, useLocation } from 'react-router-dom'
 import Header       from './components/Header'
 import Hero         from './sections/Hero'
 import Ticker       from './components/Ticker'
@@ -20,15 +21,43 @@ import BackToTop    from './components/BackToTop'
 import Cursor       from './components/Cursor'
 import Stars        from './components/Stars'
 
+function LandingPage() {
+  return (
+    <>
+      <Hero />
+      <Ticker />
+      <Nosotros />
+      <Proveedores label="Marcas que representamos" />
+      <CasosExito />
+      <Servicios />
+      <Sectores />
+      <Proyectos />
+      <Tullbox />
+      <Catalogos />
+      <Bolsa />
+      <Privacidad />
+      <Contacto />
+    </>
+  )
+}
+
 export default function App() {
+  const location = useLocation()
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in') }),
       { threshold: 0.08 }
     )
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el))
+    document.querySelectorAll('.reveal:not(.in)').forEach(el => observer.observe(el))
     return () => observer.disconnect()
-  }, [])
+  }, [location.pathname])
+
+  useEffect(() => {
+    if (!location.state?.scrollTo) return
+    const el = document.querySelector(location.state.scrollTo)
+    if (el) window.scrollTo({ top: el.offsetTop - 68, behavior: 'smooth' })
+  }, [location.state])
 
   return (
     <>
@@ -36,21 +65,11 @@ export default function App() {
       <Cursor />
       <Header />
       <main>
-        <Hero />
-        <Ticker />
-        <Nosotros />
-        <Proveedores label="Marcas que representamos" />
-        <CasosExito />
-        <Servicios />
-        <Sectores />
-        <Proyectos />
-        <Tullbox />
-        <Noticias />
-        <Blog />
-        <Catalogos />
-        <Bolsa />
-        <Privacidad />
-        <Contacto />
+        <Routes>
+          <Route path="/"         element={<LandingPage />} />
+          <Route path="/noticias" element={<Noticias />} />
+          <Route path="/blog"     element={<Blog />} />
+        </Routes>
       </main>
       <Footer />
       <BackToTop />

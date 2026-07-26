@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { useNavigate, useLocation } from 'react-router-dom'
 import './Header.css'
 
 export const NAV_LINKS = [
@@ -15,59 +16,65 @@ export const NAV_LINKS = [
   { href: '#tullbox',   label: 'Proyecto Tullbox' },
   { href: '#catalogs',  label: 'Catálogo'         },
   { href: '#bolsa',     label: 'Talento'          },
+  { href: '/noticias',  label: 'Noticias'         },
+  { href: '/blog',      label: 'Blog'             },
 ]
 
-// Cierra cualquier DetailPage abierto y navega a la sección
-function navigateTo(href, setOpen) {
-  setOpen(false)
+const OVERLAY_DELAY = 480
 
-  const doScroll = () => {
-    const target = document.querySelector(href)
-    if (target) {
-      window.scrollTo({ top: target.offsetTop - 68, behavior: 'smooth' })
-    }
-  }
+function closeOverlayThen(fn) {
+  const backBtn = document.querySelector('.dp-overlay.dp-open .dp-back')
+  if (backBtn) { backBtn.click(); setTimeout(fn, OVERLAY_DELAY) }
+  else fn()
+}
 
-  // Si hay un overlay DetailPage abierto, cerrarlo primero
-  const overlay = document.querySelector('.dp-overlay.dp-open')
-  if (overlay) {
-    // Disparar cierre buscando el botón "Volver"
-    const backBtn = overlay.querySelector('.dp-back')
-    if (backBtn) backBtn.click()
-    // Esperar animación de cierre (450ms) luego scrollear
-    setTimeout(doScroll, 480)
-  } else {
-    doScroll()
-  }
+function scrollToHash(href) {
+  const el = document.querySelector(href)
+  if (el) window.scrollTo({ top: el.offsetTop - 68, behavior: 'smooth' })
 }
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false)
   const [open,     setOpen]     = useState(false)
+  const navigate = useNavigate()
+  const location = useLocation()
 
   useEffect(() => {
-    const handler = () => setScrolled(window.scrollY > 10)
-    window.addEventListener('scroll', handler)
+    let rafPending = false
+    const handler = () => {
+      if (rafPending) return
+      rafPending = true
+      requestAnimationFrame(() => {
+        setScrolled(window.scrollY > 10)
+        rafPending = false
+      })
+    }
+    window.addEventListener('scroll', handler, { passive: true })
     return () => window.removeEventListener('scroll', handler)
   }, [])
 
   const handleNav = (e, href) => {
     e.preventDefault()
-    e.currentTarget.blur() // evita que :focus-within deje el dropdown abierto tras el clic
-    navigateTo(href, setOpen)
+    e.currentTarget.blur()
+    setOpen(false)
+    if (href.startsWith('/')) {
+      navigate(href)
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    } else if (location.pathname !== '/') {
+      navigate('/', { state: { scrollTo: href } })
+    } else {
+      closeOverlayThen(() => scrollToHash(href))
+    }
   }
 
   const handleLogo = (e) => {
     e.preventDefault()
     setOpen(false)
-    // Cierra overlay si está abierto
-    const overlay = document.querySelector('.dp-overlay.dp-open')
-    if (overlay) {
-      const backBtn = overlay.querySelector('.dp-back')
-      if (backBtn) backBtn.click()
-      setTimeout(() => window.scrollTo({ top: 0, behavior: 'smooth' }), 480)
-    } else {
+    if (location.pathname !== '/') {
+      navigate('/')
       window.scrollTo({ top: 0, behavior: 'smooth' })
+    } else {
+      closeOverlayThen(() => window.scrollTo({ top: 0, behavior: 'smooth' }))
     }
   }
 

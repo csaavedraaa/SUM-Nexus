@@ -4,23 +4,35 @@ import { OrbitControls, useGLTF, Html, Stage } from '@react-three/drei'
 import * as THREE from 'three'
 import './ModelViewer.css'
 
-function Model({ src, hotspots, activeHotspot, onHotspotSelect }) {
+function Model({ src, hotspots, activeHotspot, onHotspotSelect, coordMode, onCoordMove }) {
   const { scene } = useGLTF(src)
   const ref = useRef()
   const [box, setBox] = useState(null)
+  const [size, setSize] = useState(null)
 
   useEffect(() => {
-    setBox(new THREE.Box3().setFromObject(scene))
+    const b = new THREE.Box3().setFromObject(scene)
+    setBox(b)
+    setSize(b.getSize(new THREE.Vector3()))
   }, [scene])
 
   useFrame((_, delta) => {
-    if (ref.current && activeHotspot == null) ref.current.rotation.y += delta * 0.35
+    if (ref.current && activeHotspot == null && !coordMode) ref.current.rotation.y += delta * 0.35
   })
 
-  const size = box ? box.getSize(new THREE.Vector3()) : null
+  const handlePointerMove = (e) => {
+    if (!coordMode || !box || !ref.current) return
+    e.stopPropagation()
+    const localPt = e.point.clone()
+    ref.current.worldToLocal(localPt)
+    const x = Math.round(((localPt.x - box.min.x) / size.x) * 100)
+    const y = Math.round((1 - (localPt.y - box.min.y) / size.y) * 100)
+    const fz = Math.round(((localPt.z - box.min.z) / size.z) * 100) / 100
+    onCoordMove?.({ x, y, fz })
+  }
 
   return (
-    <group ref={ref}>
+    <group ref={ref} onPointerMove={coordMode ? handlePointerMove : undefined} onPointerLeave={() => coordMode && onCoordMove?.(null)}>
       <primitive object={scene} />
       {box && hotspots?.map((h, i) => (
         <Html
@@ -48,7 +60,7 @@ function Model({ src, hotspots, activeHotspot, onHotspotSelect }) {
   )
 }
 
-export default function ModelViewer({ src, interactive = true, hotspots, activeHotspot, onHotspotSelect }) {
+export default function ModelViewer({ src, interactive = true, hotspots, activeHotspot, onHotspotSelect, coordMode, onCoordMove }) {
   return (
     <div className="model-viewer">
       <Canvas
@@ -63,7 +75,7 @@ export default function ModelViewer({ src, interactive = true, hotspots, activeH
 
         <Suspense fallback={null}>
           <Stage environment="city" intensity={0.4} adjustCamera={1.3}>
-            <Model src={src} hotspots={hotspots} activeHotspot={activeHotspot} onHotspotSelect={onHotspotSelect} />
+            <Model src={src} hotspots={hotspots} activeHotspot={activeHotspot} onHotspotSelect={onHotspotSelect} coordMode={coordMode} onCoordMove={onCoordMove} />
           </Stage>
         </Suspense>
 

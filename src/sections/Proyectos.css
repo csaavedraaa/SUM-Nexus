@@ -93,6 +93,81 @@
   background: var(--proy-accent, var(--cyan));
 }
 
+/* ─── Hub central ──────────────────────────────────────── */
+.proy-hub-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/* ─── Hub stage — rings absolutas, botón estático ─── */
+.proy-hub-stage {
+  position: relative;
+  width: min(440px, 100%);
+  aspect-ratio: 1 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.proy-hub-rings {
+  position: absolute;
+  inset: -28px;
+  width: calc(100% + 56px);
+  height: calc(100% + 56px);
+  pointer-events: none;
+  overflow: visible;
+}
+
+.proy-hub-circle--btn {
+  all: unset;
+  cursor: pointer;
+  width: min(440px, 100%);
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 5px solid rgba(255,255,255,.9);
+  box-shadow: 0 16px 48px rgba(13,30,74,.28);
+  position: relative;
+  display: block;
+  transition: box-shadow .25s;
+  animation: hub-breathe 6s ease-in-out infinite;
+}
+@keyframes hub-breathe {
+  0%, 100% { box-shadow: 0 16px 48px rgba(13,30,74,.28), 0 0 0 0 rgba(0,212,240,0); }
+  50%       { box-shadow: 0 20px 56px rgba(13,30,74,.34), 0 0 24px 4px rgba(0,212,240,.18); }
+}
+.proy-hub-circle--btn img {
+  width: 100%; height: 100%;
+  object-fit: cover; display: block;
+  transition: transform .35s;
+}
+.proy-hub-circle--btn:hover img { transform: scale(1.06); }
+.proy-hub-circle--btn.active {
+  box-shadow: 0 0 0 5px var(--cyan), 0 16px 48px rgba(13,30,74,.28);
+  animation: none;
+}
+
+.proy-hub-overlay {
+  position: absolute; inset: 0;
+  background: rgba(0,58,112,.58);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 4px;
+  opacity: 0;
+  transition: opacity .25s;
+  color: #fff; text-align: center; padding: 12px;
+}
+.proy-hub-circle--btn:hover .proy-hub-overlay,
+.proy-hub-circle--btn.active .proy-hub-overlay { opacity: 1; }
+.proy-hub-overlay svg { width: 36px; height: 36px; margin-bottom: 6px; }
+.proy-hub-overlay span {
+  font-family: var(--font-display); font-size: 1rem;
+  font-weight: 700; text-transform: uppercase; letter-spacing: .5px;
+}
+.proy-hub-overlay small {
+  font-family: var(--font-display); font-size: .72rem;
+  opacity: .85; text-transform: uppercase; letter-spacing: .3px;
+}
+
 @media (max-width: 960px) {
   .proy-layout { grid-template-columns: 1fr; }
 }

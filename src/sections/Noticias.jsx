@@ -79,6 +79,11 @@ export default function Noticias() {
   const timerRef = useRef(null)
   const total = NEWS.length
 
+  useEffect(() => {
+    document.title = 'Noticias — SUMIMSA'
+    return () => { document.title = 'SUMIMSA — Un Solo Proveedor' }
+  }, [])
+
   const go = (n) => {
     setCur(((n % total) + total) % total)
     resetTimer()

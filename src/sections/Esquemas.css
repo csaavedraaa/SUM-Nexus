@@ -1,9 +1,9 @@
-/* Sección — fondo con imagen del stand SUMIMSA */
+﻿/* Sección — fondo con imagen del stand SUMIMSA */
 .esq-section {
   position: relative;
   padding-bottom: 56px;
   background:
-    url('/img/fondo-esquemas.png') center 20% / cover no-repeat;
+    url('/img/fondo-esquemas.webp') center 20% / cover no-repeat;
   color: #fff;
   overflow: hidden;
 }

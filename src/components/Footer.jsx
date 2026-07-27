@@ -1,4 +1,4 @@
-import './Footer.css'
+﻿import './Footer.css'
 
 const SECTORS = ['Petrolero','Naval','Metal-Mecánico','Energético']
 const COMPANY = [
@@ -49,7 +49,7 @@ export default function Footer() {
 
           {/* Brand */}
           <div className="footer-brand">
-            <img src="/logo-sumimsa_completo.png" alt="SUMIMSA" className="footer-logo" />
+            <img src="/logo-sumimsa_completo.webp" alt="SUMIMSA" className="footer-logo" />
             <p className="footer-about">
               Suministros Marinos e Industriales de México S.A. de C.V. —
               Empresa 100% mexicana al servicio de la industria nacional.

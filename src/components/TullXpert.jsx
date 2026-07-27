@@ -1,13 +1,13 @@
-import './TullXpert.css'
+﻿import './TullXpert.css'
 
 // Mismas 5 fotos reales que ya usamos en el diagrama de Proyectos —
 // reordenadas en pétalos alrededor del centro, estilo tullXpert.
 const PETALS = [
-  { id: 'p1', pos: 'p0',   img: '/img/proyectos/top-drive.png',          label: 'Top Drive' },
-  { id: 'p2', pos: 'p72',  img: '/img/proyectos/contencion-derrames.png', label: 'Contención de Derrames' },
-  { id: 'p3', pos: 'p144', img: '/img/proyectos/preventores.png',         label: 'Preventores' },
-  { id: 'p4', pos: 'p216', img: '/img/proyectos/bombas-de-lodo.png',      label: 'Bombas de Lodo' },
-  { id: 'p5', pos: 'p288', img: '/img/proyectos/control-de-solidos.png',  label: 'Control de Sólidos' },
+  { id: 'p1', pos: 'p0',   img: '/img/proyectos/top-drive.webp',          label: 'Top Drive' },
+  { id: 'p2', pos: 'p72',  img: '/img/proyectos/contencion-derrames.webp', label: 'Contención de Derrames' },
+  { id: 'p3', pos: 'p144', img: '/img/proyectos/preventores.webp',         label: 'Preventores' },
+  { id: 'p4', pos: 'p216', img: '/img/proyectos/bombas-de-lodo.webp',      label: 'Bombas de Lodo' },
+  { id: 'p5', pos: 'p288', img: '/img/proyectos/control-de-solidos.webp',  label: 'Control de Sólidos' },
 ]
 
 export default function TullXpert({ hub, hubClassName = '', petals = PETALS, onSelect, activeId }) {

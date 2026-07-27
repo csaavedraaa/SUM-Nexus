@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
@@ -455,7 +455,7 @@ document.addEventListener('keydown', e => {
 ════════════════════════════════════════════ */
 const viewer = pannellum.viewer('panorama', {
   type:    'equirectangular',
-  panorama: '/img/tullbox-terrestre.png',
+  panorama: '/img/tullbox-terrestre.webp',
   pitch:   8,
   yaw:     0,
   hfov:    115,
@@ -473,18 +473,33 @@ const viewer = pannellum.viewer('panorama', {
 })
 
 document.getElementById('cnt').textContent = HOTSPOTS.length
+let coordsActive = false
+let coordsEl = null
+
+function getOrCreateCoordsEl() {
+  if (!coordsEl) {
+    coordsEl = document.createElement('div')
+    coordsEl.id = 'coords-helper'
+    coordsEl.style.cssText = 'position:fixed;bottom:60px;left:26px;z-index:200;background:rgba(0,0,0,.85);color:#f5c400;font-family:monospace;font-size:13px;padding:8px 14px;border:1px solid rgba(245,196,0,.4);letter-spacing:1px;pointer-events:none;'
+    document.body.appendChild(coordsEl)
+  }
+  return coordsEl
+}
+
 document.addEventListener('keydown', e => {
   if (e.key !== 'c' && e.key !== 'C') return
-  const p = viewer.getPitch().toFixed(1)
-  const y = viewer.getYaw().toFixed(1)
-  const msg = `pitch: ${p},  yaw: ${y}`
-  let el = document.getElementById('coords-helper')
-  if (!el) {
-    el = document.createElement('div')
-    el.id = 'coords-helper'
-    el.style.cssText = 'position:fixed;bottom:60px;left:26px;z-index:200;background:rgba(0,0,0,.85);color:#f5c400;font-family:monospace;font-size:13px;padding:8px 14px;border:1px solid rgba(245,196,0,.4);letter-spacing:1px;'
-    document.body.appendChild(el)
-  }
+  coordsActive = !coordsActive
+  const el = getOrCreateCoordsEl()
+  el.style.display = coordsActive ? 'block' : 'none'
+  if (coordsActive) el.textContent = 'Mueve el cursor…'
+})
+
+document.addEventListener('mousemove', e => {
+  if (!coordsActive) return
+  const coords = viewer.mouseEventToCoords(e)
+  if (!coords) return
+  const msg = `pitch: ${coords[0].toFixed(1)},  yaw: ${coords[1].toFixed(1)}`
+  const el = getOrCreateCoordsEl()
   el.textContent = msg
   navigator.clipboard?.writeText(msg)
 })

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
@@ -390,7 +390,7 @@ const INFO_ABIERTO = [
     title: 'Destornilladores & Puntas',
     sub: 'Snap-on — Juego completo de puntas',
     desc: 'Panel organizador con juego completo de destornilladores y puntas intercambiables Snap-on: Phillips, Plana, Torx, Pozidriv y Robertson. Mangos de grip suave con identificación de color por tipo.',
-    img: '/img/tullbox-tools.png',
+    img: '/img/tullbox-tools.webp',
     specs: [['Marca','Snap-on'],['Piezas','32 piezas'],['Tipos','Phillips · Plana · Torx · Pozi'],['Material','Acero cromo-vanadio'],['Mango','SoftGrip ergonómico'],['Norma','ASME B107']],
   },
   {
@@ -399,7 +399,7 @@ const INFO_ABIERTO = [
     title: 'Set Llaves Combinadas',
     sub: 'Snap-on — Métricas y SAE',
     desc: 'Juego completo de llaves combinadas Snap-on en espuma de retención individual. Extremo de caja de 12 puntos con ángulo de palanca de 15°. Incluye rangos métrico y SAE completos.',
-    img: '/img/tullbox-tools.png',
+    img: '/img/tullbox-tools.webp',
     specs: [['Marca','Snap-on'],['Rango métrico','8 – 24 mm'],['Rango SAE','5/16" – 15/16"'],['Piezas','24 llaves'],['Material','Cromo-vanadio forjado'],['Acabado','Cromo pulido']],
   },
   {
@@ -408,7 +408,7 @@ const INFO_ABIERTO = [
     title: 'Set Dados y Carracas',
     sub: 'Snap-on — 3/8" y 1/2" drive',
     desc: 'Set completo de dados de 6 y 12 puntos con carracas de trinquete de liberación rápida. Incluye extensiones, articulaciones universales y adaptadores en drive 3/8" y 1/2".',
-    img: '/img/tullbox-tools.png',
+    img: '/img/tullbox-tools.webp',
     specs: [['Marca','Snap-on'],['Drive','3/8" y 1/2"'],['Dados','8 – 32 mm'],['Carracas','2 (72 dientes c/u)'],['Extensiones','50 · 150 · 250 mm'],['Piezas totales','68 piezas']],
   },
   {
@@ -417,7 +417,7 @@ const INFO_ABIERTO = [
     title: 'Llaves de Torque & Especiales',
     sub: 'Snap-on — Alta precisión',
     desc: 'Llaves dinamométricas de click y electrónicas para aplicación precisa de torque. Incluye llaves de gancho, llaves de tubo, extractores de tornillos y herramientas especiales para mantenimiento preventivo.',
-    img: '/img/tullbox-tools.png',
+    img: '/img/tullbox-tools.webp',
     specs: [['Marca','Snap-on'],['Rango click','20 – 200 Nm'],['Precisión','± 4%'],['Llaves especiales','8 piezas'],['Extractores','Set 10 piezas'],['Norma','ISO 6789']],
   },
   {
@@ -426,7 +426,7 @@ const INFO_ABIERTO = [
     title: 'Pinzas, Alicates & Cortadores',
     sub: 'Snap-on — Set de presión y corte',
     desc: 'Set de pinzas de presión, alicates de punta, alicates de corte diagonal, pinzas de anillos de retención exteriores e interiores, y cortadores de cable para trabajo eléctrico y mecánico.',
-    img: '/img/tullbox-tools.png',
+    img: '/img/tullbox-tools.webp',
     specs: [['Marca','Snap-on'],['Pinzas presión','3 tamaños'],['Alicates punta','2 piezas'],['Cortadores','Cable · Diagonal'],['Anillos retención','Int. y ext. 8 piezas'],['Mangos','Aislados 1000V']],
   },
 ]
@@ -535,7 +535,7 @@ const viewer = pannellum.viewer('panorama', {
     /* ── ESCENA 1: CAJONES CERRADOS ── */
     cerrado: {
       type:    'equirectangular',
-      panorama: '/img/tullbox-closed.png',
+      panorama: '/img/tullbox-closed.webp',
       pitch:   15,
       yaw:     7,
       hfov:    90,
@@ -560,7 +560,7 @@ const viewer = pannellum.viewer('panorama', {
     /* ── ESCENA 2: CAJONES ABIERTOS ── */
     abierto: {
       type:    'equirectangular',
-      panorama: '/img/tullbox-open.png',
+      panorama: '/img/tullbox-open.webp',
       pitch:   2,
       yaw:     55,
       hfov:    90,
@@ -608,19 +608,34 @@ function switchScene(sceneId) {
 document.getElementById('cnt').textContent =
   INFO_CERRADO.length + INFO_ABIERTO.length + 2  // +2 nav hotspots
 
-/* Coords helper — presiona C para ver pitch/yaw actual */
+/* Coords helper — presiona C para activar/desactivar, sigue el cursor en tiempo real */
+let coordsActive = false
+let coordsEl = null
+
+function getOrCreateCoordsEl() {
+  if (!coordsEl) {
+    coordsEl = document.createElement('div')
+    coordsEl.id = 'coords-helper'
+    coordsEl.style.cssText = 'position:fixed;bottom:60px;left:26px;z-index:200;background:rgba(0,0,0,.85);color:#f5c400;font-family:monospace;font-size:13px;padding:8px 14px;border:1px solid rgba(245,196,0,.4);letter-spacing:1px;pointer-events:none;'
+    document.body.appendChild(coordsEl)
+  }
+  return coordsEl
+}
+
 document.addEventListener('keydown', e => {
   if (e.key !== 'c' && e.key !== 'C') return
-  const p = viewer.getPitch().toFixed(1)
-  const y = viewer.getYaw().toFixed(1)
-  const msg = `pitch: ${p},  yaw: ${y}`
-  let el = document.getElementById('coords-helper')
-  if (!el) {
-    el = document.createElement('div')
-    el.id = 'coords-helper'
-    el.style.cssText = 'position:fixed;bottom:60px;left:26px;z-index:200;background:rgba(0,0,0,.85);color:#f5c400;font-family:monospace;font-size:13px;padding:8px 14px;border:1px solid rgba(245,196,0,.4);letter-spacing:1px;'
-    document.body.appendChild(el)
-  }
+  coordsActive = !coordsActive
+  const el = getOrCreateCoordsEl()
+  el.style.display = coordsActive ? 'block' : 'none'
+  if (coordsActive) el.textContent = 'Mueve el cursor…'
+})
+
+document.addEventListener('mousemove', e => {
+  if (!coordsActive) return
+  const coords = viewer.mouseEventToCoords(e)
+  if (!coords) return
+  const msg = `pitch: ${coords[0].toFixed(1)},  yaw: ${coords[1].toFixed(1)}`
+  const el = getOrCreateCoordsEl()
   el.textContent = msg
   navigator.clipboard?.writeText(msg)
 })

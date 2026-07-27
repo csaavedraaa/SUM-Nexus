@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+﻿import { useState, useEffect } from 'react'
 import SSPA from './SSPA'
 import '../components/SectorShowroom.css'
 import '../components/ServicioShowroom.css'
@@ -43,7 +43,7 @@ function NosotrosShowroom({ isOpen, onClose }) {
     <div className={`showroom-overlay${isOpen ? ' open' : ''}`}>
       <button className="showroom-close" onClick={onClose} aria-label="Cerrar">✕</button>
       <div className="showroom-scroll">
-        <div className="showroom-hero" style={{ backgroundImage: `url(/img/nosotros-hero.png)`, backgroundPosition: 'center 30%' }}>
+        <div className="showroom-hero" style={{ backgroundImage: `url(/img/nosotros-hero.webp)`, backgroundPosition: 'center 30%' }}>
           <div className="showroom-hero-overlay" />
           <div className="showroom-hero-content">
             <div className="showroom-eyebrow">
@@ -69,9 +69,9 @@ function NosotrosShowroom({ isOpen, onClose }) {
               <div className="showroom-subhead">Certificaciones</div>
               <div className="nos-certs">
                 {[
-                  { img: '/img/iso-9001.png',  pdf: '/cert-iso-9001.pdf',  name: 'ISO 9001:2015', desc: 'Sistemas de Calidad' },
-                  { img: '/img/iso-14001.png', pdf: '/cert-iso-14001.pdf', name: 'ISO 14001:2015', desc: 'Gestión Ambiental' },
-                  { img: '/img/iso-45001.png', pdf: '/cert-iso-45001.pdf', name: 'ISO 45001:2018', desc: 'Seguridad y Salud' },
+                  { img: '/img/iso-9001.webp',  pdf: '/cert-iso-9001.pdf',  name: 'ISO 9001:2015', desc: 'Sistemas de Calidad' },
+                  { img: '/img/iso-14001.webp', pdf: '/cert-iso-14001.pdf', name: 'ISO 14001:2015', desc: 'Gestión Ambiental' },
+                  { img: '/img/iso-45001.webp', pdf: '/cert-iso-45001.pdf', name: 'ISO 45001:2018', desc: 'Seguridad y Salud' },
                 ].map(c => (
                   <a key={c.name} href={c.pdf} download className="nos-cert-badge">
                     <img src={c.img} alt={c.name} />

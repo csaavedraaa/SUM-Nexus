@@ -1,30 +1,30 @@
-import { useState, useEffect, useRef } from 'react'
+﻿import { useState, useEffect, useRef } from 'react'
 import './Hero.css'
 
 const SLIDES = [
   {
-    img: '/img/Landing/POZO.jpg',
+    img: '/img/Landing/POZO.webp',
     badge: 'Sector Petrolero',
     h1: ['Un Solo', 'PROVEEDOR', 'Para Todo'],
     sub: 'Soluciones integrales para exploración, producción y refinación de petróleo y gas en México.',
     accentColor: 'var(--cyan2)',
   },
   {
-    img: '/img/Landing/INDUSTRIA.jpg',
+    img: '/img/Landing/INDUSTRIA.webp',
     badge: 'Sector Naval',
     h1: ['7 Puertos', 'ESTRATÉGICOS', 'en México'],
     sub: 'Cubrimos la red de puertos mexicanos: desde transporte de contenedores hasta tráfico de hidrocarburos.',
     accentColor: '#00c4f0',
   },
   {
-    img: '/img/Landing/EOLICA.jpg',
+    img: '/img/Landing/EOLICA.webp',
     badge: 'Sector Energético',
     h1: ['Energía', 'RENOVABLE', 'Sostenible'],
     sub: 'Solar, eólica, hidroeléctrica y geotérmica. Expertos en inspección para la modernización energética.',
     accentColor: '#00e87a',
   },
   {
-    img: '/img/Landing/IZAJE.jpg',
+    img: '/img/Landing/IZAJE.webp',
     badge: 'Metal-Mecánico',
     h1: ['Ingeniería', 'INDUSTRIAL', 'Clase Mundial'],
     sub: 'Fabricación, ingeniería, diseño, mantenimiento y logística. Marcas líderes a tu disposición.',

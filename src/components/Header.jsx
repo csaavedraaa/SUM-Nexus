@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+﻿import { useState, useEffect } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import './Header.css'
 
@@ -83,7 +83,7 @@ export default function Header() {
       <div className="hdr-inner">
         <a href="/" className="hdr-logo" onClick={handleLogo}>
           <img
-            src="/logo-sumimsa_completo.png"
+            src="/logo-sumimsa_completo.webp"
             alt="SUMIMSA — Un Solo Proveedor"
             className="hdr-logo-img"
           />

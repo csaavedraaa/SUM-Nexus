@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './Blog.css'
 import DetailPage from '../components/DetailPage'
 
@@ -97,6 +97,11 @@ const ARTICLES = [
 
 export default function Blog() {
   const [openArticle, setOpenArticle] = useState(null)
+
+  useEffect(() => {
+    document.title = 'Blog — SUMIMSA'
+    return () => { document.title = 'SUMIMSA — Un Solo Proveedor' }
+  }, [])
 
   return (
     <section id="blog" className="section blog-section">

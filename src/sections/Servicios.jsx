@@ -25,7 +25,7 @@ const SERVICIOS = [
         'Reporte diario del rastreo del fluido de perforación',
         'Técnicos de servicio in situ bien capacitados',
       ],
-      img: '/img/servicios/control-de-solidos.jpg',
+      img: '/img/servicios/control-de-solidos.webp',
     }
   },
   {
@@ -43,7 +43,7 @@ const SERVICIOS = [
         'Optimización del rendimiento de los equipos',
         'Correcciones preventivas antes de fallas mayores',
       ],
-      img: '/img/servicios/fuerza-g.jpg',
+      img: '/img/servicios/fuerza-g.webp',
     }
   },
   {
@@ -65,7 +65,7 @@ const SERVICIOS = [
         'Capacidades máximas de hasta 3 7/8" (96mm)',
         'Preservar y alargar la vida útil de los productos',
       ],
-      img: '/img/servicios/inspeccion-izaje.jpg',
+      img: '/img/servicios/inspeccion-izaje.webp',
     }
   },
   {
@@ -84,7 +84,7 @@ const SERVICIOS = [
         'Resultados de alta calidad y durabilidad',
         'Tecnología de grabado por rayo láser de última generación',
       ],
-      img: '/img/servicios/grabado-laser.jpg',
+      img: '/img/servicios/grabado-laser.webp',
     }
   },
   {
@@ -106,7 +106,7 @@ const SERVICIOS = [
         'Compatible con dispositivos NFC y lectores QR',
         'Información modificable en todo momento',
       ],
-      img: '/img/servicios/chip-trazabilidad.jpg',
+      img: '/img/servicios/chip-trazabilidad.webp',
     }
   },
   {
@@ -127,7 +127,7 @@ const SERVICIOS = [
         'Recomendación de certificación anual',
         'Criterios de rechazo documentados',
       ],
-      img: '/img/servicios/estrobos-eslingas.jpg',
+      img: '/img/servicios/estrobos-eslingas.webp',
     }
   },
 ]

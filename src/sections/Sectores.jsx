@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react'
+﻿import { useState, useRef, useEffect } from 'react'
 import SectorCarousel3D from '../components/SectorCarousel3D'
 import SectorShowroom from '../components/SectorShowroom'
 import './Sectores.css'
@@ -7,11 +7,11 @@ const SECTORS = [
   {
     num: '01',
     title: 'Petrolero',
-    img: '/img/sectores/petrolero.png',
+    img: '/img/sectores/petrolero.webp',
     text: 'La industria petrolera es un pilar de la economía mexicana. SUMIMSA suministra soluciones integrales a empresas de exploración, producción y refinación de petróleo y gas.',
     detail: {
       lead: 'Soluciones integrales para exploración, producción y refinación de petróleo y gas en México. Atendemos plataformas offshore, refinerías y plantas de proceso.',
-      img: '/img/sectores/petrolero.png',
+      img: '/img/sectores/petrolero.webp',
       content: [
         { icon: '', h: 'Herramienta Especializada', tag: 'Certificada para ambientes ATEX', p: 'Suministramos herramienta y equipos certificados para ambientes ATEX y zonas clasificadas. Cumplimos con normas NOM-STPS y estándares internacionales API para la industria del petróleo y gas.' },
         { icon: '', h: 'Suministro Offshore', tag: 'Entregas en menos de 24 horas', p: 'Logística especializada para plataformas marinas en el Golfo de México. Coordinamos entregas desde nuestras bases en Tampico, Ciudad del Carmen y Paraíso con tiempos de respuesta menores a 24 horas.' },
@@ -28,11 +28,11 @@ const SECTORS = [
   {
     num: '02',
     title: 'Naviero',
-    img: '/img/sectores/naviero.png',
+    img: '/img/sectores/naviero.webp',
     text: 'Con 7 ubicaciones estratégicas cubrimos la red de puertos mexicanos. Desde transporte de contenedores hasta tráfico de hidrocarburos y productos químicos.',
     detail: {
       lead: 'Cubrimos los principales puertos del Golfo de México con soluciones de suministro para buques, remolcadores, plataformas y terminales portuarias.',
-      img: '/img/sectores/naviero.png',
+      img: '/img/sectores/naviero.webp',
       content: [
         { icon: '', h: 'Suministro Portuario', tag: '4 puertos del Golfo de México', p: 'Atendemos las operaciones de buques mercantes, tanqueros y barcos de servicio en los principales puertos del Golfo: Tampico, Veracruz, Ciudad del Carmen y Paraíso.' },
         { icon: '', h: 'Herramienta de Cubierta', tag: 'Grilletes certificados DNV', p: 'Equipamiento especializado para operaciones en cubierta: cabrestantes, polipastos, estrobos, grilletes certificados DNV y herramienta de izaje para ambiente marino.' },
@@ -49,11 +49,11 @@ const SECTORS = [
   {
     num: '03',
     title: 'Metal-Mecánico',
-    img: '/img/sectores/metal-mecanico.png',
+    img: '/img/sectores/metal-mecanico.webp',
     text: 'Servicio completo en fabricación, ingeniería, diseño, mantenimiento y logística industrial. Priorizamos condiciones de trabajo seguras y saludables.',
     detail: {
       lead: 'Soluciones completas para la industria de manufactura y transformación: herramienta, maquinaria, consumibles y EPP para líneas de producción, talleres y mantenimiento.',
-      img: '/img/sectores/metal-mecanico.png',
+      img: '/img/sectores/metal-mecanico.webp',
       content: [
         { icon: '', h: 'Herramienta de Precisión', tag: 'Stanley · DeWalt · Snap-on', p: 'Distribuidores directos de Stanley, DeWalt, Snap-on, Starrett y otras marcas líderes. Herramienta de corte, medición, torque y fijación para procesos de manufactura de alta exigencia.' },
         { icon: '', h: 'Consumibles Industriales', tag: 'Entregas JIT a línea de producción', p: 'Abrasivos, lubricantes, soldaduras, químicos industriales y materiales de sellado. Programa de suministro continuo con entregas JIT (Just-in-Time) a línea de producción.' },
@@ -70,11 +70,11 @@ const SECTORS = [
   {
     num: '04',
     title: 'Energético',
-    img: '/img/sectores/energetico.png',
+    img: '/img/sectores/energetico.webp',
     text: 'Solar, eólica, hidroeléctrica y geotérmica. Expertos en inspección y pruebas especiales para la eficiencia operativa y modernización energética.',
     detail: {
       lead: 'SUMIMSA acompaña la transición energética de México con herramientas, equipos y EPP especializados para proyectos de energía renovable y convencional.',
-      img: '/img/sectores/energetico.png',
+      img: '/img/sectores/energetico.webp',
       content: [
         { icon: '', h: 'Energía Eólica', tag: 'EPP para trabajo en altura', p: 'Herramienta especializada para instalación, operación y mantenimiento de aerogeneradores: llaves de torque certificadas, herramienta de izaje, EPP para trabajos en altura y equipos de rescate.' },
         { icon: '', h: 'Energía Solar', tag: 'Certificado para alta tensión', p: 'Equipamiento para instalación de paneles fotovoltaicos, sistemas de almacenamiento y subestaciones. Herramienta eléctrica certificada y EPP para sistemas de alta tensión.' },
@@ -118,7 +118,7 @@ export default function Sectores() {
 
       {/* Entorno 3D interactivo — placeholder temporal hasta definir estrategia de marca/segmento */}
       <div className="reveal d1">
-        <SectorCarousel3D ref={carouselRef} sectors={SECTORS} onSelect={setOpenSector} bgImage="/sectores-bg.png" gridColor="#1c2530" gridSectionColor="#a8b8c8" />
+        <SectorCarousel3D ref={carouselRef} sectors={SECTORS} onSelect={setOpenSector} bgImage="/sectores-bg.webp" gridColor="#1c2530" gridSectionColor="#a8b8c8" />
       </div>
 
       <SectorShowroom sector={displaySector} isOpen={openSector !== null} onClose={handleClose} />

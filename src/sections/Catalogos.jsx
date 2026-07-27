@@ -12,7 +12,7 @@ const CATALOGOS = [
 
     paginas: 132,
     pdf: '/catalogos/01_CABLES_Y_ACCESORIOS.pdf',
-    portada: '/catalogos/covers/01_CABLES_Y_ACCESORIOS.png',
+    portada: '/catalogos/covers/01_CABLES_Y_ACCESORIOS.webp',
   },
   {
     id: '02',
@@ -21,7 +21,7 @@ const CATALOGOS = [
     accent: '#00c4f0',
     paginas: null,
     pdf: '/catalogos/02_CABOS_Y_ACCESORIOS_MARINOS.pdf',
-    portada: '/catalogos/covers/02_CABOS_Y_ACCESORIOS_MARINOS.png',
+    portada: '/catalogos/covers/02_CABOS_Y_ACCESORIOS_MARINOS.webp',
 
   },
   {
@@ -31,7 +31,7 @@ const CATALOGOS = [
     accent: '#f47920',
     paginas: null,
     pdf: '/catalogos/03_HERRAMIENTA_MANUAL.pdf',
-    portada: '/catalogos/covers/03_HERRAMIENTA_MANUAL.png',
+    portada: '/catalogos/covers/03_HERRAMIENTA_MANUAL.webp',
 
   },
   {
@@ -41,7 +41,7 @@ const CATALOGOS = [
     accent: '#ffb347',
     paginas: null,
     pdf: '/catalogos/04_HERRAMIENTA_ELECTRICA.pdf',
-    portada: '/catalogos/covers/04_HERRAMIENTA_ELECTRICA.png',
+    portada: '/catalogos/covers/04_HERRAMIENTA_ELECTRICA.webp',
 
   },
   {
@@ -51,7 +51,7 @@ const CATALOGOS = [
     accent: '#009bdb',
     paginas: null,
     pdf: '/catalogos/05_HERRAMIENTA_HIDRAULICA.pdf',
-    portada: '/catalogos/covers/05_HERRAMIENTA_HIDRAULICA.png',
+    portada: '/catalogos/covers/05_HERRAMIENTA_HIDRAULICA.webp',
 
   },
   {
@@ -61,7 +61,7 @@ const CATALOGOS = [
     accent: '#00c4f0',
     paginas: null,
     pdf: '/catalogos/06_HERRAMIENTA_NEUMATICA.pdf',
-    portada: '/catalogos/covers/06_HERRAMIENTA_NEUMATICA.png',
+    portada: '/catalogos/covers/06_HERRAMIENTA_NEUMATICA.webp',
 
   },
   {
@@ -71,7 +71,7 @@ const CATALOGOS = [
     accent: '#f47920',
     paginas: null,
     pdf: '/catalogos/07_CORTE_Y_DESBASTE.pdf',
-    portada: '/catalogos/covers/07_CORTE_Y_DESBASTE.png',
+    portada: '/catalogos/covers/07_CORTE_Y_DESBASTE.webp',
 
   },
   {
@@ -81,7 +81,7 @@ const CATALOGOS = [
     accent: '#f47920',
     paginas: null,
     pdf: '/catalogos/08_INDUSTRIA_PETROLERA.pdf',
-    portada: '/catalogos/covers/08_INDUSTRIA_PETROLERA.png',
+    portada: '/catalogos/covers/08_INDUSTRIA_PETROLERA.webp',
 
   },
   {
@@ -91,7 +91,7 @@ const CATALOGOS = [
     accent: '#009bdb',
     paginas: null,
     pdf: '/catalogos/09_HERRAMIENTA_DE_MEDICION.pdf',
-    portada: '/catalogos/covers/09_HERRAMIENTA_DE_MEDICION.png',
+    portada: '/catalogos/covers/09_HERRAMIENTA_DE_MEDICION.webp',
 
   },
   {
@@ -101,7 +101,7 @@ const CATALOGOS = [
     accent: '#00c4f0',
     paginas: null,
     pdf: '/catalogos/10_CONTRADERRAMES_Y_TAPATES.pdf',
-    portada: '/catalogos/covers/10_CONTRADERRAMES_Y_TAPATES.png',
+    portada: '/catalogos/covers/10_CONTRADERRAMES_Y_TAPATES.webp',
 
   },
   {
@@ -111,7 +111,7 @@ const CATALOGOS = [
     accent: '#ffb347',
     paginas: null,
     pdf: '/catalogos/11_EQUIPO_PARA_PINTAR.pdf',
-    portada: '/catalogos/covers/11_EQUIPO_PARA_PINTAR.png',
+    portada: '/catalogos/covers/11_EQUIPO_PARA_PINTAR.webp',
 
   },
   {
@@ -121,7 +121,7 @@ const CATALOGOS = [
     accent: '#009bdb',
     paginas: null,
     pdf: '/catalogos/12_SISTEMAS_DE_LIMPIEZA.pdf',
-    portada: '/catalogos/covers/12_SISTEMAS_DE_LIMPIEZA.png',
+    portada: '/catalogos/covers/12_SISTEMAS_DE_LIMPIEZA.webp',
 
   },
 ]
@@ -168,7 +168,7 @@ export default function Catalogos() {
           camDistance={15}
           lineSpacing={6}
           cardDistanceFactor={5.8}
-          bgImage="/img/fondo-catalogo.png"
+          bgImage="/img/fondo-catalogo.webp"
           bgColor="#0f1216"
           gridColor="#1c2530"
           gridSectionColor="#a8b8c8"

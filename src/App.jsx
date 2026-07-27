@@ -65,11 +65,13 @@ export default function App() {
       <Cursor />
       <Header />
       <main>
-        <Routes>
-          <Route path="/"         element={<LandingPage />} />
-          <Route path="/noticias" element={<Noticias />} />
-          <Route path="/blog"     element={<Blog />} />
-        </Routes>
+        <div key={location.pathname} className="page-transition">
+          <Routes>
+            <Route path="/"         element={<LandingPage />} />
+            <Route path="/noticias" element={<Noticias />} />
+            <Route path="/blog"     element={<Blog />} />
+          </Routes>
+        </div>
       </main>
       <Footer />
       <BackToTop />

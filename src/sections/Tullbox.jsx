@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+﻿import { useState, useEffect } from 'react'
 import '../components/SectorShowroom.css'
 import '../components/ServicioShowroom.css'
 import './Tullbox.css'
@@ -47,7 +47,7 @@ function TullboxShowroom({ isOpen, onClose }) {
       <div className="showroom-scroll">
 
         {/* HERO */}
-        <div className="showroom-hero" style={{ backgroundImage: `url(/Contenedor_Tullbox.jpg)`, backgroundPosition: 'center 40%' }}>
+        <div className="showroom-hero" style={{ backgroundImage: `url(/Contenedor_Tullbox.webp)`, backgroundPosition: 'center 40%' }}>
           <div className="showroom-hero-overlay" />
           <div className="showroom-hero-content">
             <div className="showroom-eyebrow">
@@ -201,7 +201,7 @@ export default function Tullbox() {
 
           {/* Right: photo */}
           <div className="tullbox-photo">
-            <img src="/Contenedor_Tullbox.jpg" alt="Centro de Servicio Tullbox In Situ" />
+            <img src="/Contenedor_Tullbox.webp" alt="Centro de Servicio Tullbox In Situ" />
             <div className="tullbox-photo-overlay" />
             <div className="tullbox-photo-caption">
               <div className="tullbox-photo-tag" style={{color: YELLOW}}>// Operando In Situ</div>

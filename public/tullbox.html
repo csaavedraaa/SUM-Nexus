@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
@@ -175,9 +175,12 @@
       align-self: flex-end;
     }
     .card-icon img {
-      width: 180px; height: auto;
+      width: 210px; height: auto;
       display: block;
       filter: drop-shadow(0 6px 20px rgba(0,155,219,.45));
+    }
+    .card.amber .card-icon img {
+      filter: drop-shadow(0 6px 20px rgba(245,158,11,.5));
     }
 
     .card-tag {
@@ -271,7 +274,7 @@
 
   <!-- Unidad Marítima -->
   <a href="/tullbox-tour.html" class="card cyan">
-    <div class="card-bg" style="background-image: url('/img/tullbox-closed.png')"></div>
+    <div class="card-bg" style="background-image: url('/img/tullbox-closed.webp')"></div>
     <div class="card-overlay"></div>
     <div class="card-accent"></div>
     <div class="card-content card-content--split">
@@ -288,28 +291,30 @@
         </div>
         <div class="card-cta">Entrar al tour →</div>
       </div>
-      <div class="card-icon"><img src="/img/contenedor-marino.png" alt="Unidad Marítima" /></div>
+      <div class="card-icon"><img src="/img/contenedor-marino.webp" alt="Unidad Marítima" /></div>
     </div>
   </a>
 
   <!-- Unidad Terrestre -->
   <a href="/tullbox-terrestre.html" class="card amber">
-    <div class="card-bg" style="background-image: url('/img/tullbox-terrestre.png')"></div>
+    <div class="card-bg" style="background-image: url('/img/tullbox-terrestre.webp')"></div>
     <div class="card-overlay"></div>
     <div class="card-accent"></div>
-    <div class="card-content">
-      <div class="card-number">02 / 02</div>
-      <div class="card-icon">🏗️</div>
-      <div class="card-tag">Contenedor terrestre</div>
-      <h2 class="card-title">Unidad<br/>Terrestre</h2>
-      <p class="card-desc">Unidad para instalaciones fijas e industria en tierra. Milwaukee, Snap-on, estación de gestión, almacenaje modular y estantería de carga pesada.</p>
-      <div class="card-pills">
-        <span class="pill pill-accent">Milwaukee</span>
-        <span class="pill pill-accent">Snap-on</span>
-        <span class="pill">Estación PC</span>
-        <span class="pill">6 puntos</span>
+    <div class="card-content card-content--split">
+      <div class="card-text">
+        <div class="card-number">02 / 02</div>
+        <div class="card-tag">Contenedor terrestre</div>
+        <h2 class="card-title">Unidad<br/>Terrestre</h2>
+        <p class="card-desc">Unidad para instalaciones fijas e industria en tierra. Milwaukee, Snap-on, estación de gestión, almacenaje modular y estantería de carga pesada.</p>
+        <div class="card-pills">
+          <span class="pill pill-accent">Milwaukee</span>
+          <span class="pill pill-accent">Snap-on</span>
+          <span class="pill">Estación PC</span>
+          <span class="pill">6 puntos</span>
+        </div>
+        <div class="card-cta">Entrar al tour →</div>
       </div>
-      <div class="card-cta">Entrar al tour →</div>
+      <div class="card-icon"><img src="/img/contenedor-terrestre.webp" alt="Unidad Terrestre" /></div>
     </div>
   </a>
 

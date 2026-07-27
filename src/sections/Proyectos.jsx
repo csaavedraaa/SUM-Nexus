@@ -1,4 +1,4 @@
-import { useState } from 'react'
+﻿import { useState } from 'react'
 import DiagramaInteractivo from '../components/DiagramaInteractivo'
 import './Proyectos.css'
 
@@ -70,17 +70,17 @@ const LINEAS = [
     diagrama: {
       eyebrow: 'Esquema Técnico',
       title: 'Equipos de Control de Sólidos',
-      img: '/img/proyectos/control-solidos-esquema.png',
+      img: '/img/proyectos/control-solidos-esquema.webp',
       hotspots: [
-        { x: 29, y: 39, label: 'Agitador de Lodo', desc: 'Mezcla el lodo en las presas para mantener sus propiedades homogéneas antes de reingresar al pozo.', img: '/img/proyectos/equipos/agitador-de-lodo.png' },
-        { x: 42, y: 37, label: 'Centrífuga Decantadora', desc: 'Separa sólidos finos del lodo por fuerza centrífuga, recuperando fluido reutilizable.', img: '/img/proyectos/equipos/centrifuga-decantadora.png' },
-        { x: 50, y: 33, label: 'Mud Cleaner', desc: 'Combina hidrociclones y zaranda fina para recuperar barita y reducir descarte de lodo.', img: '/img/proyectos/equipos/mud-cleaner.png' },
-        { x: 57, y: 37, label: 'Desarcillador', desc: 'Remueve partículas de arcilla de tamaño medio mediante hidrociclones.', img: '/img/proyectos/equipos/desarcillador.png' },
-        { x: 64, y: 37, label: 'Desarenador', desc: 'Elimina partículas de arena del lodo de perforación mediante hidrociclones de mayor diámetro.', img: '/img/proyectos/equipos/desarenador.png' },
-        { x: 76, y: 37, label: 'Desgasificador', desc: 'Extrae el gas atrapado en el lodo antes de que continúe circulando, previniendo riesgos de kick.', img: '/img/proyectos/equipos/desgasificador.png' },
-        { x: 85, y: 37, label: 'Zaranda', desc: 'Primer punto de control: retira los recortes de perforación más grandes mediante mallas vibratorias.', img: '/img/proyectos/equipos/zaranda.png' },
-        { x: 95, y: 22, label: 'Separador Líquido-Gas', desc: 'Separa la fase líquida de la gaseosa antes del venteo, protegiendo el resto del sistema.', img: '/img/proyectos/equipos/separador-liquido-gas.png' },
-        { x: 23, y: 76, label: 'Bomba de Lodo', desc: 'Impulsa el lodo tratado de regreso hacia la sarta de perforación para continuar el ciclo.', img: '/img/proyectos/equipos/bomba-de-lodo.png' },
+        { x: 29, y: 39, label: 'Agitador de Lodo', desc: 'Mezcla el lodo en las presas para mantener sus propiedades homogéneas antes de reingresar al pozo.', img: '/img/proyectos/equipos/agitador-de-lodo.webp' },
+        { x: 42, y: 37, label: 'Centrífuga Decantadora', desc: 'Separa sólidos finos del lodo por fuerza centrífuga, recuperando fluido reutilizable.', img: '/img/proyectos/equipos/centrifuga-decantadora.webp' },
+        { x: 50, y: 33, label: 'Mud Cleaner', desc: 'Combina hidrociclones y zaranda fina para recuperar barita y reducir descarte de lodo.', img: '/img/proyectos/equipos/mud-cleaner.webp' },
+        { x: 57, y: 37, label: 'Desarcillador', desc: 'Remueve partículas de arcilla de tamaño medio mediante hidrociclones.', img: '/img/proyectos/equipos/desarcillador.webp' },
+        { x: 64, y: 37, label: 'Desarenador', desc: 'Elimina partículas de arena del lodo de perforación mediante hidrociclones de mayor diámetro.', img: '/img/proyectos/equipos/desarenador.webp' },
+        { x: 76, y: 37, label: 'Desgasificador', desc: 'Extrae el gas atrapado en el lodo antes de que continúe circulando, previniendo riesgos de kick.', img: '/img/proyectos/equipos/desgasificador.webp' },
+        { x: 85, y: 37, label: 'Zaranda', desc: 'Primer punto de control: retira los recortes de perforación más grandes mediante mallas vibratorias.', img: '/img/proyectos/equipos/zaranda.webp' },
+        { x: 95, y: 22, label: 'Separador Líquido-Gas', desc: 'Separa la fase líquida de la gaseosa antes del venteo, protegiendo el resto del sistema.', img: '/img/proyectos/equipos/separador-liquido-gas.webp' },
+        { x: 23, y: 76, label: 'Bomba de Lodo', desc: 'Impulsa el lodo tratado de regreso hacia la sarta de perforación para continuar el ciclo.', img: '/img/proyectos/equipos/bomba-de-lodo.webp' },
       ],
     },
   },
@@ -174,7 +174,7 @@ export default function Proyectos() {
                 onClick={() => { setImmersivoId(id => id === 'hub' ? null : 'hub'); setActiveId(null); setActiveHotspot(null) }}
                 aria-label="Ver esquema técnico de Top Drive"
               >
-                <img src="/img/servicios/hub-plataforma.jpg" alt="Equipo de perforación SUMIMSA" />
+                <img src="/img/servicios/hub-plataforma.webp" alt="Equipo de perforación SUMIMSA" />
                 <div className="proy-hub-overlay">
                   <Icon360 />
                   <span>Vista 360°</span>

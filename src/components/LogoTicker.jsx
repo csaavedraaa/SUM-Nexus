@@ -11,7 +11,7 @@ export default function LogoTicker({ items, basePath, label, speed = 45 }) {
             <div key={i} className="ticker-item">
               <img
                 className="ticker-logo"
-                src={`${basePath}/${slug}.png`}
+                src={`${basePath}/${slug}.webp`}
                 alt={slug.replace(/-/g, ' ')}
                 loading="lazy"
               />

@@ -102,7 +102,7 @@ function HubSVG({ hoverId, items }) {
 
       {/* Mascot — centered, floats gently */}
       <image
-        href="/mascota.png"
+        href="/mascota.webp"
         x="110" y="90"
         width="100" height="140"
         preserveAspectRatio="xMidYMid meet"
@@ -214,7 +214,7 @@ const ITEMS = [
         'Identificación proactiva de necesidades',
         'Despacho de material directo en planta',
       ],
-      img: '/img/servicios/on-site.png',
+      img: '/img/servicios/on-site.webp',
     },
   },
 ]

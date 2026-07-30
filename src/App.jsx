@@ -14,6 +14,9 @@ import Noticias     from './sections/Noticias'
 import Blog         from './sections/Blog'
 import Catalogos    from './sections/Catalogos'
 import Bolsa        from './sections/Bolsa'
+import HSE              from './sections/HSE'
+import Gobernanza       from './sections/Gobernanza'
+import Sustentabilidad  from './sections/Sustentabilidad'
 import Privacidad   from './sections/Privacidad'
 import Contacto     from './sections/Contacto'
 import Footer       from './components/Footer'
@@ -27,6 +30,9 @@ function LandingPage() {
       <Hero />
       <Ticker />
       <Nosotros />
+      <Gobernanza />
+      <HSE />
+      <Sustentabilidad />
       <Proveedores label="Marcas que representamos" />
       <CasosExito />
       <Servicios />

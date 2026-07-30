@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
+import { createPortal } from 'react-dom'
 import ModelViewer from './ModelViewer'
 import './DiagramaInteractivo.css'
 
@@ -24,7 +25,7 @@ export default function DiagramaInteractivo({ isOpen, onClose, eyebrow, title, i
     [hotspots, showHotspots, coordMode]
   )
 
-  return (
+  return createPortal(
     <div className={`di-overlay${isOpen ? ' open' : ''}`}>
       <button className="di-close" onClick={onClose} aria-label="Cerrar">✕</button>
 
@@ -100,6 +101,7 @@ export default function DiagramaInteractivo({ isOpen, onClose, eyebrow, title, i
           )}
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   )
 }

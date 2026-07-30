@@ -1,5 +1,5 @@
 import { Suspense, useRef, useEffect, useState, useCallback } from 'react'
-import { Canvas, useFrame } from '@react-three/fiber'
+import { Canvas } from '@react-three/fiber'
 import { OrbitControls, useGLTF, Html, Stage } from '@react-three/drei'
 import * as THREE from 'three'
 import './ModelViewer.css'
@@ -16,10 +16,6 @@ function Model({ src, hotspots, activeHotspot, onHotspotSelect, coordMode, onCoo
     setSize(b.getSize(new THREE.Vector3()))
     onLoaded?.()
   }, [scene, onLoaded])
-
-  useFrame((_, delta) => {
-    if (ref.current && activeHotspot == null && !coordMode) ref.current.rotation.y += delta * 0.35
-  })
 
   const handlePointerMove = (e) => {
     if (!coordMode || !box || !ref.current) return
@@ -125,6 +121,8 @@ export default function ModelViewer({ src, interactive = true, hotspots, activeH
                 maxDistance={8}
                 enableDamping
                 dampingFactor={0.08}
+                autoRotate={activeHotspot == null && !coordMode}
+                autoRotateSpeed={1.5}
               />
             )}
           </Canvas>

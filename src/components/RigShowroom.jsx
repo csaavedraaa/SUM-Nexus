@@ -113,8 +113,8 @@ export default function RigShowroom() {
         camera={{ position: [3.3, 1.7, 3.3], fov: 42 }}
         gl={{ antialias: true }}
       >
-        <color attach="background" args={['#050f28']} />
-        <fog attach="fog" args={['#050f28', 5, 10]} />
+        <color attach="background" args={['#5bbdd6']} />
+        <fog attach="fog" args={['#5bbdd6', 5, 10]} />
 
         <ambientLight intensity={0.55} />
         <directionalLight
@@ -130,7 +130,7 @@ export default function RigShowroom() {
 
         <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -1.62, 0]} receiveShadow>
           <circleGeometry args={[2.6, 32]} />
-          <meshStandardMaterial color="#0a1730" metalness={0.25} roughness={0.85} />
+          <meshStandardMaterial color="#001e2e" metalness={0.25} roughness={0.85} />
         </mesh>
 
         <OrbitControls

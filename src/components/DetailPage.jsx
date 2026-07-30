@@ -1,10 +1,14 @@
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
+import { createPortal } from 'react-dom'
 import { NAV_LINKS } from './Header'
 import './DetailPage.css'
 
-export default function DetailPage({ isOpen, onClose, eyebrow, title, lead, heroImg, children }) {
+export default function DetailPage({ isOpen, onClose, eyebrow, title, lead, heroImg, children, className }) {
+  const scrollRef = useRef(null)
+
   useEffect(() => {
     document.body.style.overflow = isOpen ? 'hidden' : ''
+    if (isOpen && scrollRef.current) scrollRef.current.scrollTop = 0
     return () => { document.body.style.overflow = '' }
   }, [isOpen])
 
@@ -27,21 +31,22 @@ export default function DetailPage({ isOpen, onClose, eyebrow, title, lead, hero
     }, 460)
   }
 
-  return (
+  return createPortal(
     <div
-      className={`dp-overlay${isOpen ? ' dp-open' : ''}`}
+      className={`dp-overlay${isOpen ? ' dp-open' : ''}${className ? ` ${className}` : ''}`}
       role="dialog"
       aria-modal="true"
       onClick={handleNavClick}
     >
-      <div className="dp-scroll-area">
-        {/* Header — con foto de fondo cuando se pasa heroImg (opt-in, no afecta a quien no lo use) */}
+      {/* X fija — siempre visible al hacer scroll */}
+      <button className="dp-close-x" onClick={onClose} aria-label="Cerrar">
+        <span>✕</span>
+      </button>
+
+      <div className="dp-scroll-area" ref={scrollRef}>
+        {/* Header — con foto de fondo cuando se pasa heroImg */}
         <div className={`dp-header${heroImg ? ' has-photo' : ''}`}>
           {heroImg && <img className="dp-header-photo" src={heroImg} alt="" />}
-          <button className="dp-back" onClick={onClose} aria-label="Volver">
-            <span className="dp-back-arrow">←</span>
-            Volver al inicio
-          </button>
           <div className="dp-header-text">
             {eyebrow && (
               <div className="dp-eyebrow">
@@ -74,6 +79,7 @@ export default function DetailPage({ isOpen, onClose, eyebrow, title, lead, hero
           </div>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   )
 }

@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState, useCallback } from 'react'
+import { createPortal } from 'react-dom'
 import './CatalogoViewer.css'
 
 const PDFJS_CDN  = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js'
@@ -259,7 +260,7 @@ export default function CatalogoViewer({ catalogo, onClose }) {
 
   const zoomPct = Math.round(zoom * 100)
 
-  return (
+  return createPortal(
     <div className="cv-overlay" role="dialog" aria-modal="true">
       <div className="cv-backdrop" onClick={onClose} />
 
@@ -393,6 +394,7 @@ export default function CatalogoViewer({ catalogo, onClose }) {
           </div>
         )}
       </div>
-    </div>
+    </div>,
+    document.body
   )
 }

@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import { createPortal } from 'react-dom'
 import './SectorShowroom.css'
 
 export default function SectorShowroom({ sector, isOpen, onClose }) {
@@ -16,7 +17,7 @@ export default function SectorShowroom({ sector, isOpen, onClose }) {
   if (!sector) return null
   const { detail } = sector
 
-  return (
+  return createPortal(
     <div className={`showroom-overlay${isOpen ? ' open' : ''}`}>
       <button className="showroom-close" onClick={onClose} aria-label="Cerrar">✕</button>
 
@@ -76,6 +77,7 @@ export default function SectorShowroom({ sector, isOpen, onClose }) {
           </div>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   )
 }

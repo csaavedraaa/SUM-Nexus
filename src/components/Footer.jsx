@@ -2,12 +2,14 @@
 
 const SECTORS = ['Petrolero','Naval','Metal-Mecánico','Energético']
 const COMPANY = [
-  { label: 'Acerca de SUMIMSA', href: '#nosotros'  },
-  { label: 'Tullbox',           href: '#tullbox'   },
-  { label: 'Política SSPA',     href: '#sspa'      },
-  { label: 'Noticias',          href: '/noticias'  },
-  { label: 'Catálogos',         href: '#catalogs'  },
-  { label: 'Bolsa de trabajo',  href: '#bolsa'     },
+  { label: 'Acerca de SUMIMSA',  href: '#nosotros'       },
+  { label: 'Gobernanza',         href: '#gobernanza'     },
+  { label: 'HSE',                href: '#hse'            },
+  { label: 'Sustentabilidad',    href: '#sustentabilidad'},
+  { label: 'Tullbox',            href: '#tullbox'        },
+  { label: 'Noticias',           href: '/noticias'       },
+  { label: 'Catálogos',          href: '#catalogs'       },
+  { label: 'Bolsa de trabajo',   href: '#bolsa'          },
 ]
 
 const IconFacebook = () => (
@@ -92,7 +94,7 @@ export default function Footer() {
         </div>
 
         <div className="footer-bar">
-          <p>© 2025 SUMIMSA — Suministros Marinos e Industriales de México S.A. de C.V.</p>
+          <p>© 2026 SUMIMSA — Suministros Marinos e Industriales de México S.A. de C.V.</p>
           <p>Hecho en México</p>
         </div>
       </div>

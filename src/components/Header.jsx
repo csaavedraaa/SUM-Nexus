@@ -4,8 +4,10 @@ import './Header.css'
 
 export const NAV_LINKS = [
   { href: '#nosotros',  label: 'Nosotros', children: [
-      { href: '#nosotros', label: 'Resumen' },
-      { href: '#sspa',     label: 'SSPA' },
+      { href: '#nosotros',   label: 'Resumen' },
+      { href: '#gobernanza', label: 'Gobernanza' },
+      { href: '#hse',              label: 'HSE' },
+      { href: '#sustentabilidad', label: 'Sustentabilidad' },
     ] },
   { href: '#servicios', label: 'Servicios', children: [
       { href: '#servicios', label: 'Soluciones' },

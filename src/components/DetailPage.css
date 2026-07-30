@@ -56,6 +56,35 @@
   background: linear-gradient(to top, var(--navy) 0%, rgba(13,30,74,.75) 45%, rgba(13,30,74,.15) 100%);
 }
 
+/* ── Botón X fijo ────────────────────────────────────────────── */
+.dp-close-x {
+  position: absolute;
+  top: 14px;
+  right: 20px;
+  z-index: 20;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Navy oscuro — visible sobre header oscuro Y sobre cuerpo blanco */
+  background: rgba(13, 30, 74, 0.88);
+  color: #fff;
+  font-size: 1rem;
+  line-height: 1;
+  /* Anillo blanco que lo separa del header oscuro */
+  box-shadow: 0 2px 12px rgba(0,0,0,.35), 0 0 0 1.5px rgba(255,255,255,.22);
+  transition: background .15s, transform .15s, box-shadow .15s;
+}
+.dp-close-x:hover {
+  background: rgba(13, 30, 74, 1);
+  transform: scale(1.1);
+  box-shadow: 0 4px 20px rgba(0,0,0,.45), 0 0 0 2px rgba(255,255,255,.3);
+}
+
 .dp-back {
   display: inline-flex; align-items: center; gap: 8px;
   font-family: var(--font-display); font-size: .78rem; font-weight: 500;
@@ -278,3 +307,22 @@
   .dp-footer-nav { gap: 4px; }
   .dp-footer-link { font-size: .52rem; padding: 4px 8px; }
 }
+
+/* ── Variante clara (dp-light) ───────────────────────────────── */
+.dp-overlay.dp-light {
+  background: #f8fafc;
+}
+.dp-overlay.dp-light .dp-body p   { color: #475569; }
+.dp-overlay.dp-light .dp-body h3  { color: #1e293b; }
+.dp-overlay.dp-light .dp-body h3::before { background: var(--cyan); }
+.dp-overlay.dp-light .dp-body strong { color: #1e293b; }
+.dp-overlay.dp-light .dp-body em    { color: #0ea5e9; }
+.dp-overlay.dp-light .dp-body li   { color: #475569; }
+.dp-overlay.dp-light .dp-footer {
+  background: #f1f5f9;
+  border-top-color: #e2e8f0;
+}
+.dp-overlay.dp-light .dp-back          { color: rgba(0,0,0,.38); }
+.dp-overlay.dp-light .dp-back:hover    { color: var(--cyan); }
+.dp-overlay.dp-light .dp-footer-link   { color: rgba(0,0,0,.35); border-color: rgba(0,0,0,.1); }
+.dp-overlay.dp-light .dp-footer-link:hover { color: var(--cyan); border-color: var(--cyan); }

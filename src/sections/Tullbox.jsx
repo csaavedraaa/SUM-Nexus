@@ -1,4 +1,5 @@
 ﻿import { useState, useEffect } from 'react'
+import { createPortal } from 'react-dom'
 import '../components/SectorShowroom.css'
 import '../components/ServicioShowroom.css'
 import './Tullbox.css'
@@ -41,7 +42,7 @@ function TullboxShowroom({ isOpen, onClose }) {
     }, 460)
   }
 
-  return (
+  return createPortal(
     <div className={`showroom-overlay${isOpen ? ' open' : ''}`}>
       <button className="showroom-close" onClick={onClose} aria-label="Cerrar">✕</button>
       <div className="showroom-scroll">
@@ -143,7 +144,8 @@ function TullboxShowroom({ isOpen, onClose }) {
 
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   )
 }
 

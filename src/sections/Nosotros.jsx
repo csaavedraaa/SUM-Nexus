@@ -1,5 +1,5 @@
 ﻿import { useState, useEffect } from 'react'
-import SSPA from './SSPA'
+import { createPortal } from 'react-dom'
 import '../components/SectorShowroom.css'
 import '../components/ServicioShowroom.css'
 import './Nosotros.css'
@@ -39,7 +39,7 @@ function NosotrosShowroom({ isOpen, onClose }) {
     }, 460)
   }
 
-  return (
+  return createPortal(
     <div className={`showroom-overlay${isOpen ? ' open' : ''}`}>
       <button className="showroom-close" onClick={onClose} aria-label="Cerrar">✕</button>
       <div className="showroom-scroll">
@@ -129,7 +129,8 @@ function NosotrosShowroom({ isOpen, onClose }) {
           </div>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   )
 }
 
@@ -231,8 +232,6 @@ export default function Nosotros() {
         </div>
 
       </div>
-
-      <SSPA />
 
       <NosotrosShowroom isOpen={openNosotros} onClose={() => setOpenNosotros(false)} />
     </section>
